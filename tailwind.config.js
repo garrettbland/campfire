@@ -1,7 +1,21 @@
 module.exports = {
-    theme: {},
-    variants: {
-        translate: ['responsive', 'hover', 'focus', 'active', 'group-hover'],
+    theme: {
+        cursor: {
+            'col-resize': 'col-resize',
+        },
     },
-    plugins: [require('@tailwindcss/ui'), require('@tailwindcss/custom-forms')],
+    variants: {
+        cursor: ['responsive', 'hover'],
+        translate: [
+            'responsive',
+            'hover',
+            'focus',
+            'active',
+            'group-hover',
+        ],
+    },
+    plugins: [
+        require('@tailwindcss/ui'),
+        require('@tailwindcss/custom-forms'),
+    ],
 }

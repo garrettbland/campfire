@@ -2,6 +2,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const TerserJSPlugin = require('terser-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 var path = require('path')
 const purgecss = require('@fullhuman/postcss-purgecss')({
     // Specify the paths to all of the files with css styling
@@ -21,7 +22,7 @@ module.exports = (env, options) => {
         },
         output: {
             path: __dirname + '/dist',
-            filename: `[name].[hash].js`, // bundle created by webpack it will contain all our app logic. we will link to this .js file from our html page.
+            filename: `bundle.[hash].js`, // bundle created by webpack it will contain all our app logic. we will link to this .js file from our html page.
             publicPath: '/',
         },
         optimization: {
@@ -78,12 +79,18 @@ module.exports = (env, options) => {
         },
         plugins: [
             new MiniCssExtractPlugin({
-                filename: `[name].[hash].css`,
+                filename: `style.[hash].css`,
             }),
             new HtmlWebpackPlugin({
                 template: './index.html',
                 filename: './index.html',
             }),
+            new CopyWebpackPlugin([
+                {
+                    from: __dirname + '/src/public',
+                    to: __dirname + '/dist/public',
+                },
+            ]),
         ],
         devServer: {
             contentBase: path.join(__dirname, 'dist'),
