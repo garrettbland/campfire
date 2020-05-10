@@ -1,12 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './style.css'
-const App = () => {
-    return (
-        <div className="max-w-xl mx-auto">
-            🔥 Campfire website builder
-        </div>
-    )
-}
+import Router from './router'
+
+const App = () => <Router />
 
 ReactDOM.render(<App />, document.querySelector('#root'))

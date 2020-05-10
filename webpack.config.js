@@ -22,6 +22,7 @@ module.exports = (env, options) => {
         output: {
             path: __dirname + '/dist',
             filename: `[name].[hash].js`, // bundle created by webpack it will contain all our app logic. we will link to this .js file from our html page.
+            publicPath: '/',
         },
         optimization: {
             minimize: options.mode === 'production' ? true : false,
@@ -88,6 +89,7 @@ module.exports = (env, options) => {
             contentBase: path.join(__dirname, 'dist'),
             compress: true,
             port: 9000,
+            historyApiFallback: true,
         },
     }
 }
