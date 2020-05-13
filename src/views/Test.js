@@ -4,29 +4,40 @@ import interact from 'interactjs'
 import iFrameResize from 'iframe-resizer/js/iframeResizer'
 
 const Compo = () => (
-    <div className="bg-pink-500">This is a outside thing</div>
+    <div className='bg-pink-500'>This is a outside thing</div>
 )
 
 const Test = () => {
     const [name, setName] = useState('garrett')
 
-    useEffect(() => {
-        iFrameResize(
-            {
-                log: false,
-                checkOrigin: false,
-                resizeFrom: 'child',
-            },
-            '#myIframe'
-        )
-    })
+    const handleClick = event => {
+        // handle click events
+
+        let localName = event.target.localName
+        let editableElements = ['h1', 'p']
+
+        if (editableElements.includes(localName)) {
+            event.target.setAttribute('contenteditable', true)
+        }
+    }
+
+    // useEffect(() => {
+    //     iFrameResize(
+    //         {
+    //             log: false,
+    //             checkOrigin: false,
+    //             resizeFrom: 'child',
+    //         },
+    //         '#myIframe'
+    //     )
+    // })
 
     interact('.resize-drag').resizable({
         // resize from all edges and corners
         edges: { right: true },
 
         listeners: {
-            move(event) {
+            move (event) {
                 var target = event.target
                 var x = parseFloat(target.getAttribute('data-x')) || 0
                 var y = parseFloat(target.getAttribute('data-y')) || 0
@@ -73,48 +84,55 @@ const Test = () => {
 
     return (
         <div>
-            <div className="bg-gray-800">
-                <div className="bg-gray-200 pl-4 pt-4 pb-4 pr-8 relative resize-drag">
-                    <div className="bg-green-500 w-4 h-full absolute right-0 top-0 hover:cursor-col-resize"></div>
+            <div className='bg-gray-800'>
+                <div className='bg-gray-200 pr-4 relative resize-drag'>
+                    <div className='bg-green-500 w-4 h-full absolute right-0 top-0 hover:cursor-col-resize'></div>
                     <Frame
-                        id="myIframe"
-                        style={{ height: 0 }}
-                        className="w-full h-auto"
+                        id='myIframe'
+                        className='w-full h-screen'
                         head={
                             <>
                                 <link
-                                    href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
-                                    rel="stylesheet"
+                                    href='https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css'
+                                    rel='stylesheet'
                                 />
                             </>
                         }
                     >
                         <FrameContextConsumer>
-                            {
-                                // Callback is invoked with iframe's window and document instances
-                                ({ document, window }) => {
-                                    console.log(
-                                        'this is happening ==>'
-                                    )
-                                    let script = document.createElement(
-                                        'SCRIPT'
-                                    )
-                                    script.src =
-                                        'https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.2.10/iframeResizer.contentWindow.min.js'
-                                    // crazy hackey way of getting this to work.
-                                    // resizer is calculating height before tailwind loads.
-                                    // this sets a timeout to let css load first
-                                    setTimeout(() => {
-                                        document
-                                            .getElementsByTagName(
-                                                'HEAD'
-                                            )[0]
-                                            .appendChild(script)
-                                    }, 500)
+                            {// Callback is invoked with iframe's window and document instances
+                            ({ document, window }) => {
+                                document.addEventListener(
+                                    'mouseover',
+                                    event => {
+                                        handleClick(event)
+                                    }
+                                )
 
-                                    return <IFrameContent />
-                                }
-                            }
+                                // console.log('this is happening ==>')
+                                // console.log(
+                                //     document.body.scrollHeight
+                                // )
+
+                                // console.log(document)
+                                // let script = document.createElement(
+                                //     'SCRIPT'
+                                // )
+                                // script.src =
+                                //     'https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.2.10/iframeResizer.contentWindow.min.js'
+                                // crazy hackey way of getting this to work.
+                                // resizer is calculating height before tailwind loads.
+                                // this sets a timeout to let css load first
+                                // setTimeout(() => {
+                                //     document
+                                //         .getElementsByTagName(
+                                //             'HEAD'
+                                //         )[0]
+                                //         .appendChild(script)
+                                // }, 500)
+
+                                return <IFrameContent />
+                            }}
                         </FrameContextConsumer>
                     </Frame>
                 </div>
@@ -123,23 +141,43 @@ const Test = () => {
     )
 }
 
-const IFrameContent = () => (
-    <div className="bg-red-600 w-full">
-        this is in a iframe {name}
-        <Compo />
-        <button onClick={() => changeName()}>
-            Click me to do stuff
-        </button>
-        <div className="flex flex-wrap">
-            <div className="w-full md:w-1/2 bg-orange-300">
-                First col
+const IFrameContent = () => {
+    return (
+        <div className='bg-red-600 w-full'>
+            this is in a iframe {name}
+            <Compo />
+            <button onClick={() => changeName()}>
+                Click me to do stuff
+            </button>
+            <div className='flex flex-wrap'>
+                <div className='w-full md:w-1/2 bg-orange-300'>
+                    <h1>This is editable text probably</h1>
+                </div>
+                <div className='w-full md:w-1/2 bg-blue-400'>
+                    Second col
+                    <img src='https://images.unsplash.com/photo-1589083564106-5d0dc94f4e3f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80' />
+                </div>
             </div>
-            <div className="w-full md:w-1/2 bg-blue-400">
-                Second col
-                <img src="https://images.unsplash.com/photo-1589083564106-5d0dc94f4e3f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80" />
+            <div className='flex flex-wrap'>
+                <div className='w-full md:w-1/2 bg-orange-300'>
+                    First col
+                </div>
+                <div className='w-full md:w-1/2 bg-blue-400'>
+                    Second col
+                    <img src='https://images.unsplash.com/photo-1589083564106-5d0dc94f4e3f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80' />
+                </div>
+            </div>
+            <div className='flex flex-wrap'>
+                <div className='w-full md:w-1/2 bg-orange-300'>
+                    First col
+                </div>
+                <div className='w-full md:w-1/2 bg-blue-400'>
+                    Second col
+                    <img src='https://images.unsplash.com/photo-1589083564106-5d0dc94f4e3f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80' />
+                </div>
             </div>
         </div>
-    </div>
-)
+    )
+}
 
 export default Test
