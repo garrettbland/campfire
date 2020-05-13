@@ -151,11 +151,28 @@ const IFrameContent = () => {
             </button>
             <div className='flex flex-wrap'>
                 <div className='w-full md:w-1/2 bg-orange-300'>
-                    <h1>This is editable text probably</h1>
+                    <h1
+                        onInput={e =>
+                            console.log(
+                                'Text inside div',
+                                e.currentTarget.textContent
+                            )
+                        }
+                    >
+                        This is editable text probably
+                    </h1>
                 </div>
                 <div className='w-full md:w-1/2 bg-blue-400'>
                     Second col
-                    <img src='https://images.unsplash.com/photo-1589083564106-5d0dc94f4e3f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80' />
+                    <img
+                        onInput={e =>
+                            console.log(
+                                'Text inside div',
+                                e.currentTarget.src
+                            )
+                        }
+                        src='https://images.unsplash.com/photo-1589083564106-5d0dc94f4e3f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80'
+                    />
                 </div>
             </div>
             <div className='flex flex-wrap'>
