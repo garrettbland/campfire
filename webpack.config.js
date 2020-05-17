@@ -2,8 +2,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const TerserJSPlugin = require('terser-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-var path = require('path')
 const HtmlWebpackInjector = require('html-webpack-injector')
+const path = require('path')
 
 const purgecss = require('@fullhuman/postcss-purgecss')({
     /**
@@ -28,8 +28,8 @@ module.exports = (env, options) => {
              * Define a index and index_head
              * HTMLWebpackInjector injects index_head to <head>, and appends index script to body
              */
-            app: './app.js',
-            vendor: './vendor/vendor.js',
+            index: './index.js',
+            head: './head.js',
         },
         output: {
             path: __dirname + '/dist',
@@ -87,7 +87,7 @@ module.exports = (env, options) => {
         },
         plugins: [
             new MiniCssExtractPlugin({
-                filename: './vendor/style.css',
+                filename: './app/style/style.css',
             }),
             new HtmlWebpackPlugin({
                 template: './index.html',
@@ -96,10 +96,10 @@ module.exports = (env, options) => {
                  * Hash adds ?[hash] to file name for cache busting
                  */
                 hash: true,
-                chunks: ['app', 'vendor'],
+                chunks: ['index', 'head'],
                 chunksConfig: {
-                    defer: ['app'],
-                    defer: ['vendor'],
+                    defer: ['index'],
+                    defer: ['head'],
                 },
             }),
             new HtmlWebpackInjector(),

@@ -3,4 +3,4 @@
  * Webpack plugin splits up this code, refer to the webpack config
  */
 import 'alpinejs'
-import './style.css'
+import './app/style/style.css'

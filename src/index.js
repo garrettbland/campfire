@@ -1,5 +1,5 @@
-import textElementListener from './components/textElementListener'
-import store from './redux/store'
+import store from './app/redux/store'
+import app from './app/app'
 
 /**
  * Base alpine function for x-data
@@ -19,9 +19,9 @@ const campfire = () => {
             })
 
             /**
-             * Start listening for hover and mouseover events
+             * Start app
              */
-            textElementListener()
+            app()
         },
     }
 }
