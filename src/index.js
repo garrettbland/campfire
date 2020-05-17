@@ -1,5 +1,6 @@
-import showAlert from './showAlert'
-
+/**
+ * Base alpine function for x-data
+ */
 const campfire = () => {
     return {
         name: 'garrett',
@@ -10,4 +11,7 @@ const campfire = () => {
     }
 }
 
+/**
+ * Attach campfire function to global window object to use alpine
+ */
 window.campfire = campfire

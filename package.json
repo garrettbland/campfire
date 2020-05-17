@@ -26,7 +26,6 @@
         "@tailwindcss/ui": "^0.3.0",
         "alpinejs": "^2.3.5",
         "babel-loader": "^8.1.0",
-        "copy-webpack-plugin": "^5.1.1",
         "css-loader": "^3.5.3",
         "html-loader": "^1.1.0",
         "html-webpack-injector": "^1.1.2",

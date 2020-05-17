@@ -2,14 +2,19 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const TerserJSPlugin = require('terser-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 var path = require('path')
 const HtmlWebpackInjector = require('html-webpack-injector')
+
 const purgecss = require('@fullhuman/postcss-purgecss')({
-    // Specify the paths to all of the files with css styling
+    /**
+     * Specifiy the path of the files to inspect
+     */
     content: [__dirname + '/src/**/*.js'],
 
-    // Include any special characters you're using in this regular expression
+    /**
+     * Include any special characters you're using in this regular expression
+     * This is recommended from tailwind docs
+     */
     defaultExtractor: (content) =>
         content.match(/[\w-/.:]+(?<!:)/g) || [],
 })
@@ -17,8 +22,12 @@ const purgecss = require('@fullhuman/postcss-purgecss')({
 module.exports = (env, options) => {
     console.log(`✅ Running webpack in ${options.mode} mode`)
     return {
-        context: __dirname + '/src', // `__dirname` is root of project and `/src` is source
+        context: __dirname + '/src',
         entry: {
+            /**
+             * Define a index and index_head
+             * HTMLWebpackInjector injects index_head to <head>, and appends index script to body
+             */
             index: './index.js',
             index_head: './index_head.js',
         },
@@ -37,15 +46,12 @@ module.exports = (env, options) => {
         module: {
             rules: [
                 {
-                    test: /\.(js|jsx)$/,
+                    test: /\.(js)$/,
                     exclude: /node_modules/,
                     use: {
                         loader: 'babel-loader',
                         options: {
-                            presets: [
-                                '@babel/preset-env',
-                                // '@babel/preset-react',
-                            ],
+                            presets: ['@babel/preset-env'],
                         },
                     },
                 },
@@ -86,21 +92,17 @@ module.exports = (env, options) => {
             new HtmlWebpackPlugin({
                 template: './index.html',
                 filename: './index.html',
+                /**
+                 * Hash adds ?[hash] to file name for cache busting
+                 */
                 hash: true,
                 chunks: ['index', 'index_head'],
                 chunksConfig: {
-                    // Added option
                     defer: ['index_head'],
                     defer: ['index'],
                 },
             }),
             new HtmlWebpackInjector(),
-            // new CopyWebpackPlugin([
-            //     {
-            //         from: __dirname + '/src/public',
-            //         to: __dirname + '/dist/public',
-            //     },
-            // ]),
         ],
         devServer: {
             contentBase: path.join(__dirname, 'dist'),
@@ -110,5 +112,3 @@ module.exports = (env, options) => {
         },
     }
 }
-
-// module.exports = config
