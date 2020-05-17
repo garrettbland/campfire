@@ -1,4 +1,3 @@
-import dataObject from './data'
 import textElementListener from './components/textElementListener'
 import store from './redux/store'
 

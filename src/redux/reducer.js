@@ -1,4 +1,8 @@
-import { INCREMENT, DECREMENT } from './constants'
+import {
+    INCREMENT,
+    DECREMENT,
+    SET_CURRENT_ELEMENT,
+} from './constants'
 
 /**
  * Define initial state for campfire app
@@ -7,6 +11,7 @@ let initialState = {
     name: 'Garrett',
     age: 26,
     count: 0,
+    currentElement: '',
 }
 
 /**
@@ -14,6 +19,12 @@ let initialState = {
  */
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
+        case SET_CURRENT_ELEMENT: {
+            return {
+                ...state,
+                currentElement: action.payload.currentElement,
+            }
+        }
         case INCREMENT:
             return {
                 ...state,

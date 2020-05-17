@@ -28,8 +28,8 @@ module.exports = (env, options) => {
              * Define a index and index_head
              * HTMLWebpackInjector injects index_head to <head>, and appends index script to body
              */
-            index: './index.js',
-            index_head: './index_head.js',
+            app: './app.js',
+            vendor: './vendor/vendor.js',
         },
         output: {
             path: __dirname + '/dist',
@@ -87,7 +87,7 @@ module.exports = (env, options) => {
         },
         plugins: [
             new MiniCssExtractPlugin({
-                filename: `style.css`,
+                filename: './vendor/style.css',
             }),
             new HtmlWebpackPlugin({
                 template: './index.html',
@@ -96,10 +96,10 @@ module.exports = (env, options) => {
                  * Hash adds ?[hash] to file name for cache busting
                  */
                 hash: true,
-                chunks: ['index', 'index_head'],
+                chunks: ['app', 'vendor'],
                 chunksConfig: {
-                    defer: ['index_head'],
-                    defer: ['index'],
+                    defer: ['app'],
+                    defer: ['vendor'],
                 },
             }),
             new HtmlWebpackInjector(),
