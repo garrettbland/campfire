@@ -1,6 +1,6 @@
 import store from './app/redux/store'
 import app from './app/app'
-
+import addSectionEditButtons from './app/components/addSectionEditButtons'
 /**
  * Base alpine function for x-data
  */
@@ -8,6 +8,7 @@ const campfire = () => {
     return {
         store: store,
         state: store.getState(),
+        app: {},
         init: function () {
             console.log('🔥 campfire has initialized...')
 
@@ -21,7 +22,7 @@ const campfire = () => {
             /**
              * Start app
              */
-            app()
+            this.app = app()
         },
     }
 }
