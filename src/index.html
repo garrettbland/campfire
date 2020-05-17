@@ -26,7 +26,9 @@
                     <span x-text="state.name"></span>
                     <span x-text="state.count"></span>
                     <div>
-                        <button x-on:click="increment()">
+                        <button
+                            x-on:click="store.dispatch({ type: 'INCREMENT' })"
+                        >
                             Increment from redux
                         </button>
                     </div>
