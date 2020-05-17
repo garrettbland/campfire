@@ -90,8 +90,8 @@ module.exports = (env, options) => {
                 chunks: ['index', 'index_head'],
                 chunksConfig: {
                     // Added option
-                    async: ['index_head'],
-                    async: ['index'],
+                    defer: ['index_head'],
+                    defer: ['index'],
                 },
             }),
             new HtmlWebpackInjector(),
