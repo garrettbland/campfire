@@ -1,8 +1,10 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import './style.css'
-import Router from './router'
+import showAlert from './showAlert'
 
-const App = () => <Router />
+const campfire = () => {
+    return {
+        name: 'garrett',
+        showAlert: showAlert,
+    }
+}
 
-ReactDOM.render(<App />, document.querySelector('#root'))
+window.campfire = campfire

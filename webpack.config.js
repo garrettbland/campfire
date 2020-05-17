@@ -4,6 +4,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 var path = require('path')
+const HtmlWebpackInjector = require('html-webpack-injector')
 const purgecss = require('@fullhuman/postcss-purgecss')({
     // Specify the paths to all of the files with css styling
     content: [__dirname + '/src/**/*.js'],
@@ -18,11 +19,12 @@ module.exports = (env, options) => {
     return {
         context: __dirname + '/src', // `__dirname` is root of project and `/src` is source
         entry: {
-            app: './index.js',
+            index: './index.js',
+            index_head: './index_head.js',
         },
         output: {
             path: __dirname + '/dist',
-            filename: `bundle.[hash].js`, // bundle created by webpack it will contain all our app logic. we will link to this .js file from our html page.
+            filename: '[name].bundle.js',
             publicPath: '/',
         },
         optimization: {
@@ -42,7 +44,7 @@ module.exports = (env, options) => {
                         options: {
                             presets: [
                                 '@babel/preset-env',
-                                '@babel/preset-react',
+                                // '@babel/preset-react',
                             ],
                         },
                     },
@@ -79,18 +81,26 @@ module.exports = (env, options) => {
         },
         plugins: [
             new MiniCssExtractPlugin({
-                filename: `style.[hash].css`,
+                filename: `style.css`,
             }),
             new HtmlWebpackPlugin({
                 template: './index.html',
                 filename: './index.html',
-            }),
-            new CopyWebpackPlugin([
-                {
-                    from: __dirname + '/src/public',
-                    to: __dirname + '/dist/public',
+                hash: true,
+                chunks: ['index', 'index_head'],
+                chunksConfig: {
+                    // Added option
+                    async: ['index_head'],
+                    async: ['index'],
                 },
-            ]),
+            }),
+            new HtmlWebpackInjector(),
+            // new CopyWebpackPlugin([
+            //     {
+            //         from: __dirname + '/src/public',
+            //         to: __dirname + '/dist/public',
+            //     },
+            // ]),
         ],
         devServer: {
             contentBase: path.join(__dirname, 'dist'),
