@@ -1,12 +1,18 @@
+import dataObject from './data'
+import textElementListener from './components/textElementListener'
+
 /**
  * Base alpine function for x-data
  */
 const campfire = () => {
     return {
-        name: 'garrett',
-        showAlert: showAlert,
+        ...dataObject,
         init: function () {
-            console.log(this.name)
+            console.log('🔥 campfire has initialized...')
+            /**
+             * Start listening for hover and mouseover events
+             */
+            textElementListener()
         },
     }
 }
