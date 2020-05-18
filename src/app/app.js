@@ -1,8 +1,9 @@
-import textElementListener from './components/textElementListener'
+import elementHoverListener from './components/elementHoverListener'
 import keydownListener from './components/keydownListener'
 import addSectionEditButtons from './components/addSectionEditButtons'
 import sectionTools from './components/sectionTools'
 import stripFormattingOnPaste from './components/stripFormattingOnPaste'
+import elementClickListener from './components/elementClickListener'
 /**
  * Map out tools and utilities, and initialize
  * Accessed from view layer with app.{}.{}
@@ -13,9 +14,10 @@ const app = () => {
     return {
         section: sectionTools,
         ...stripFormattingOnPaste(),
-        ...textElementListener(),
+        ...elementHoverListener(),
         ...keydownListener(),
         ...addSectionEditButtons(),
+        ...elementClickListener(),
     }
 }
 

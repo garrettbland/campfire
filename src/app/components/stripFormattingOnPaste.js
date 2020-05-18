@@ -1,6 +1,5 @@
 const stripFormattingOnPaste = () => {
-    let mainElement = document.getElementById('campfire_main')
-    mainElement.addEventListener('paste', (event) => {
+    document.addEventListener('paste', (event) => {
         /**
          * cancels paste
          */
@@ -9,14 +8,14 @@ const stripFormattingOnPaste = () => {
         /**
          * get text from clipboard
          */
-        var text = (
+        let text = (
             event.originalEvent || event
         ).clipboardData.getData('text/plain')
 
         /**
          * insert text manaully
          */
-        document.execCommand('insertHTML', false, text)
+        document.execCommand('insertText', false, text)
     })
 }
 

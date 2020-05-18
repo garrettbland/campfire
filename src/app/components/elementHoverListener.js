@@ -1,6 +1,6 @@
-const textElementListener = () => {
+const elementHoverListener = () => {
     let mainElement = document.getElementById('campfire_main')
-    const textEditableElements = ['h1', 'h2', 'p', 'li']
+    const editableElements = ['h1', 'h2', 'p', 'li']
 
     /**
      * Set default paragraph separator
@@ -13,7 +13,7 @@ const textElementListener = () => {
      */
     mainElement.addEventListener('mouseover', (event) => {
         let localName = event.target.localName
-        if (textEditableElements.includes(localName)) {
+        if (editableElements.includes(localName)) {
             if (localName === 'li') {
                 /**
                  * Add content editable to parent to let brownser handle
@@ -30,4 +30,4 @@ const textElementListener = () => {
     })
 }
 
-export default textElementListener
+export default elementHoverListener

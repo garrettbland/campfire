@@ -66,10 +66,10 @@ module.exports = (env, options) => {
                                 ident: 'postcss',
                                 plugins: [
                                     require('tailwindcss'),
-                                    require('autoprefixer'),
-                                    ...(options.mode === 'production'
-                                        ? [purgecss]
-                                        : []),
+                                    // require('autoprefixer'),
+                                    // ...(options.mode === 'production'
+                                    //     ? [purgecss]
+                                    //     : []),
                                 ],
                             },
                         },
@@ -87,7 +87,7 @@ module.exports = (env, options) => {
         },
         plugins: [
             new MiniCssExtractPlugin({
-                filename: './app/style/style.css',
+                filename: './style.css',
             }),
             new HtmlWebpackPlugin({
                 template: './index.html',

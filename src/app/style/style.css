@@ -4,3 +4,7 @@
 /* purgecss end ignore */
 @tailwind utilities;
 /** custom css goes below **/
+
+#campfire_main img:hover {
+    cursor: pointer;
+}
