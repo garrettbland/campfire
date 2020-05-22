@@ -16,6 +16,29 @@ const keydownListener = () => {
                 event.preventDefault()
             }
         }
+
+        /**
+         * Handle delete key
+         */
+        if (keyCode === 8) {
+            /**
+             * Handle delete in lists. Make sure user
+             * cant delete last <li></li>
+             */
+            if (localName === 'ol' || localName === 'ul') {
+                if (
+                    event.target.children.length === 1 &&
+                    event.target.children[0].innerText === `\n`
+                ) {
+                    /**
+                     * Prevent delete
+                     * Adding -> event.target.remove() will enable
+                     * removing ol all together
+                     */
+                    event.preventDefault()
+                }
+            }
+        }
     })
 }
 
