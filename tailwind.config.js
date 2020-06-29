@@ -1,21 +1,8 @@
 module.exports = {
+    purge: ['./src/**/*.js'],
     theme: {
-        cursor: {
-            'col-resize': 'col-resize',
-        },
+        extend: {},
     },
-    variants: {
-        cursor: ['responsive', 'hover'],
-        translate: [
-            'responsive',
-            'hover',
-            'focus',
-            'active',
-            'group-hover',
-        ],
-    },
-    plugins: [
-        require('@tailwindcss/ui'),
-        require('@tailwindcss/custom-forms'),
-    ],
+    variants: {},
+    plugins: [],
 }

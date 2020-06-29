@@ -3,7 +3,7 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html class="no-js">
+<html class="no-js" lang="en">
     <!--<![endif]-->
 
     <head>
@@ -17,63 +17,7 @@
         />
     </head>
 
-    <body class="bg-gray-50">
-        <div x-data="campfire()" x-init="init()">
-            <div id="campfire_main">
-                <section class="bg-gray-100 py-24">
-                    <div class="flex flex-wrap container mx-auto">
-                        <div class="w-full md:w-1/2 p-4">
-                            <h1
-                                class="text-3xl md:text-4xl lg:text-5xl leading-tight"
-                            >
-                                Campfire is a website editor
-                            </h1>
-                            <p class="text-lg text-gray-800">
-                                Edit elements with ease - just click
-                                on what you want to change. No clunky
-                                drag and drop, clean html code,
-                                sesible styles.
-                            </p>
-                            <ol
-                                class="text-lg text-gray-800 list-disc list-inside mt-6"
-                            >
-                                <li>This</li>
-                                <li>Is a test</li>
-                                <li>for line items</li>
-                            </ol>
-                        </div>
-                        <div class="w-full md:w-1/2 p-4">
-                            <img
-                                src="https://images.unsplash.com/photo-1589629961136-7d33a3ddb785?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
-                            />
-                        </div>
-                    </div>
-                </section>
-                <section>
-                    <h1>This is your new website</h1>
-                    <p>Do stuff with it</p>
-                    <span x-text="state.name"></span>
-                    <span x-text="state.count"></span>
-                    <div>
-                        <button
-                            x-on:click="store.dispatch({ type: 'INCREMENT' })"
-                        >
-                            Increment from redux
-                        </button>
-                    </div>
-                    <div>
-                        Current element:
-                        <span x-text="state.currentElement"></span>
-                    </div>
-                    <div>
-                        <ol>
-                            <li>This</li>
-                            <li>Is a test</li>
-                            <li>for line items</li>
-                        </ol>
-                    </div>
-                </section>
-            </div>
-        </div>
+    <body>
+        <div id="campfire_app"></div>
     </body>
 </html>
