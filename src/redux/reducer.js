@@ -51,6 +51,15 @@ let initialState = {
                                                 'This is a website builder',
                                         },
                                     },
+                                    {
+                                        id: '393z',
+                                        type: 'p',
+                                        classes: ['text-red-800'],
+                                        data: {
+                                            text:
+                                                'This is a website builder',
+                                        },
+                                    },
                                 ],
                             },
                             {

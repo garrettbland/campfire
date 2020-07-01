@@ -25,6 +25,11 @@ const buildSite = (data) => {
                             key={block.id}
                             id={block.id}
                             className={[...block.classes].join(' ')}
+                            onClick={() =>
+                                alert(
+                                    `clicked on p tag with ${block.data.text}`
+                                )
+                            }
                         >
                             {block.data.text}
                         </p>
@@ -36,6 +41,11 @@ const buildSite = (data) => {
                             key={block.id}
                             id={block.id}
                             className={[...block.classes].join(' ')}
+                            onClick={() =>
+                                alert(
+                                    `clicked on h1 tag with ${block.data.text}`
+                                )
+                            }
                         >
                             {block.data.text}
                         </h1>
@@ -49,6 +59,11 @@ const buildSite = (data) => {
                             alt={block.data.alt}
                             className={[...block.classes].join(' ')}
                             src={block.data.src}
+                            onClick={() =>
+                                alert(
+                                    `clicked on img tag with src ${block.data.src}`
+                                )
+                            }
                         />
                     )
                 }
