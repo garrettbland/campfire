@@ -3,28 +3,51 @@
  * and returns jsx
  */
 import React from 'react'
-const blocks = ['body', 'section', 'div']
+import { v4 as uuidv4 } from 'uuid'
+
+/**
+ * Block types
+ */
+const blocks = ['section', 'div']
+const content = ['h1', 'p', 'img']
 
 const buildSite = (data) => {
+    /**
+     * Loops through data
+     */
     return data.map((block) => {
+        /**
+         * If type is in blocks array
+         */
         if (blocks.includes(block.type)) {
             return (
                 <div
-                    key={block.id}
-                    id={block.id}
-                    className={[...block.classes].join(' ')}
+                    key={uuidv4()}
+                    id={uuidv4()}
+                    className={
+                        block?.classes
+                            ? [...block.classes].join(' ')
+                            : null
+                    }
                 >
                     {buildSite(block.data)}
                 </div>
             )
-        } else {
+        } else if (content.includes(block.type)) {
+            /**
+             * Block type is content
+             */
             switch (block.type) {
                 case 'p': {
                     return (
                         <p
-                            key={block.id}
-                            id={block.id}
-                            className={[...block.classes].join(' ')}
+                            key={uuidv4()}
+                            id={uuidv4()}
+                            className={
+                                block?.classes
+                                    ? [...block.classes].join(' ')
+                                    : null
+                            }
                             onClick={() =>
                                 alert(
                                     `clicked on p tag with ${block.data.text}`
@@ -38,9 +61,13 @@ const buildSite = (data) => {
                 case 'h1': {
                     return (
                         <h1
-                            key={block.id}
-                            id={block.id}
-                            className={[...block.classes].join(' ')}
+                            key={uuidv4()}
+                            id={uuidv4()}
+                            className={
+                                block?.classes
+                                    ? [...block.classes].join(' ')
+                                    : null
+                            }
                             onClick={() =>
                                 alert(
                                     `clicked on h1 tag with ${block.data.text}`
@@ -54,10 +81,14 @@ const buildSite = (data) => {
                 case 'img': {
                     return (
                         <img
-                            key={block.id}
-                            id={block.id}
+                            key={uuidv4()}
+                            id={uuidv4()}
                             alt={block.data.alt}
-                            className={[...block.classes].join(' ')}
+                            className={
+                                block?.classes
+                                    ? [...block.classes].join(' ')
+                                    : null
+                            }
                             src={block.data.src}
                             onClick={() =>
                                 alert(
@@ -71,66 +102,10 @@ const buildSite = (data) => {
                     return null
                 }
             }
+        } else {
+            return null
         }
     })
 }
 
 export default buildSite
-
-// const buildIt = (data) => {
-//     return data.map((block) => {
-//         if (blocks.includes(block.type)) {
-//             return (
-//                 <div
-//                     id={block.id}
-//                     className={[...classesArray].join(' ')}
-//                 >
-//                     {buildIt(block.data)}
-//                 </div>
-//             )
-//         } else {
-//             switch (block.type) {
-//                 case 'p': {
-//                     return (
-//                         <p
-//                             id={block.id}
-//                             className={[...classesArray].join(' ')}
-//                         >
-//                             {block.data.text}
-//                         </p>
-//                     )
-//                 }
-//                 case 'h1': {
-//                     return (
-//                         <h1
-//                             id={block.id}
-//                             className={[...classesArray].join(' ')}
-//                         >
-//                             {block.data.text}
-//                         </h1>
-//                     )
-//                 }
-//                 case 'img': {
-//                     return (
-//                         <img
-//                             id={block.id}
-//                             alt={block.data.alt}
-//                             className={[...classesArray].join(' ')}
-//                             src={block.data.src}
-//                         />
-//                     )
-//                 }
-//                 default: {
-//                     return null
-//                 }
-//             }
-//         }
-//     })
-// }
-
-// /**
-//  * Takes in top level data array
-//  */
-// export const buildSite = (dataArray) => {
-//     return buildIt(dataArray)
-// }

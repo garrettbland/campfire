@@ -1,5 +1,4 @@
 /**
  * Define redux constants for maintainability
  */
-export const INCREMENT = 'INCREMENT'
-export const DECREMENT = 'DECREMENT'
+export const ADD_SECTION = 'ADD_SECTION'
