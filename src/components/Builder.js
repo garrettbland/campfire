@@ -7,23 +7,61 @@ const Builder = () => {
     const website = useSelector((state) => state.website)
 
     const addSection = () => {
-        dispatch({
-            type: 'ADD_SECTION',
-            payload: {
-                id: 'cc91',
-                type: 'section',
-                classes: [],
-                data: [
-                    {
-                        id: 'v3z9',
-                        type: 'p',
-                        data: {
-                            text: 'New section paragraph text',
+        /**
+         * ask user for columns
+         */
+        const columns = prompt('how many columns')
+
+        /**
+         * range of columns (currently max of 6 with tailwind)
+         */
+        const column_range = ['1', '2', '3', '4', '5', '6']
+
+        if (column_range.includes(columns)) {
+            dispatch({
+                type: 'ADD_SECTION',
+                payload: {
+                    type: 'section',
+                    classes: ['p-8', 'bg-red-100'],
+                    data: [
+                        {
+                            type: 'div',
+                            classes: [
+                                'container',
+                                'mx-auto',
+                                'flex',
+                                'flex-wrap',
+                                'p-8',
+                                'bg-red-400',
+                            ],
+                            data: [...Array(parseInt(columns))].map(
+                                (col, index) => {
+                                    return {
+                                        type: 'div',
+                                        classes: [
+                                            'w-full',
+                                            `md:w-1/${columns}`,
+                                            'p-4',
+                                            'bg-red-700',
+                                        ],
+                                        data: [
+                                            {
+                                                type: 'p',
+                                                data: {
+                                                    text: `Column ${index}`,
+                                                },
+                                            },
+                                        ],
+                                    }
+                                }
+                            ),
                         },
-                    },
-                ],
-            },
-        })
+                    ],
+                },
+            })
+        } else {
+            alert('Allowed columns are 1 - 6')
+        }
     }
 
     return (
