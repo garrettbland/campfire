@@ -1,9 +1,15 @@
 import { ADD_SECTION } from './constants'
+import { SET_EDITING } from './constants'
+import { UPDATE_BLOCK } from './constants'
+
+import deepSearch from '../utils/deepSearch'
+var findAnd = require('find-and')
 
 /**
  * Define initial state for campfire app
  */
 let initialState = {
+    currentlyEditing: {},
     website: {
         head: {
             title: 'Campfire site',
@@ -11,6 +17,7 @@ let initialState = {
             scripts: ['google gtag analytics', 'google fonts'],
         },
         body: {
+            id: 'body',
             classes: ['bg-gray-100'],
             data: [],
             // data: [
@@ -95,6 +102,32 @@ const rootReducer = (state = initialState, action) => {
                             ...state.website.body.data,
                             { ...action.payload },
                         ],
+                    },
+                },
+            }
+        }
+        case SET_EDITING: {
+            return {
+                ...state,
+                currentlyEditing: action.payload,
+            }
+        }
+        case UPDATE_BLOCK: {
+            console.log(action.payload)
+            return {
+                ...state,
+                website: {
+                    ...state.website,
+                    body: {
+                        ...findAnd.changeProps(
+                            state.website.body,
+                            {
+                                id: action.payload.id,
+                            },
+                            {
+                                ...action.payload,
+                            }
+                        ),
                     },
                 },
             }

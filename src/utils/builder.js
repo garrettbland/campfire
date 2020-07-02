@@ -3,7 +3,7 @@
  * and returns jsx
  */
 import React from 'react'
-import { v4 as uuidv4 } from 'uuid'
+import { useDispatch } from 'react-redux'
 
 /**
  * Block types
@@ -11,7 +11,9 @@ import { v4 as uuidv4 } from 'uuid'
 const blocks = ['section', 'div']
 const content = ['h1', 'p', 'img']
 
-const buildSite = (data) => {
+const BuildSite = ({ data }) => {
+    const dispatch = useDispatch()
+
     /**
      * Loops through data
      */
@@ -22,15 +24,14 @@ const buildSite = (data) => {
         if (blocks.includes(block.type)) {
             return (
                 <div
-                    key={uuidv4()}
-                    id={uuidv4()}
+                    key={block.id}
                     className={
                         block?.classes
                             ? [...block.classes].join(' ')
                             : null
                     }
                 >
-                    {buildSite(block.data)}
+                    <BuildSite data={block.data} />
                 </div>
             )
         } else if (content.includes(block.type)) {
@@ -41,17 +42,17 @@ const buildSite = (data) => {
                 case 'p': {
                     return (
                         <p
-                            key={uuidv4()}
-                            id={uuidv4()}
+                            key={block.id}
                             className={
                                 block?.classes
                                     ? [...block.classes].join(' ')
                                     : null
                             }
                             onClick={() =>
-                                alert(
-                                    `clicked on p tag with ${block.data.text}`
-                                )
+                                dispatch({
+                                    type: 'SET_EDITING',
+                                    payload: block,
+                                })
                             }
                         >
                             {block.data.text}
@@ -61,8 +62,7 @@ const buildSite = (data) => {
                 case 'h1': {
                     return (
                         <h1
-                            key={uuidv4()}
-                            id={uuidv4()}
+                            key={block.id}
                             className={
                                 block?.classes
                                     ? [...block.classes].join(' ')
@@ -81,8 +81,7 @@ const buildSite = (data) => {
                 case 'img': {
                     return (
                         <img
-                            key={uuidv4()}
-                            id={uuidv4()}
+                            key={block.id}
                             alt={block.data.alt}
                             className={
                                 block?.classes
@@ -108,4 +107,4 @@ const buildSite = (data) => {
     })
 }
 
-export default buildSite
+export default BuildSite
