@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux'
  */
 const blocks = ['section', 'container', 'content-container']
 const empty = ['empty-content']
-const content = ['h1', 'p', 'img']
+const content = ['text', 'img']
 
 const BuildSite = ({ data, addContent }) => {
     const dispatch = useDispatch()
@@ -43,7 +43,7 @@ const BuildSite = ({ data, addContent }) => {
              * Block type is content
              */
             switch (block.type) {
-                case 'p': {
+                case 'text': {
                     return (
                         <p
                             key={block.id}
@@ -63,25 +63,6 @@ const BuildSite = ({ data, addContent }) => {
                         </p>
                     )
                 }
-                case 'h1': {
-                    return (
-                        <h1
-                            key={block.id}
-                            className={
-                                block?.classes
-                                    ? [...block.classes].join(' ')
-                                    : null
-                            }
-                            onClick={() =>
-                                alert(
-                                    `clicked on h1 tag with ${block.data.text}`
-                                )
-                            }
-                        >
-                            {block.data.text}
-                        </h1>
-                    )
-                }
                 case 'img': {
                     return (
                         <img
@@ -94,9 +75,10 @@ const BuildSite = ({ data, addContent }) => {
                             }
                             src={block.data.src}
                             onClick={() =>
-                                alert(
-                                    `clicked on img tag with src ${block.data.src}`
-                                )
+                                dispatch({
+                                    type: 'SET_EDITING',
+                                    payload: block,
+                                })
                             }
                         />
                     )

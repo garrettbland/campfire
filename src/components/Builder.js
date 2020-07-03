@@ -72,16 +72,37 @@ const Builder = () => {
     }
 
     const addContent = (id) => {
-        dispatch({
-            type: 'UPDATE_BLOCK',
-            payload: {
-                id: id,
-                type: 'p',
-                data: {
-                    text: 'A new text block!',
+        const contentType = prompt(
+            'What kind of content "text or img"'
+        )
+
+        if (contentType === 'text') {
+            dispatch({
+                type: 'UPDATE_BLOCK',
+                payload: {
+                    id: id,
+                    type: 'text',
+                    data: {
+                        text: 'A new text block!',
+                    },
                 },
-            },
-        })
+            })
+        } else if (contentType === 'img') {
+            dispatch({
+                type: 'UPDATE_BLOCK',
+                payload: {
+                    id: id,
+                    type: 'img',
+                    data: {
+                        src:
+                            'https://images.unsplash.com/photo-1515516089376-88db1e26e9c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
+                        alt: '',
+                    },
+                },
+            })
+        } else {
+            alert('must be text or img')
+        }
     }
 
     const handleChange = ({ target }) => {
@@ -105,13 +126,37 @@ const Builder = () => {
         })
     }
 
-    const addClassToBlock = () => {
-        const newClass = 'text-teal-500'
+    const addTextColor = (name) => {
+        /**
+         * Create clone of classes array
+         */
+        const { classes } = currentlyEditing
+
+        /**
+         * Color Library
+         */
+        const textClasses = [
+            'text-green-500',
+            'text-red-500',
+            'text-teal-500',
+        ]
+
+        /**
+         * Filter and remove all text color classes
+         */
+        const updatedClasses = classes.filter((item) => {
+            return !textClasses.includes(item)
+        })
+
+        return updatedClasses.concat(name)
+    }
+
+    const addClassToBlock = (newClass) => {
         dispatch({
             type: 'SET_EDITING',
             payload: {
                 ...currentlyEditing,
-                classes: [...currentlyEditing.classes, newClass],
+                classes: addTextColor(newClass.name),
             },
         })
     }
@@ -131,9 +176,10 @@ const Builder = () => {
                 <p>Currently editing</p>
                 <p>{JSON.stringify(currentlyEditing, null, 2)}</p>
                 {currentlyEditing.data && (
-                    <>
+                    <div className="p-2 border-2 border-gray-800">
+                        <p>Text</p>
                         <input
-                            className="bg-gray-300 p-1 border border-gray-500"
+                            className="bg-gray-300 p-1 border border-gray-500 mb-6"
                             value={currentlyEditing.data.text}
                             onChange={(event) => handleChange(event)}
                         />
@@ -141,16 +187,35 @@ const Builder = () => {
                             {currentlyEditing.classes.length > 0 && (
                                 <div>
                                     {currentlyEditing.classes.map(
-                                        (item) => (
-                                            <div>{item}</div>
+                                        (item, index) => (
+                                            <div key={index}>
+                                                {item}
+                                            </div>
                                         )
                                     )}
                                 </div>
                             )}
                             {currentlyEditing?.classes && (
                                 <div>
-                                    <button onClick={addClassToBlock}>
+                                    <button
+                                        onClick={() =>
+                                            addClassToBlock({
+                                                type: 'color',
+                                                name: 'text-teal-500',
+                                            })
+                                        }
+                                    >
                                         Add Teal Color
+                                    </button>
+                                    <button
+                                        onClick={() =>
+                                            addClassToBlock({
+                                                type: 'color',
+                                                name: 'text-red-500',
+                                            })
+                                        }
+                                    >
+                                        Add Red Color
                                     </button>
                                 </div>
                             )}
@@ -158,7 +223,7 @@ const Builder = () => {
                         <button onClick={() => updateBlock()}>
                             Update
                         </button>
-                    </>
+                    </div>
                 )}
             </div>
             <div>
