@@ -175,7 +175,7 @@ const Builder = () => {
             <div>
                 <p>Currently editing</p>
                 <p>{JSON.stringify(currentlyEditing, null, 2)}</p>
-                {currentlyEditing.data && (
+                {currentlyEditing.type === 'text' && (
                     <div className="p-2 border-2 border-gray-800">
                         <p>Text</p>
                         <input
