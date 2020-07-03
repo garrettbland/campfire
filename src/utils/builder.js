@@ -8,12 +8,12 @@ import { useDispatch } from 'react-redux'
 /**
  * Block types
  */
-const blocks = ['section', 'div']
+const blocks = ['section', 'container', 'content-container']
+const empty = ['empty-content']
 const content = ['h1', 'p', 'img']
 
-const BuildSite = ({ data }) => {
+const BuildSite = ({ data, addContent }) => {
     const dispatch = useDispatch()
-
     /**
      * Loops through data
      */
@@ -21,6 +21,7 @@ const BuildSite = ({ data }) => {
         /**
          * If type is in blocks array
          */
+
         if (blocks.includes(block.type)) {
             return (
                 <div
@@ -31,7 +32,10 @@ const BuildSite = ({ data }) => {
                             : null
                     }
                 >
-                    <BuildSite data={block.data} />
+                    <BuildSite
+                        data={block.data}
+                        addContent={addContent}
+                    />
                 </div>
             )
         } else if (content.includes(block.type)) {
@@ -101,6 +105,17 @@ const BuildSite = ({ data }) => {
                     return null
                 }
             }
+        } else if (empty.includes(block.type)) {
+            return (
+                <div
+                    key={block.id}
+                    className="flex items-center justify-center"
+                >
+                    <button onClick={() => addContent(block.id)}>
+                        Add Text Content ({block.id})
+                    </button>
+                </div>
+            )
         } else {
             return null
         }

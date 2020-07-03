@@ -31,7 +31,7 @@ const Builder = () => {
                     data: [
                         {
                             id: uuidv4(),
-                            type: 'div',
+                            type: 'container',
                             classes: [
                                 'container',
                                 'mx-auto',
@@ -44,7 +44,7 @@ const Builder = () => {
                                 (col, index) => {
                                     return {
                                         id: uuidv4(),
-                                        type: 'div',
+                                        type: 'content-container',
                                         classes: [
                                             'w-full',
                                             `md:w-1/${columns}`,
@@ -54,13 +54,8 @@ const Builder = () => {
                                         data: [
                                             {
                                                 id: uuidv4(),
-                                                type: 'p',
-                                                classes: [
-                                                    'opacity-75',
-                                                ],
-                                                data: {
-                                                    text: `Column ${index}`,
-                                                },
+                                                type: 'empty-content',
+                                                data: [],
                                             },
                                         ],
                                     }
@@ -73,6 +68,21 @@ const Builder = () => {
         } else {
             alert('Allowed columns are 1 - 6')
         }
+    }
+
+    const addContent = (id) => {
+        alert(`replace block with id ${id}`)
+        dispatch({
+            type: 'UPDATE_BLOCK',
+            payload: {
+                id: id,
+                type: 'p',
+                classes: [],
+                data: {
+                    text: 'A new text block',
+                },
+            },
+        })
     }
 
     const handleChange = ({ target }) => {
@@ -99,7 +109,10 @@ const Builder = () => {
 
     return (
         <div>
-            <BuildSite data={website?.body?.data} />
+            <BuildSite
+                data={website.body.data}
+                addContent={addContent}
+            />
             <div>
                 <button onClick={() => addSection()}>
                     Add Section
@@ -120,6 +133,9 @@ const Builder = () => {
                         </button>
                     </>
                 )}
+            </div>
+            <div>
+                <pre>{JSON.stringify(website, null, 2)}</pre>
             </div>
         </div>
     )
