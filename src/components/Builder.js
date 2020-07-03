@@ -55,6 +55,7 @@ const Builder = () => {
                                             {
                                                 id: uuidv4(),
                                                 type: 'empty-content',
+                                                classes: [],
                                                 data: [],
                                             },
                                         ],
@@ -71,15 +72,13 @@ const Builder = () => {
     }
 
     const addContent = (id) => {
-        alert(`replace block with id ${id}`)
         dispatch({
             type: 'UPDATE_BLOCK',
             payload: {
                 id: id,
                 type: 'p',
-                classes: [],
                 data: {
-                    text: 'A new text block',
+                    text: 'A new text block!',
                 },
             },
         })
@@ -102,7 +101,17 @@ const Builder = () => {
             type: 'UPDATE_BLOCK',
             payload: {
                 ...currentlyEditing,
-                classes: ['text-3xl'],
+            },
+        })
+    }
+
+    const addClassToBlock = () => {
+        const newClass = 'text-teal-500'
+        dispatch({
+            type: 'SET_EDITING',
+            payload: {
+                ...currentlyEditing,
+                classes: [...currentlyEditing.classes, newClass],
             },
         })
     }
@@ -128,6 +137,24 @@ const Builder = () => {
                             value={currentlyEditing.data.text}
                             onChange={(event) => handleChange(event)}
                         />
+                        <div>
+                            {currentlyEditing.classes.length > 0 && (
+                                <div>
+                                    {currentlyEditing.classes.map(
+                                        (item) => (
+                                            <div>{item}</div>
+                                        )
+                                    )}
+                                </div>
+                            )}
+                            {currentlyEditing?.classes && (
+                                <div>
+                                    <button onClick={addClassToBlock}>
+                                        Add Teal Color
+                                    </button>
+                                </div>
+                            )}
+                        </div>
                         <button onClick={() => updateBlock()}>
                             Update
                         </button>
