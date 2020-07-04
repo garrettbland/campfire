@@ -1,6 +1,11 @@
 import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+/**
+ * Block types
+ */
+import TextEdit from '../components/TextEdit'
+
 const Sidebar = () => {
     const dispatch = useDispatch()
     const sidebarNode = useRef()
@@ -24,44 +29,63 @@ const Sidebar = () => {
     }, [])
 
     const handleClick = (event) => {
-        if (sidebarNode.current.contains(event.target)) {
-            console.log('inside click')
-            // inside click
+        if (
+            sidebarNode.current &&
+            sidebarNode.current.contains(event.target)
+        ) {
+            /**
+             * Do nothing since click is inside sidbar
+             */
             return
         }
-        // outside click
+
+        /**
+         * Handle outside sideBar node click
+         */
         dispatch({
             type: 'SET_EDITING',
             payload: {},
         })
     }
 
-    /**
-     * Nothing is being edited, don't show sidebar
-     */
+    const updateBlock = () => {
+        dispatch({
+            type: 'UPDATE_BLOCK',
+            payload: {
+                ...currentlyEditing,
+            },
+        })
+
+        dispatch({
+            type: 'SET_EDITING',
+            payload: {},
+        })
+    }
+
+    if (!currentlyEditing.id) return null
 
     return (
-        <div>
-            {currentlyEditing.id && (
-                <div className="absolute top-0 left-0 w-screen h-screen flex justify-end bg-gray-900 bg-opacity-50">
-                    <div
-                        ref={sidebarNode}
-                        className="bg-gray-100 w-1/3 h-full shadow-2xl"
-                    >
-                        ID: {currentlyEditing.id}
+        <div className="fixed top-0 left-0 w-screen h-screen flex justify-end bg-gray-900 bg-opacity-50 overflow-hidden">
+            <div
+                ref={sidebarNode}
+                className="bg-gray-100 w-1/3 h-full shadow-2xl"
+            >
+                <div className="relative flex h-screen">
+                    <div className="overflow-y-scroll w-full">
+                        {currentlyEditing.type === 'text' && (
+                            <TextEdit />
+                        )}
+                    </div>
+                    <div className="w-full absolute bottom-0 right-0 bg-red-500 p-4">
                         <button
-                            onClick={() =>
-                                dispatch({
-                                    type: 'SET_EDITING',
-                                    payload: {},
-                                })
-                            }
+                            onClick={() => updateBlock()}
+                            className="rounded bg-blue-500 text-white text-center w-full px-6 py-2 hover:bg-blue-600"
                         >
-                            Close
+                            Update
                         </button>
                     </div>
                 </div>
-            )}
+            </div>
         </div>
     )
 }
