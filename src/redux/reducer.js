@@ -85,7 +85,6 @@ const rootReducer = (state = initialState, action) => {
             }
         }
         case UPDATE_BLOCK: {
-            console.log(action.payload)
             return {
                 ...state,
                 website: {

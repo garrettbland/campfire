@@ -7,9 +7,8 @@ const path = require('path')
 module.exports = (env, options) => {
     console.log(`✅ Running webpack in ${options.mode} mode`)
     return {
-        context: path.resolve(__dirname, 'src'),
         entry: {
-            index: './index.js',
+            index: './src/index.js',
         },
         output: {
             path: path.resolve(__dirname, 'dist'),
@@ -47,14 +46,6 @@ module.exports = (env, options) => {
                         'postcss-loader',
                     ],
                 },
-                {
-                    test: /\.html$/,
-                    use: [
-                        {
-                            loader: 'html-loader',
-                        },
-                    ],
-                },
             ],
         },
         plugins: [
@@ -62,7 +53,8 @@ module.exports = (env, options) => {
                 filename: './[name].css',
             }),
             new HtmlWebpackPlugin({
-                template: './index.html',
+                title: 'Campfire',
+                template: './public/index.html',
                 filename: './index.html',
                 /**
                  * Hash adds ?[hash] to file name for cache busting
