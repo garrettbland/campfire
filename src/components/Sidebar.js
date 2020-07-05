@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
  * Block types
  */
 import TextEdit from '../components/TextEdit'
+import ImageEdit from '../components/ImageEdit'
 
 const Sidebar = () => {
     const dispatch = useDispatch()
@@ -74,6 +75,9 @@ const Sidebar = () => {
                     <div className="overflow-y-scroll w-full">
                         {currentlyEditing.type === 'text' && (
                             <TextEdit />
+                        )}
+                        {currentlyEditing.type === 'img' && (
+                            <ImageEdit />
                         )}
                     </div>
                     <div className="w-full absolute bottom-0 right-0 bg-red-500 p-4">
