@@ -23,21 +23,52 @@ const BuildSite = ({ data, addContent }) => {
          */
 
         if (blocks.includes(block.type)) {
-            return (
-                <div
-                    key={block.id}
-                    className={
-                        block?.classes
-                            ? [...block.classes].join(' ')
-                            : null
-                    }
-                >
-                    <BuildSite
-                        data={block.data}
-                        addContent={addContent}
-                    />
-                </div>
-            )
+            if (block.type === 'section') {
+                return (
+                    <div
+                        key={block.id}
+                        className={
+                            block?.classes
+                                ? [...block.classes, 'relative'].join(
+                                      ' '
+                                  )
+                                : null
+                        }
+                    >
+                        <div
+                            className="absolute top-0 left-0"
+                            onClick={() =>
+                                dispatch({
+                                    type: 'SET_EDITING',
+                                    payload: block,
+                                })
+                            }
+                        >
+                            Edit Section
+                        </div>
+                        <BuildSite
+                            data={block.data}
+                            addContent={addContent}
+                        />
+                    </div>
+                )
+            } else {
+                return (
+                    <div
+                        key={block.id}
+                        className={
+                            block?.classes
+                                ? [...block.classes].join(' ')
+                                : null
+                        }
+                    >
+                        <BuildSite
+                            data={block.data}
+                            addContent={addContent}
+                        />
+                    </div>
+                )
+            }
         } else if (content.includes(block.type)) {
             /**
              * Block type is content
