@@ -71,7 +71,7 @@ const BuildSite = ({ data, addContent }) => {
                             addContent={addContent}
                         />
 
-                        <div className="w-full bg-orange-500">
+                        <div className="w-full bg-orange-500 h-0">
                             <button
                                 onClick={() => addContent(block.id)}
                                 className={
@@ -111,7 +111,10 @@ const BuildSite = ({ data, addContent }) => {
                             key={block.id}
                             className={
                                 block?.classes
-                                    ? [...block.classes].join(' ')
+                                    ? [
+                                          ...block.classes,
+                                          'campfire-content',
+                                      ].join(' ')
                                     : null
                             }
                             onClick={() =>
@@ -132,7 +135,10 @@ const BuildSite = ({ data, addContent }) => {
                             alt={block.data.alt}
                             className={
                                 block?.classes
-                                    ? [...block.classes].join(' ')
+                                    ? [
+                                          ...block.classes,
+                                          'campfire-content',
+                                      ].join(' ')
                                     : null
                             }
                             src={block.data.src}
