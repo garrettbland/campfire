@@ -13,6 +13,7 @@ const TextEdit = () => {
             payload: {
                 ...currentlyEditing,
                 data: {
+                    ...currentlyEditing.data,
                     text: target.value,
                 },
             },
@@ -54,6 +55,19 @@ const TextEdit = () => {
         })
     }
 
+    const handleTagUpdate = ({ target }) => {
+        dispatch({
+            type: 'SET_EDITING',
+            payload: {
+                ...currentlyEditing,
+                data: {
+                    ...currentlyEditing.data,
+                    tag: target.value,
+                },
+            },
+        })
+    }
+
     return (
         <div>
             <div>
@@ -63,6 +77,18 @@ const TextEdit = () => {
                     value={currentlyEditing.data.text}
                     onChange={(event) => handleChange(event)}
                 />
+            </div>
+            <div>
+                <p>Tag</p>
+                <select
+                    onChange={(event) => handleTagUpdate(event)}
+                    value={currentlyEditing.data.tag}
+                >
+                    <option value="h1">H1</option>
+                    <option value="h2">H2</option>
+                    <option value="h3">H3</option>
+                    <option value="p">Paragraph</option>
+                </select>
             </div>
             <div>
                 <div>

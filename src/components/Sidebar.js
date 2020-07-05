@@ -77,7 +77,7 @@ const Sidebar = () => {
                         {currentlyEditing.type === 'text' && (
                             <TextEdit />
                         )}
-                        {currentlyEditing.type === 'img' && (
+                        {currentlyEditing.type === 'image' && (
                             <ImageEdit />
                         )}
                         {currentlyEditing.type === 'section' && (

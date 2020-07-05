@@ -9,8 +9,7 @@ import { useDispatch } from 'react-redux'
  * Block types
  */
 const blocks = ['section', 'container', 'content-container']
-const empty = ['empty-content']
-const content = ['text', 'img']
+const content = ['text', 'image']
 
 const BuildSite = ({ data, addContent }) => {
     const dispatch = useDispatch()
@@ -124,7 +123,7 @@ const BuildSite = ({ data, addContent }) => {
                         </p>
                     )
                 }
-                case 'img': {
+                case 'image': {
                     return (
                         <img
                             key={block.id}

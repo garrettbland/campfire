@@ -20,6 +20,7 @@ let initialState = {
         body: {
             id: 'body',
             type: 'body',
+            tag: 'body',
             classes: ['bg-gray-100'],
             data: [],
         },
