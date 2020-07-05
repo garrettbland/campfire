@@ -35,9 +35,10 @@ const Builder = () => {
                             classes: [
                                 'container',
                                 'mx-auto',
-                                'flex',
-                                'flex-wrap',
-                                'p-8',
+                                'grid',
+                                'grid-cols-1',
+                                `md:grid-cols-${columns}`,
+                                'gap-4',
                                 'bg-red-400',
                             ],
                             data: [...Array(parseInt(columns))].map(
@@ -46,8 +47,6 @@ const Builder = () => {
                                         id: uuidv4(),
                                         type: 'content-container',
                                         classes: [
-                                            'w-full',
-                                            `md:w-1/${columns}`,
                                             'p-8',
                                             'bg-pink-400',
                                         ],

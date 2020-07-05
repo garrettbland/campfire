@@ -108,13 +108,11 @@ const BuildSite = ({ data, addContent }) => {
                 case 'text': {
                     return (
                         <p
+                            id="campfire-content"
                             key={block.id}
                             className={
                                 block?.classes
-                                    ? [
-                                          ...block.classes,
-                                          'campfire-content',
-                                      ].join(' ')
+                                    ? [...block.classes].join(' ')
                                     : null
                             }
                             onClick={() =>
@@ -131,14 +129,12 @@ const BuildSite = ({ data, addContent }) => {
                 case 'image': {
                     return (
                         <img
+                            id="campfire-content"
                             key={block.id}
                             alt={block.data.alt}
                             className={
                                 block?.classes
-                                    ? [
-                                          ...block.classes,
-                                          'campfire-content',
-                                      ].join(' ')
+                                    ? [...block.classes].join(' ')
                                     : null
                             }
                             src={block.data.src}

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /** Custom Styles **/
-.campfire-content:hover {
+#campfire-content:hover {
     outline-style: solid;
     outline-color: red;
     outline-width: 3px;
