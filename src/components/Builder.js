@@ -225,7 +225,7 @@ const Builder = () => {
                     </div>
                 )}
             </div>
-            <div>
+            <div className="overflow-hidden">
                 <pre>{JSON.stringify(website, null, 2)}</pre>
             </div>
         </div>

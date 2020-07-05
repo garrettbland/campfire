@@ -70,7 +70,7 @@ const Sidebar = () => {
         <div className="fixed top-0 left-0 z-40 w-screen h-screen flex justify-end bg-gray-900 bg-opacity-50 overflow-hidden">
             <div
                 ref={sidebarNode}
-                className="bg-gray-100 w-1/3 h-full shadow-2xl"
+                className="bg-gray-100 w-4/5 sm:w-2/5 lg:w-1/3 h-full shadow-2xl"
             >
                 <div className="relative flex h-screen">
                     <div className="overflow-y-scroll w-full">
