@@ -82,6 +82,7 @@ const Builder = () => {
                 payload: {
                     id: id,
                     type: 'text',
+                    classes: [],
                     data: {
                         text: 'A new text block!',
                     },
@@ -93,6 +94,7 @@ const Builder = () => {
                 payload: {
                     id: id,
                     type: 'img',
+                    classes: [],
                     data: {
                         src:
                             'https://images.unsplash.com/photo-1515516089376-88db1e26e9c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
