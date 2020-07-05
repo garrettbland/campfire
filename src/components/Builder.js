@@ -51,14 +51,7 @@ const Builder = () => {
                                             'p-8',
                                             'bg-pink-400',
                                         ],
-                                        data: [
-                                            {
-                                                id: uuidv4(),
-                                                type: 'empty-content',
-                                                classes: [],
-                                                data: [],
-                                            },
-                                        ],
+                                        data: [],
                                     }
                                 }
                             ),
@@ -71,16 +64,17 @@ const Builder = () => {
         }
     }
 
-    const addContent = (id) => {
+    const addContent = (parentId) => {
         const contentType = prompt(
             'What kind of content "text or img"'
         )
 
         if (contentType === 'text') {
             dispatch({
-                type: 'UPDATE_BLOCK',
+                type: 'ADD_CONTENT',
                 payload: {
-                    id: id,
+                    id: uuidv4(),
+                    parentId: parentId,
                     type: 'text',
                     classes: [],
                     data: {
@@ -90,9 +84,10 @@ const Builder = () => {
             })
         } else if (contentType === 'img') {
             dispatch({
-                type: 'UPDATE_BLOCK',
+                type: 'ADD_CONTENT',
                 payload: {
-                    id: id,
+                    id: uuidv4(),
+                    parentId: parentId,
                     type: 'img',
                     classes: [],
                     data: {

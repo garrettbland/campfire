@@ -1,6 +1,9 @@
-import { ADD_SECTION } from './constants'
-import { SET_EDITING } from './constants'
-import { UPDATE_BLOCK } from './constants'
+import {
+    ADD_SECTION,
+    SET_EDITING,
+    UPDATE_BLOCK,
+    ADD_CONTENT,
+} from './constants'
 const findAnd = require('find-and')
 
 /**
@@ -39,6 +42,37 @@ const rootReducer = (state = initialState, action) => {
                             ...state.website.body.data,
                             { ...action.payload },
                         ],
+                    },
+                },
+            }
+        }
+        case ADD_CONTENT: {
+            /**
+             * Finds the content blocks parent id, and then appends
+             * new content block to parent
+             */
+            let contentObj = findAnd.returnFound(state.website.body, {
+                id: action.payload.parentId,
+            })
+            contentObj.data = [
+                ...contentObj.data,
+                { ...action.payload },
+            ]
+
+            return {
+                ...state,
+                website: {
+                    ...state.website,
+                    body: {
+                        ...findAnd.changeProps(
+                            state.website.body,
+                            {
+                                parentId: action.payload.parentId,
+                            },
+                            {
+                                contentObj,
+                            }
+                        ),
                     },
                 },
             }

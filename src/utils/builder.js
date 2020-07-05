@@ -14,6 +14,7 @@ const content = ['text', 'img']
 
 const BuildSite = ({ data, addContent }) => {
     const dispatch = useDispatch()
+
     /**
      * Loops through data
      */
@@ -50,6 +51,31 @@ const BuildSite = ({ data, addContent }) => {
                             data={block.data}
                             addContent={addContent}
                         />
+                    </div>
+                )
+            } else if (block.type === 'content-container') {
+                return (
+                    <div
+                        key={block.id}
+                        className={
+                            block?.classes
+                                ? [...block.classes].join(' ')
+                                : null
+                        }
+                    >
+                        <BuildSite
+                            data={block.data}
+                            addContent={addContent}
+                        />
+
+                        <button
+                            onClick={() => addContent(block.id)}
+                            className={
+                                'rounded-full w-8 h-8 bg-gray-500 text-white'
+                            }
+                        >
+                            + ({block.id})
+                        </button>
                     </div>
                 )
             } else {
@@ -118,17 +144,6 @@ const BuildSite = ({ data, addContent }) => {
                     return null
                 }
             }
-        } else if (empty.includes(block.type)) {
-            return (
-                <div
-                    key={block.id}
-                    className="flex items-center justify-center"
-                >
-                    <button onClick={() => addContent(block.id)}>
-                        Add Text Content ({block.id})
-                    </button>
-                </div>
-            )
         } else {
             return null
         }
