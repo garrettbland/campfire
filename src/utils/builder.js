@@ -54,6 +54,10 @@ const BuildSite = ({ data, addContent }) => {
                     </div>
                 )
             } else if (block.type === 'content-container') {
+                /**
+                 * If content container, add 'add content' button
+                 * with content-container id to concat to data array
+                 */
                 return (
                     <div
                         key={block.id}
@@ -74,7 +78,7 @@ const BuildSite = ({ data, addContent }) => {
                                 'rounded-full w-8 h-8 bg-gray-500 text-white'
                             }
                         >
-                            + ({block.id})
+                            +
                         </button>
                     </div>
                 )
