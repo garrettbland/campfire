@@ -2,6 +2,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const TerserJSPlugin = require('terser-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 const path = require('path')
 
 module.exports = (env, options) => {
@@ -51,6 +52,11 @@ module.exports = (env, options) => {
         plugins: [
             new MiniCssExtractPlugin({
                 filename: './[name].css',
+            }),
+            new CopyPlugin({
+                patterns: [
+                    { from: path.resolve(__dirname, 'public') },
+                ],
             }),
             new HtmlWebpackPlugin({
                 title: 'Campfire',
