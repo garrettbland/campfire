@@ -42,6 +42,20 @@ const SectionEdit = () => {
         })
     }
 
+    const removeSection = () => {
+        dispatch({
+            type: 'REMOVE_BLOCK',
+            payload: {
+                id: currentlyEditing.id,
+            },
+        })
+
+        dispatch({
+            type: 'SET_EDITING',
+            payload: {},
+        })
+    }
+
     return (
         <div>
             <div>
@@ -76,6 +90,14 @@ const SectionEdit = () => {
                     >
                         Green BG
                     </button>
+                    <div>
+                        <button
+                            onClick={() => removeSection()}
+                            className="text-red-500"
+                        >
+                            Remove Section
+                        </button>
+                    </div>
                 </div>
             </div>
             <div>

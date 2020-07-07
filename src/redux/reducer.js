@@ -3,6 +3,7 @@ import {
     SET_EDITING,
     UPDATE_BLOCK,
     ADD_CONTENT,
+    REMOVE_BLOCK,
 } from './constants'
 const findAnd = require('find-and')
 
@@ -99,6 +100,19 @@ const rootReducer = (state = initialState, action) => {
                                 ...action.payload,
                             }
                         ),
+                    },
+                },
+            }
+        }
+        case REMOVE_BLOCK: {
+            return {
+                ...state,
+                website: {
+                    ...state.website,
+                    body: {
+                        ...findAnd.removeObject(state.website.body, {
+                            id: action.payload.id,
+                        }),
                     },
                 },
             }
