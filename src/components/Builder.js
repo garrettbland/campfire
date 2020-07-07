@@ -27,29 +27,25 @@ const Builder = () => {
                 payload: {
                     id: uuidv4(),
                     type: 'section',
-                    classes: ['p-8', 'bg-green-400'],
+                    classes: ['py-12', 'bg-gray-200'],
                     data: [
                         {
                             id: uuidv4(),
                             type: 'container',
                             classes: [
-                                'container',
-                                'mx-auto',
-                                'grid',
-                                'grid-cols-1',
+                                `container`,
+                                `mx-auto`,
+                                `grid`,
+                                `grid-cols-1`,
                                 `md:grid-cols-${columns}`,
-                                'gap-4',
-                                'bg-red-400',
+                                `gap-4`,
                             ],
                             data: [...Array(parseInt(columns))].map(
                                 (col, index) => {
                                     return {
                                         id: uuidv4(),
                                         type: 'content-container',
-                                        classes: [
-                                            'p-8',
-                                            'bg-pink-400',
-                                        ],
+                                        classes: ['p-4'],
                                         data: [],
                                     }
                                 }
@@ -75,7 +71,7 @@ const Builder = () => {
                     id: uuidv4(),
                     parentId: parentId,
                     type: 'text',
-                    classes: [],
+                    classes: ['p-4'],
                     data: {
                         tag: 'p',
                         text:

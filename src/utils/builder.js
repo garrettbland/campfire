@@ -13,7 +13,6 @@ const content = ['text', 'image']
 
 const BuildSite = ({ data, addContent }) => {
     const dispatch = useDispatch()
-
     /**
      * Loops through data
      */
@@ -75,7 +74,7 @@ const BuildSite = ({ data, addContent }) => {
                             <button
                                 onClick={() => addContent(block.id)}
                                 className={
-                                    'rounded-full w-8 h-8 bg-gray-500 text-white mx-auto block'
+                                    'rounded-full w-8 h-8 bg-blue-500 text-white mx-auto block'
                                 }
                             >
                                 +
