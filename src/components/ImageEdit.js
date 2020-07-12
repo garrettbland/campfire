@@ -50,6 +50,20 @@ const ImageEdit = () => {
         })
     }
 
+    const removeImage = () => {
+        dispatch({
+            type: 'REMOVE_BLOCK',
+            payload: {
+                id: currentlyEditing.id,
+            },
+        })
+
+        dispatch({
+            type: 'SET_EDITING',
+            payload: {},
+        })
+    }
+
     return (
         <div>
             <div>
@@ -72,6 +86,14 @@ const ImageEdit = () => {
                         )}
                     </div>
                 )}
+            </div>
+            <div>
+                <button
+                    onClick={() => removeImage()}
+                    className="text-red-500"
+                >
+                    Remove Image
+                </button>
             </div>
             <div>
                 <div>

@@ -20,6 +20,20 @@ const TextEdit = () => {
         })
     }
 
+    const removeText = () => {
+        dispatch({
+            type: 'REMOVE_BLOCK',
+            payload: {
+                id: currentlyEditing.id,
+            },
+        })
+
+        dispatch({
+            type: 'SET_EDITING',
+            payload: {},
+        })
+    }
+
     const addTextColor = (name) => {
         /**
          * Create clone of classes array
@@ -77,6 +91,14 @@ const TextEdit = () => {
                     value={currentlyEditing.data.text}
                     onChange={(event) => handleChange(event)}
                 />
+            </div>
+            <div>
+                <button
+                    onClick={() => removeText()}
+                    className="text-red-500"
+                >
+                    Remove Text
+                </button>
             </div>
             <div>
                 <p>Tag</p>
