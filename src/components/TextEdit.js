@@ -1,11 +1,80 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import Slider from 'react-input-slider'
+
+/**
+ * Color Library
+ */
+const textClasses = [
+    'text-green-500',
+    'text-red-500',
+    'text-teal-500',
+]
+
+/**
+ * Text sizes library
+ */
+const textSizeClasses = [
+    'text-xs',
+    'text-sm',
+    'text-base',
+    'text-lg',
+    'text-xl',
+    'text-2xl',
+    'text-3xl',
+    'text-4xl',
+    'text-5xl',
+    'text-6xl',
+]
 
 const TextEdit = () => {
     const dispatch = useDispatch()
     const currentlyEditing = useSelector(
         (state) => state.currentlyEditing
     )
+    const [currentSize, setCurrentSize] = useState(0)
+
+    useEffect(() => {
+        const currentTextSize = findExistingClass(
+            currentlyEditing.classes,
+            textSizeClasses
+        )
+
+        /**
+         * Set current text to index from findExistingClass
+         */
+        const defaultTextIndex = 2
+        setCurrentSize(
+            currentTextSize === false
+                ? defaultTextIndex
+                : currentTextSize
+        )
+    }, [])
+
+    const findExistingClass = (classList, library) => {
+        /**
+         * takes in classlist array and checks against library
+         * Returns index from library
+         */
+
+        // Loop for array1
+        for (let i = 0; i < classList.length; i++) {
+            // Loop for array2
+            for (let j = 0; j < library.length; j++) {
+                // Compare the elementy of each and
+                // every element from both of the
+                // arrays
+                if (classList[i] === library[j]) {
+                    // Return if common element found
+                    console.log(library[j])
+                    return j
+                }
+            }
+        }
+
+        // Return if no common element exist
+        return false
+    }
 
     const handleChange = ({ target }) => {
         dispatch({
@@ -34,20 +103,40 @@ const TextEdit = () => {
         })
     }
 
-    const addTextColor = (name) => {
+    const updateTextSize = (newClassIndex) => {
         /**
          * Create clone of classes array
          */
         const { classes } = currentlyEditing
 
         /**
-         * Color Library
+         * Filter and remove all text size classes
          */
-        const textClasses = [
-            'text-green-500',
-            'text-red-500',
-            'text-teal-500',
-        ]
+        const updatedClasses = classes.filter((item) => {
+            return !textSizeClasses.includes(item)
+        })
+
+        /**
+         * Return updated class list and add new class
+         */
+        setCurrentSize(newClassIndex)
+        dispatch({
+            type: 'SET_EDITING',
+            payload: {
+                ...currentlyEditing,
+                classes: updatedClasses.concat(
+                    textSizeClasses[newClassIndex]
+                ),
+            },
+        })
+        //return updatedClasses.concat(textSizeClasses[newClassIndex])
+    }
+
+    const addTextColor = (name) => {
+        /**
+         * Create clone of classes array
+         */
+        const { classes } = currentlyEditing
 
         /**
          * Filter and remove all text color classes
@@ -56,6 +145,9 @@ const TextEdit = () => {
             return !textClasses.includes(item)
         })
 
+        /**
+         * Return updated class list and add new class
+         */
         return updatedClasses.concat(name)
     }
 
@@ -111,6 +203,19 @@ const TextEdit = () => {
                     <option value="h3">H3</option>
                     <option value="p">Paragraph</option>
                 </select>
+            </div>
+            <div>
+                <label>Text Size</label>
+                <div>
+                    <Slider
+                        axis="x"
+                        xstep={1}
+                        xmin={0}
+                        xmax={9}
+                        x={currentSize}
+                        onChange={({ x }) => updateTextSize(x)}
+                    />
+                </div>
             </div>
             <div>
                 <div>
