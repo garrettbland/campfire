@@ -39,13 +39,19 @@ const Builder = () => {
                                 `grid-cols-1`,
                                 `md:grid-cols-${columns}`,
                                 `gap-4`,
+                                `px-4`,
+                                `md:px-0`,
                             ],
                             data: [...Array(parseInt(columns))].map(
                                 (col, index) => {
                                     return {
                                         id: uuidv4(),
                                         type: 'content-container',
-                                        classes: ['p-4'],
+                                        classes: [
+                                            'grid',
+                                            'gap-4',
+                                            'content-start',
+                                        ],
                                         data: [],
                                     }
                                 }
@@ -71,7 +77,7 @@ const Builder = () => {
                     id: uuidv4(),
                     parentId: parentId,
                     type: 'text',
-                    classes: ['p-4'],
+                    classes: [],
                     data: {
                         tag: 'p',
                         text:
