@@ -1,6 +1,19 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+/**
+ * Box Shadow Class Library
+ */
+const boxShadowClasses = [
+    'shadow-xs',
+    'shadow-sm',
+    'shadow',
+    'shadow-md',
+    'shadow-lg',
+    'shadow-xl',
+    'shadow-2xl',
+]
+
 const ImageEdit = () => {
     const dispatch = useDispatch()
     const currentlyEditing = useSelector(
@@ -38,6 +51,28 @@ const ImageEdit = () => {
         })
 
         return updatedClasses.concat(name)
+    }
+
+    const addBoxShadow = (name) => {
+        /**
+         * Create clone of classes array
+         */
+        const { classes } = currentlyEditing
+
+        /**
+         * Filter and remove all box shadow classes
+         */
+        const updatedClasses = classes.filter((item) => {
+            return !boxShadowClasses.includes(item)
+        })
+
+        dispatch({
+            type: 'SET_EDITING',
+            payload: {
+                ...currentlyEditing,
+                classes: updatedClasses.concat(name),
+            },
+        })
     }
 
     const addClassToBlock = (newClass) => {
@@ -94,6 +129,19 @@ const ImageEdit = () => {
                 >
                     Remove Image
                 </button>
+            </div>
+            <div>
+                <p>Shadow</p>
+                {boxShadowClasses.map((className) => {
+                    return (
+                        <button
+                            className="capitalize"
+                            onClick={() => addBoxShadow(className)}
+                        >
+                            {className}
+                        </button>
+                    )
+                })}
             </div>
             <div>
                 <div>
