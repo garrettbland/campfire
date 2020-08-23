@@ -70,7 +70,7 @@ const BuildSite = ({ data, addContent }) => {
                             addContent={addContent}
                         />
 
-                        <div className="w-full bg-orange-500 h-0">
+                        <div className="w-full bg-orange-500 h-0 -my-4">
                             <button
                                 onClick={() => addContent(block.id)}
                                 className={

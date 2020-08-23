@@ -40,7 +40,6 @@ const Builder = () => {
                                 `md:grid-cols-${columns}`,
                                 `gap-4`,
                                 `px-4`,
-                                `md:px-0`,
                             ],
                             data: [...Array(parseInt(columns))].map(
                                 (col, index) => {
@@ -176,56 +175,6 @@ const Builder = () => {
             <div>
                 <p>Currently editing</p>
                 <p>{JSON.stringify(currentlyEditing, null, 2)}</p>
-                {currentlyEditing.type === 'text' && (
-                    <div className="p-2 border-2 border-gray-800">
-                        <p>Text</p>
-                        <input
-                            className="bg-gray-300 p-1 border border-gray-500 mb-6"
-                            value={currentlyEditing.data.text}
-                            onChange={(event) => handleChange(event)}
-                        />
-                        <div>
-                            {currentlyEditing.classes.length > 0 && (
-                                <div>
-                                    {currentlyEditing.classes.map(
-                                        (item, index) => (
-                                            <div key={index}>
-                                                {item}
-                                            </div>
-                                        )
-                                    )}
-                                </div>
-                            )}
-                            {currentlyEditing?.classes && (
-                                <div>
-                                    <button
-                                        onClick={() =>
-                                            addClassToBlock({
-                                                type: 'color',
-                                                name: 'text-teal-500',
-                                            })
-                                        }
-                                    >
-                                        Add Teal Color
-                                    </button>
-                                    <button
-                                        onClick={() =>
-                                            addClassToBlock({
-                                                type: 'color',
-                                                name: 'text-red-500',
-                                            })
-                                        }
-                                    >
-                                        Add Red Color
-                                    </button>
-                                </div>
-                            )}
-                        </div>
-                        <button onClick={() => updateBlock()}>
-                            Update
-                        </button>
-                    </div>
-                )}
             </div>
             <div className="overflow-hidden">
                 <pre>{JSON.stringify(website, null, 2)}</pre>
