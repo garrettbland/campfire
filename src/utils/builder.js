@@ -70,14 +70,37 @@ const BuildSite = ({ data, addContent }) => {
                             addContent={addContent}
                         />
 
-                        <div className="w-full bg-orange-500 h-0 -my-4">
+                        <div className="w-full h-0">
                             <button
                                 onClick={() => addContent(block.id)}
                                 className={
-                                    'rounded-full w-8 h-8 bg-blue-500 text-white mx-auto block'
+                                    'mx-auto flex justify-center items-center bg-blue-700 text-sm h-8 w-8 hover:bg-blue-600 rounded-full text-blue-100'
                                 }
                             >
-                                +
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    width="16"
+                                    height="16"
+                                    stroke="currentColor"
+                                    strokeWidth="2.5"
+                                    fill="none"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    class="css-i6dzq1"
+                                >
+                                    <line
+                                        x1="12"
+                                        y1="5"
+                                        x2="12"
+                                        y2="19"
+                                    ></line>
+                                    <line
+                                        x1="5"
+                                        y1="12"
+                                        x2="19"
+                                        y2="12"
+                                    ></line>
+                                </svg>
                             </button>
                         </div>
                     </div>

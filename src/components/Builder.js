@@ -167,18 +167,21 @@ const Builder = () => {
                 data={website.body.data}
                 addContent={addContent}
             />
-            <div>
-                <button onClick={() => addSection()}>
+            <div className="flex justify-center py-6">
+                <button
+                    className="bg-blue-700 text-sm px-4 py-1 hover:bg-blue-600 rounded text-blue-100"
+                    onClick={() => addSection()}
+                >
                     Add Section
                 </button>
             </div>
-            <div>
+            {/* <div>
                 <p>Currently editing</p>
                 <p>{JSON.stringify(currentlyEditing, null, 2)}</p>
             </div>
             <div className="overflow-hidden">
                 <pre>{JSON.stringify(website, null, 2)}</pre>
-            </div>
+            </div> */}
         </div>
     )
 }
