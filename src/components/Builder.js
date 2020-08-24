@@ -198,9 +198,9 @@ const Builder = () => {
                 <p>Currently editing</p>
                 <p>{JSON.stringify(currentlyEditing, null, 2)}</p>
             </div> */}
-            <div className="overflow-hidden">
+            {/* <div className="overflow-hidden">
                 <pre>{JSON.stringify(website, null, 2)}</pre>
-            </div>
+            </div> */}
         </div>
     )
 }
