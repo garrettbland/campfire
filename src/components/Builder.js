@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import BuildSite from '../utils/builder'
 import { useSelector, useDispatch } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
+import { Container } from 'react-smooth-dnd'
+import { SWAP_BLOCKS } from '../redux/constants'
+import { removeObject } from 'find-and'
 
 const Builder = () => {
     const dispatch = useDispatch()
@@ -161,12 +164,28 @@ const Builder = () => {
         })
     }
 
+    const swapSections = ({ removedIndex, addedIndex }) => {
+        dispatch({
+            type: 'SWAP_BLOCKS',
+            payload: {
+                removedIndex,
+                addedIndex,
+            },
+        })
+    }
+
     return (
         <div>
-            <BuildSite
-                data={website.body.data}
-                addContent={addContent}
-            />
+            <Container
+                onDrop={(dropResult) => swapSections(dropResult)}
+                dragHandleSelector="#section-drag-handle"
+                dragClass="shadow-2xl opacity-75"
+            >
+                <BuildSite
+                    data={website.body.data}
+                    addContent={addContent}
+                />
+            </Container>
             <div className="flex justify-center py-6">
                 <button
                     className="bg-blue-700 text-sm px-4 py-1 hover:bg-blue-600 rounded text-blue-100"
@@ -178,10 +197,10 @@ const Builder = () => {
             {/* <div>
                 <p>Currently editing</p>
                 <p>{JSON.stringify(currentlyEditing, null, 2)}</p>
-            </div>
+            </div> */}
             <div className="overflow-hidden">
                 <pre>{JSON.stringify(website, null, 2)}</pre>
-            </div> */}
+            </div>
         </div>
     )
 }

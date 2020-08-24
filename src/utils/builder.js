@@ -4,6 +4,7 @@
  */
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import { Draggable } from 'react-smooth-dnd'
 
 /**
  * Block types
@@ -24,32 +25,41 @@ const BuildSite = ({ data, addContent }) => {
         if (blocks.includes(block.type)) {
             if (block.type === 'section') {
                 return (
-                    <div
-                        key={block.id}
-                        className={
-                            block?.classes
-                                ? [...block.classes, 'relative'].join(
-                                      ' '
-                                  )
-                                : null
-                        }
-                    >
+                    <Draggable key={block.id}>
                         <div
-                            className="absolute top-0 left-0"
-                            onClick={() =>
-                                dispatch({
-                                    type: 'SET_EDITING',
-                                    payload: block,
-                                })
+                            key={block.id}
+                            className={
+                                block?.classes
+                                    ? [
+                                          ...block.classes,
+                                          'relative',
+                                      ].join(' ')
+                                    : null
                             }
                         >
-                            Edit Section
+                            <div className="absolute top-0 left-0">
+                                <div className="flex">
+                                    <button
+                                        onClick={() =>
+                                            dispatch({
+                                                type: 'SET_EDITING',
+                                                payload: block,
+                                            })
+                                        }
+                                    >
+                                        Edit Section
+                                    </button>
+                                    <div id="section-drag-handle">
+                                        Drag Handle
+                                    </div>
+                                </div>
+                            </div>
+                            <BuildSite
+                                data={block.data}
+                                addContent={addContent}
+                            />
                         </div>
-                        <BuildSite
-                            data={block.data}
-                            addContent={addContent}
-                        />
-                    </div>
+                    </Draggable>
                 )
             } else if (block.type === 'content-container') {
                 /**
@@ -86,7 +96,7 @@ const BuildSite = ({ data, addContent }) => {
                                     fill="none"
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
-                                    class="css-i6dzq1"
+                                    className="css-i6dzq1"
                                 >
                                     <line
                                         x1="12"
