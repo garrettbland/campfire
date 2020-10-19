@@ -1,3 +1,0 @@
-# campfire
-
-## Campfire website builder

@@ -1,0 +1,19 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+* {
+    transition: all 50ms ease-in-out;
+}
+
+[data-type="section"]:hover {
+    outline: 2px solid red;
+    outline-offset: -2px;
+}
+
+[data-type="row"]:hover {
+    outline: 2px solid pink;
+    outline-offset: 0px;
+}

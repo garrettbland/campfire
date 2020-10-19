@@ -1,6 +1,13 @@
 import React from "react";
-import ReactDom from "react-dom";
-import App from "./app";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import store from "./store";
+import App from "./App";
 
-const app = document.getElementById("campfire_app");
-ReactDom.render(<App />, app);
+const rootElement = document.getElementById("app");
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    rootElement
+);
