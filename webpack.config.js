@@ -17,6 +17,13 @@ module.exports = (env, options) => {
             path: path.resolve(__dirname, './dist'),
             filename: '[name].bundle.js',
         },
+        optimization: {
+            minimize: options.mode === 'production' ? true : false,
+            minimizer: [
+                new TerserJSPlugin({}),
+                new OptimizeCSSAssetsPlugin({}),
+            ],
+        },
         module: {
             rules: [
                 {
@@ -41,16 +48,19 @@ module.exports = (env, options) => {
                         'postcss-loader',
                     ],
                 },
-            ]
+            ],
         },
         plugins: [
             new MiniCssExtractPlugin({
                 filename: './[name].css',
             }),
             new HtmlWebpackPlugin({
-                template: path.resolve(__dirname, './src/template.html'), // template file
+                template: path.resolve(
+                    __dirname,
+                    './src/template.html'
+                ), // template file
                 filename: 'index.html', // output file
-                hash: true // adds ?hash to cache bust
+                hash: true, // adds ?hash to cache bust
             }),
             new CopyPlugin({
                 patterns: [

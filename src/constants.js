@@ -1,1 +1,1 @@
-export const UPDATE_BLOCK = "UPDATE_BLOCK";
+export const UPDATE_BLOCK = 'UPDATE_BLOCK'

@@ -1,57 +1,57 @@
 {
-  "name": "campfire",
-  "version": "1.0.0",
-  "description": "Campfire website builder",
-  "main": "index.js",
-  "scripts": {
-    "clean": "rm dist/bundle.js",
-    "build-dev": "webpack --mode development",
-    "build-prod": "webpack --mode production",
-    "dev": "webpack serve --hot --mode development",
-    "build": "webpack --mode=development",
-    "serve": "webpack serve --mode=development"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/garrettbland/campfire.git"
-  },
-  "author": "Garrett Bland",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/garrettbland/campfire/issues"
-  },
-  "homepage": "https://github.com/garrettbland/campfire#readme",
-  "dependencies": {
-    "find-and": "^1.3.0",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
-    "react-hot-loader": "^4.13.0",
-    "react-redux": "^7.2.1",
-    "redux": "^4.0.5",
-    "tailwindcss": "^1.9.4"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.12.3",
-    "@babel/preset-env": "^7.12.1",
-    "@babel/preset-react": "^7.12.1",
-    "autoprefixer": "^10.0.1",
-    "babel-loader": "^8.1.0",
-    "clean-webpack-plugin": "^3.0.0",
-    "copy-webpack-plugin": "^6.2.1",
-    "css-loader": "^5.0.0",
-    "eslint": "^7.11.0",
-    "eslint-config-prettier": "^6.13.0",
-    "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-react": "^7.21.4",
-    "html-webpack-plugin": "^4.5.0",
-    "mini-css-extract-plugin": "^1.0.0",
-    "optimize-css-assets-webpack-plugin": "^5.0.4",
-    "postcss-loader": "^4.0.4",
-    "prettier": "^2.1.2",
-    "style-loader": "^2.0.0",
-    "terser-webpack-plugin": "^5.0.0",
-    "webpack": "^5.1.3",
-    "webpack-cli": "^4.1.0",
-    "webpack-dev-server": "^3.11.0"
-  }
+    "name": "campfire",
+    "version": "1.0.0",
+    "description": "Campfire website builder",
+    "main": "index.js",
+    "scripts": {
+        "clean": "rm dist/bundle.js",
+        "build-dev": "webpack --mode development",
+        "build-prod": "webpack --mode production",
+        "dev": "webpack serve --hot --mode development",
+        "build": "webpack --mode=production",
+        "serve": "webpack serve --mode=development"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/garrettbland/campfire.git"
+    },
+    "author": "Garrett Bland",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/garrettbland/campfire/issues"
+    },
+    "homepage": "https://github.com/garrettbland/campfire#readme",
+    "dependencies": {
+        "find-and": "^1.3.0",
+        "react": "^16.14.0",
+        "react-dom": "^16.14.0",
+        "react-hot-loader": "^4.13.0",
+        "react-redux": "^7.2.1",
+        "redux": "^4.0.5",
+        "tailwindcss": "^1.9.4"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.12.3",
+        "@babel/preset-env": "^7.12.1",
+        "@babel/preset-react": "^7.12.1",
+        "autoprefixer": "^10.0.1",
+        "babel-loader": "^8.1.0",
+        "clean-webpack-plugin": "^3.0.0",
+        "copy-webpack-plugin": "^6.2.1",
+        "css-loader": "^5.0.0",
+        "eslint": "^7.11.0",
+        "eslint-config-prettier": "^6.13.0",
+        "eslint-plugin-prettier": "^3.1.4",
+        "eslint-plugin-react": "^7.21.4",
+        "html-webpack-plugin": "^4.5.0",
+        "mini-css-extract-plugin": "^1.0.0",
+        "optimize-css-assets-webpack-plugin": "^5.0.4",
+        "postcss-loader": "^4.0.4",
+        "prettier": "^2.1.2",
+        "style-loader": "^2.0.0",
+        "terser-webpack-plugin": "^5.0.0",
+        "webpack": "^5.1.3",
+        "webpack-cli": "^4.1.0",
+        "webpack-dev-server": "^3.11.0"
+    }
 }
