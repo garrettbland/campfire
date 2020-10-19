@@ -1,4 +1,4 @@
-import { UPDATE_BLOCK } from './constants'
+import { UPDATE_BLOCK, SET_EDITING } from './constants'
 const findAnd = require('find-and')
 import { v4 as uuidv4 } from 'uuid'
 
@@ -11,6 +11,7 @@ import { v4 as uuidv4 } from 'uuid'
  * to be setup.
  */
 let initialState = {
+    currentlyEditing: null,
     blocks: [
         {
             id: uuidv4(),
@@ -22,14 +23,7 @@ let initialState = {
                     id: uuidv4(),
                     type: 'row',
                     tag: 'div',
-                    classList: [
-                        'max-w-4xl',
-                        'mx-auto',
-                        'bg-blue-500',
-                        'flex',
-                        'flex-wrap',
-                        'py-6',
-                    ],
+                    classList: ['max-w-4xl', 'mx-auto', 'bg-blue-500', 'flex', 'flex-wrap', 'py-6'],
                     data: [
                         {
                             id: uuidv4(),
@@ -48,19 +42,13 @@ let initialState = {
                                         'leading-10',
                                         'mb-2',
                                     ],
-                                    data:
-                                        'This is a website editor made with react + tailwind',
+                                    data: 'This is a website editor made with react + tailwind',
                                 },
                                 {
                                     id: uuidv4(),
                                     type: 'text',
                                     tag: 'p',
-                                    classList: [
-                                        'text-gray-800',
-                                        'text-md',
-                                        'leading-6',
-                                        'mb-4',
-                                    ],
+                                    classList: ['text-gray-800', 'text-md', 'leading-6', 'mb-4'],
                                     data:
                                         'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century',
                                 },
@@ -122,14 +110,7 @@ let initialState = {
                     id: uuidv4(),
                     type: 'row',
                     tag: 'div',
-                    classList: [
-                        'max-w-4xl',
-                        'mx-auto',
-                        'bg-blue-500',
-                        'flex',
-                        'flex-wrap',
-                        'py-6',
-                    ],
+                    classList: ['max-w-4xl', 'mx-auto', 'bg-blue-500', 'flex', 'flex-wrap', 'py-6'],
                     data: [
                         {
                             id: uuidv4(),
@@ -200,6 +181,12 @@ let initialState = {
  */
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
+        case SET_EDITING: {
+            return {
+                ...state,
+                currentlyEditing: action.payload ? action.payload : null,
+            }
+        }
         case UPDATE_BLOCK: {
             return {
                 ...state,

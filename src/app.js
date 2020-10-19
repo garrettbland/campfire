@@ -2,11 +2,79 @@ import React, { useEffect, useState, useRef } from 'react'
 import './styles.css'
 import { returnFound } from 'find-and'
 import { useDispatch, useSelector } from 'react-redux'
-import { UPDATE_BLOCK } from './constants'
+import { UPDATE_BLOCK, SET_EDITING } from './constants'
 
 const App = () => {
     const blocks = useSelector((state) => state.blocks)
-    return <BuildSite data={blocks} />
+    const currentlyEditing = useSelector((state) => state.currentlyEditing)
+    return (
+        <>
+            <Modal />
+            <div className="z-20 relative">
+                <BuildSite data={blocks} />
+            </div>
+        </>
+    )
+}
+
+const Modal = () => {
+    const currentlyEditing = useSelector((state) => state.currentlyEditing)
+    const dispatch = useDispatch()
+    const modalNode = useRef()
+
+    useEffect(() => {
+        /**
+         * Event listener when mounted to listen for mousedown
+         * for overlay
+         */
+        document.addEventListener('mousedown', handleClick)
+
+        /**
+         * Return function to be called on component unmount
+         */
+        return () => {
+            document.removeEventListener('mousedown', handleClick)
+        }
+    }, [])
+
+    const handleClick = (event) => {
+        if (modalNode.current && modalNode.current.contains(event.target)) {
+            /**
+             * Do nothing since click is inside sidbar
+             */
+            return
+        }
+
+        /**
+         * Handle outside sideBar node click
+         */
+        dispatch({
+            type: 'SET_EDITING',
+        })
+    }
+
+    return (
+        <div
+            className={`w-full h-full bg-opacity-50 bg-black transform transition duration-150 ease-in-out ${
+                currentlyEditing ? 'show z-40 fixed' : 'hide absolute top-0 left-0 z-10'
+            }`}
+        >
+            <div
+                ref={modalNode}
+                className={`bg-white max-w-4xl mx-auto rounded mt-12 transition duration-150 ease-in-out`}
+            >
+                {currentlyEditing && currentlyEditing.id && (
+                    <>
+                        Currently editing id: {JSON.stringify(currentlyEditing.id)}
+                        <div>
+                            {currentlyEditing.type === 'text' && <div>{currentlyEditing.data}</div>}
+                        </div>
+                        <button onClick={() => dispatch({ type: SET_EDITING })}>Close</button>
+                    </>
+                )}
+            </div>
+        </div>
+    )
 }
 
 /**
@@ -75,18 +143,10 @@ const Section = ({ block, children }) => {
     })
 
     return (
-        <div
-            data-type="section"
-            ref={sectionRef}
-            className={block.classList.join(' ')}
-        >
+        <div data-type="section" ref={sectionRef} className={block.classList.join(' ')}>
             <button
-                onClick={() =>
-                    console.log(returnFound(blocks, { id: block.id }))
-                }
-                className={`absolute top-0 left-0 bg-red-500 ${
-                    showTool ? 'block' : 'hidden'
-                }`}
+                onClick={() => console.log(returnFound(blocks, { id: block.id }))}
+                className={`absolute top-0 left-0 bg-red-500 ${showTool ? 'block' : 'hidden'}`}
             >
                 Section Tools
             </button>
@@ -125,18 +185,10 @@ const Row = ({ block, children }) => {
     })
 
     return (
-        <div
-            data-type="row"
-            ref={rowRef}
-            className={[...block.classList, 'relative'].join(' ')}
-        >
+        <div data-type="row" ref={rowRef} className={[...block.classList, 'relative'].join(' ')}>
             <button
-                onClick={() =>
-                    console.log(returnFound(blocks, { id: block.id }))
-                }
-                className={`absolute top-0 left-0 h-6 bg-red-500 ${
-                    showTool ? 'block' : 'hidden'
-                }`}
+                onClick={() => console.log(returnFound(blocks, { id: block.id }))}
+                className={`absolute top-0 left-0 h-6 bg-red-500 ${showTool ? 'block' : 'hidden'}`}
             >
                 Row Tools
             </button>
@@ -183,32 +235,15 @@ const Text = ({ block }) => {
         }
     })
 
-    const editText = () => {
-        const currentValue = returnFound(blocks, { id: block.id })
-            .data
-        const updatedValue = prompt(
-            'Enter text',
-            currentValue ? currentValue : ''
-        )
-        if (updatedValue !== currentValue) {
-            dispatch({
-                type: UPDATE_BLOCK,
-                payload: {
-                    id: block.id,
-                    data: updatedValue,
-                },
-            })
-        }
-    }
-
     return (
-        <p
-            data-type="text"
-            ref={textRef}
-            className={[...block.classList, 'relative'].join(' ')}
-        >
+        <p data-type="text" ref={textRef} className={[...block.classList, 'relative'].join(' ')}>
             <button
-                onClick={() => editText()}
+                onClick={() =>
+                    dispatch({
+                        type: SET_EDITING,
+                        payload: returnFound(blocks, { id: block.id }),
+                    })
+                }
                 className={`absolute top-0 left-0 text-black bg-white p-1 h-full bg-opacity-25 text-lg w-full ${
                     showTool ? 'block' : 'hidden'
                 }`}
@@ -224,6 +259,7 @@ const Image = ({ block }) => {
     const [showTool, setShowTool] = useState(false)
     const imageRef = useRef()
     const blocks = useSelector((state) => state.blocks)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const image = imageRef.current
@@ -244,7 +280,10 @@ const Image = ({ block }) => {
         <div ref={imageRef} className="relative z-10">
             <button
                 onClick={() =>
-                    console.log(returnFound(blocks, { id: block.id }))
+                    dispatch({
+                        type: SET_EDITING,
+                        payload: returnFound(blocks, { id: block.id }),
+                    })
                 }
                 className={`w-full h-full bg-blue-400 bg-opacity-50 absolute top-0 left-0 z-20 ${
                     showTool ? 'block' : 'hidden'
@@ -266,6 +305,7 @@ const Link = ({ block }) => {
     const [showTool, setShowTool] = useState(false)
     const linkRef = useRef()
     const blocks = useSelector((state) => state.blocks)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const link = linkRef.current
@@ -286,7 +326,10 @@ const Link = ({ block }) => {
         <div ref={linkRef} className="relative z-10">
             <button
                 onClick={() =>
-                    console.log(returnFound(blocks, { id: block.id }))
+                    dispatch({
+                        type: SET_EDITING,
+                        payload: returnFound(blocks, { id: block.id }),
+                    })
                 }
                 className={`w-full h-full bg-blue-400 bg-opacity-50 absolute top-0 left-0 z-20 ${
                     showTool ? 'block' : 'hidden'
@@ -294,10 +337,7 @@ const Link = ({ block }) => {
             >
                 Edit | Add
             </button>
-            <a
-                className={block.classList.join(' ')}
-                href={block.data.href}
-            >
+            <a className={block.classList.join(' ')} href={block.data.href}>
                 {block.data.title}
             </a>
         </div>
