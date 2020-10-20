@@ -3,6 +3,7 @@ import './styles.css'
 import { returnFound } from 'find-and'
 import { useDispatch, useSelector } from 'react-redux'
 import { UPDATE_BLOCK, SET_EDITING } from './constants'
+import { ReactTrixRTEInput } from 'react-trix-rte'
 
 const App = () => {
     const blocks = useSelector((state) => state.blocks)
@@ -21,6 +22,7 @@ const Modal = () => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)
     const dispatch = useDispatch()
     const modalNode = useRef()
+    const [textValue, setTextValue] = useState('')
 
     useEffect(() => {
         /**
@@ -53,6 +55,27 @@ const Modal = () => {
         })
     }
 
+    const handleTextChange = (event, newValue) => {
+        if (currentlyEditing.type === 'text') {
+            console.log(newValue)
+            setTextValue(newValue)
+        }
+    }
+
+    const handleSubmit = () => {
+        dispatch({
+            type: UPDATE_BLOCK,
+            payload: {
+                ...currentlyEditing,
+                data: textValue,
+            },
+        })
+
+        dispatch({
+            type: 'SET_EDITING',
+        })
+    }
+
     return (
         <div
             className={`w-full h-full bg-opacity-50 bg-black transform transition duration-150 ease-in-out ${
@@ -65,11 +88,31 @@ const Modal = () => {
             >
                 {currentlyEditing && currentlyEditing.id && (
                     <>
-                        Currently editing id: {JSON.stringify(currentlyEditing.id)}
+                        Currently editing: {JSON.stringify(currentlyEditing.id)}
                         <div>
-                            {currentlyEditing.type === 'text' && <div>{currentlyEditing.data}</div>}
+                            {currentlyEditing.type === 'text' && (
+                                <div>
+                                    <ReactTrixRTEInput
+                                        defaultValue={currentlyEditing.data}
+                                        onChange={handleTextChange}
+                                    />
+                                </div>
+                            )}
                         </div>
-                        <button onClick={() => dispatch({ type: SET_EDITING })}>Close</button>
+                        <div className="flex justify-between">
+                            <button
+                                className="bg-red-500 text-white px-4 py-2"
+                                onClick={() => dispatch({ type: SET_EDITING })}
+                            >
+                                Close
+                            </button>
+                            <button
+                                className="bg-green-500 text-white px-4 py-2"
+                                onClick={() => handleSubmit()}
+                            >
+                                Submit
+                            </button>
+                        </div>
                     </>
                 )}
             </div>
@@ -250,7 +293,7 @@ const Text = ({ block }) => {
             >
                 Edit | Add
             </button>
-            {block.data}
+            <span dangerouslySetInnerHTML={{ __html: block.data }}></span>
         </p>
     )
 }

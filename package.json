@@ -27,6 +27,7 @@
         "react-dom": "^16.14.0",
         "react-hot-loader": "^4.13.0",
         "react-redux": "^7.2.1",
+        "react-trix-rte": "^1.0.5",
         "redux": "^4.0.5",
         "tailwindcss": "^1.9.4"
     },
