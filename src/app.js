@@ -7,7 +7,6 @@ import { ReactTrixRTEInput } from 'react-trix-rte'
 
 const App = () => {
     const blocks = useSelector((state) => state.blocks)
-    const currentlyEditing = useSelector((state) => state.currentlyEditing)
     return (
         <>
             <Modal />
@@ -28,6 +27,9 @@ const Modal = () => {
         if (currentlyEditing !== null) {
             if (currentlyEditing.type === 'image') {
                 setTextValue(currentlyEditing.data.src)
+            }
+            if (currentlyEditing.type === 'link') {
+                setTextValue(currentlyEditing.data.title)
             }
         }
     }, [currentlyEditing])
@@ -93,6 +95,19 @@ const Modal = () => {
             })
         }
 
+        if (currentlyEditing.type === 'link') {
+            dispatch({
+                type: UPDATE_BLOCK,
+                payload: {
+                    ...currentlyEditing,
+                    data: {
+                        ...currentlyEditing.data,
+                        title: textValue
+                    }
+                }
+            })
+        }
+
         dispatch({
             type: 'SET_EDITING',
         })
@@ -136,6 +151,21 @@ const Modal = () => {
                                             className="border-2 px-4 py-2 rounded"
                                         />
                                     </div>
+                                </div>
+                            )}
+                            { currentlyEditing.type === 'link' && (
+                                <div className="flex flex-col">
+                                    <label>Title</label>
+                                    <input
+                                            value={textValue}
+                                            onChange={(event) => setTextValue(event.target.value)}
+                                            className="border-2 px-4 py-2 rounded"
+                                        />
+                                        <label>Link</label>
+                                    <input
+                                            defaultValue={currentlyEditing.data.href}
+                                            className="border-2 px-4 py-2 rounded"
+                                        />
                                 </div>
                             )}
                         </div>

@@ -15,7 +15,7 @@ module.exports = (env, options) => {
         },
         output: {
             path: path.resolve(__dirname, './dist'),
-            filename: '[name].bundle.js',
+            filename: '[name].[contenthash].js',
         },
         optimization: {
             minimize: options.mode === 'production' ? true : false,
@@ -75,7 +75,7 @@ module.exports = (env, options) => {
             contentBase: path.resolve(__dirname, './dist'),
             open: true,
             compress: true,
-            hot: true,
+            watchContentBase: true,
             port: 8080,
         },
     }
