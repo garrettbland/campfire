@@ -25,6 +25,14 @@ const Modal = () => {
     const [textValue, setTextValue] = useState('')
 
     useEffect(() => {
+        if (currentlyEditing !== null) {
+            if (currentlyEditing.type === 'image') {
+                setTextValue(currentlyEditing.data.src)
+            }
+        }
+    }, [currentlyEditing])
+
+    useEffect(() => {
         /**
          * Event listener when mounted to listen for mousedown
          * for overlay
@@ -57,19 +65,33 @@ const Modal = () => {
 
     const handleTextChange = (event, newValue) => {
         if (currentlyEditing.type === 'text') {
-            console.log(newValue)
             setTextValue(newValue)
         }
     }
 
     const handleSubmit = () => {
-        dispatch({
-            type: UPDATE_BLOCK,
-            payload: {
-                ...currentlyEditing,
-                data: textValue,
-            },
-        })
+        if (currentlyEditing.type === 'text') {
+            dispatch({
+                type: UPDATE_BLOCK,
+                payload: {
+                    ...currentlyEditing,
+                    data: textValue,
+                },
+            })
+        }
+
+        if (currentlyEditing.type === 'image') {
+            dispatch({
+                type: UPDATE_BLOCK,
+                payload: {
+                    ...currentlyEditing,
+                    data: {
+                        ...currentlyEditing.data,
+                        src: textValue,
+                    },
+                },
+            })
+        }
 
         dispatch({
             type: 'SET_EDITING',
@@ -96,6 +118,24 @@ const Modal = () => {
                                         defaultValue={currentlyEditing.data}
                                         onChange={handleTextChange}
                                     />
+                                </div>
+                            )}
+                            {currentlyEditing.type === 'image' && (
+                                <div>
+                                    <img className="w-64 h-auto" src={currentlyEditing.data.src} />
+                                    Alt Text:{' '}
+                                    <input
+                                        defaultValue={currentlyEditing.data.alt}
+                                        className="border-2 px-4 py-2 rounded"
+                                    />
+                                    <div>
+                                        <label>Photo URL</label>
+                                        <input
+                                            value={textValue}
+                                            onChange={(event) => setTextValue(event.target.value)}
+                                            className="border-2 px-4 py-2 rounded"
+                                        />
+                                    </div>
                                 </div>
                             )}
                         </div>
