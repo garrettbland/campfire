@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
-import './styles.css'
 import { returnFound } from 'find-and'
 import { useDispatch, useSelector } from 'react-redux'
-import { UPDATE_BLOCK, SET_EDITING } from './constants'
+import { UPDATE_BLOCK, SET_EDITING } from './redux/constants'
 import { ReactTrixRTEInput } from 'react-trix-rte'
 
 const App = () => {
@@ -102,9 +101,9 @@ const Modal = () => {
                     ...currentlyEditing,
                     data: {
                         ...currentlyEditing.data,
-                        title: textValue
-                    }
-                }
+                        title: textValue,
+                    },
+                },
             })
         }
 
@@ -153,19 +152,19 @@ const Modal = () => {
                                     </div>
                                 </div>
                             )}
-                            { currentlyEditing.type === 'link' && (
+                            {currentlyEditing.type === 'link' && (
                                 <div className="flex flex-col">
                                     <label>Title</label>
                                     <input
-                                            value={textValue}
-                                            onChange={(event) => setTextValue(event.target.value)}
-                                            className="border-2 px-4 py-2 rounded"
-                                        />
-                                        <label>Link</label>
+                                        value={textValue}
+                                        onChange={(event) => setTextValue(event.target.value)}
+                                        className="border-2 px-4 py-2 rounded"
+                                    />
+                                    <label>Link</label>
                                     <input
-                                            defaultValue={currentlyEditing.data.href}
-                                            className="border-2 px-4 py-2 rounded"
-                                        />
+                                        defaultValue={currentlyEditing.data.href}
+                                        className="border-2 px-4 py-2 rounded"
+                                    />
                                 </div>
                             )}
                         </div>

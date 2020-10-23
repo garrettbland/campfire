@@ -5,7 +5,7 @@
     "scripts": {
         "clean": "rimraf dist",
         "dev": "npm run clean && parcel serve src/index.html --dist-dir dist",
-        "build": "npm run clean && parcel build src/index.html --dist-dir dist",
+        "build": "npm run clean && parcel build src/index.html --dist-dir dist"
     },
     "repository": {
         "type": "git",
