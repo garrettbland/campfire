@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { UPDATE_BLOCK, SET_EDITING, UPDATE_EDITING } from '../redux/constants'
 import { ReactTrixRTEInput } from 'react-trix-rte'
+import { backgroundColors, removeBackgroundClasses } from '../utils/colors'
 
 const Modal = () => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)
@@ -214,25 +215,36 @@ const SectionEdit = () => {
 
     const handleUpdate = (value) => {
         setBgColor(value)
+
+        /**
+         * Filter out any background classes
+         */
+        const updatedClassList = removeBackgroundClasses(currentlyEditing.classList)
+
         dispatch({
             type: UPDATE_EDITING,
             payload: {
                 ...currentlyEditing,
-                classList: [...currentlyEditing.classList, value],
+                classList: [...updatedClassList, value],
             },
         })
     }
 
     return (
         <div>
-            <div>Background Color</div>
-            <div></div>
-            <div>
-                <input
-                    value={bgColor}
-                    onChange={(event) => handleUpdate(event.target.value)}
-                    className="border-2 px-4 py-2 rounded"
-                />
+            <div>Background Color: {bgColor}</div>
+            <div className="flex flex-wrap">
+                {backgroundColors().map((color) => {
+                    return (
+                        <div
+                            key={color}
+                            onClick={() => handleUpdate(color)}
+                            className={`w-8 h-8 ${color} border cursor-pointer`}
+                        >
+                            {color === bgColor ? 'Selected' : null}
+                        </div>
+                    )
+                })}
             </div>
         </div>
     )
