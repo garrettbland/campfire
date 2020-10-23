@@ -196,7 +196,7 @@ const rootReducer = (state = initialState, action) => {
                 blocks: findAnd.changeProps(
                     state.blocks,
                     { id: action.payload.id },
-                    { data: action.payload.data }
+                    { ...action.payload }
                 ),
             }
         }

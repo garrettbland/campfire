@@ -212,12 +212,13 @@ const SectionEdit = () => {
         return foundClassName
     }
 
-    const handleUpdate = () => {
+    const handleUpdate = (value) => {
+        setBgColor(value)
         dispatch({
             type: UPDATE_EDITING,
             payload: {
                 ...currentlyEditing,
-                classList: [...currentlyEditing.classList, 'bg-red-500'],
+                classList: [...currentlyEditing.classList, value],
             },
         })
     }
@@ -229,7 +230,7 @@ const SectionEdit = () => {
             <div>
                 <input
                     value={bgColor}
-                    onChange={(event) => handleUpdate()}
+                    onChange={(event) => handleUpdate(event.target.value)}
                     className="border-2 px-4 py-2 rounded"
                 />
             </div>
