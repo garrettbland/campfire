@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { UPDATE_BLOCK, SET_EDITING, UPDATE_EDITING } from '../redux/constants'
+import { UPDATE_BLOCK, SET_EDITING } from '../redux/constants'
 import { ReactTrixRTEInput } from 'react-trix-rte'
-import { backgroundColors, removeBackgroundClasses } from '../utils/colors'
+import SectionEdit from './SectionEdit'
 
 const Modal = () => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)
@@ -182,69 +182,6 @@ const Modal = () => {
                         </div>
                     </>
                 )}
-            </div>
-        </div>
-    )
-}
-
-const SectionEdit = () => {
-    const currentlyEditing = useSelector((state) => state.currentlyEditing)
-    const [bgColor, setBgColor] = useState('')
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        console.log('extract class...')
-        const currentBgColor = extractClass(currentlyEditing.classList, 'bg-')
-        if (currentBgColor) {
-            setBgColor(currentBgColor)
-        }
-    }, [])
-
-    const extractClass = (classList, startValue) => {
-        /**
-         * Will return first class that matches startValue
-         */
-        const foundClassName = classList.find((item) => item.startsWith(startValue))
-        console.log(
-            foundClassName
-                ? `Found class ${foundClassName}`
-                : `No class starting with ${startValue}`
-        )
-        return foundClassName
-    }
-
-    const handleUpdate = (value) => {
-        setBgColor(value)
-
-        /**
-         * Filter out any background classes
-         */
-        const updatedClassList = removeBackgroundClasses(currentlyEditing.classList)
-
-        dispatch({
-            type: UPDATE_EDITING,
-            payload: {
-                ...currentlyEditing,
-                classList: [...updatedClassList, value],
-            },
-        })
-    }
-
-    return (
-        <div>
-            <div>Background Color: {bgColor}</div>
-            <div className="flex flex-wrap">
-                {backgroundColors().map((color) => {
-                    return (
-                        <div
-                            key={color}
-                            onClick={() => handleUpdate(color)}
-                            className={`w-8 h-8 ${color} border cursor-pointer`}
-                        >
-                            {color === bgColor ? 'Selected' : null}
-                        </div>
-                    )
-                })}
             </div>
         </div>
     )
