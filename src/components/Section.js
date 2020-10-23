@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { returnFound } from 'find-and'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { SET_EDITING } from '../redux/constants'
 
 const Section = ({ block, children }) => {
     const [showTool, setShowTool] = useState(false)
     const sectionRef = useRef()
     const blocks = useSelector((state) => state.blocks)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const section = sectionRef.current
@@ -25,7 +27,12 @@ const Section = ({ block, children }) => {
     return (
         <div data-type="section" ref={sectionRef} className={block.classList.join(' ')}>
             <button
-                onClick={() => console.log(returnFound(blocks, { id: block.id }))}
+                onClick={() =>
+                    dispatch({
+                        type: SET_EDITING,
+                        payload: returnFound(blocks, { id: block.id }),
+                    })
+                }
                 className={`absolute top-0 left-0 bg-red-500 ${showTool ? 'block' : 'hidden'}`}
             >
                 Section Tools

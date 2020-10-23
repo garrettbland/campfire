@@ -1,4 +1,4 @@
-import { UPDATE_BLOCK, SET_EDITING } from './constants'
+import { UPDATE_BLOCK, SET_EDITING, UPDATE_EDITING } from './constants'
 const findAnd = require('find-and')
 import { v4 as uuidv4 } from 'uuid'
 
@@ -104,7 +104,7 @@ let initialState = {
             id: uuidv4(),
             type: 'section',
             tag: 'section',
-            classList: ['py-12', 'relative'],
+            classList: ['py-12', 'relative', 'bg-orange-400'],
             data: [
                 {
                     id: uuidv4(),
@@ -188,6 +188,9 @@ const rootReducer = (state = initialState, action) => {
             }
         }
         case UPDATE_BLOCK: {
+            /**
+             * Need to update this for classList and stuff other than 'data' key
+             */
             return {
                 ...state,
                 blocks: findAnd.changeProps(
@@ -195,6 +198,12 @@ const rootReducer = (state = initialState, action) => {
                     { id: action.payload.id },
                     { data: action.payload.data }
                 ),
+            }
+        }
+        case UPDATE_EDITING: {
+            return {
+                ...state,
+                currentlyEditing: action.payload,
             }
         }
         default:

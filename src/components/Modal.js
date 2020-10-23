@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { UPDATE_BLOCK, SET_EDITING } from '../redux/constants'
+import { UPDATE_BLOCK, SET_EDITING, UPDATE_EDITING } from '../redux/constants'
 import { ReactTrixRTEInput } from 'react-trix-rte'
 
 const Modal = () => {
@@ -58,6 +58,15 @@ const Modal = () => {
     }
 
     const handleSubmit = () => {
+        if (currentlyEditing.type === 'section') {
+            dispatch({
+                type: UPDATE_BLOCK,
+                payload: {
+                    ...currentlyEditing,
+                },
+            })
+        }
+
         if (currentlyEditing.type === 'text') {
             dispatch({
                 type: UPDATE_BLOCK,
@@ -154,6 +163,7 @@ const Modal = () => {
                                     />
                                 </div>
                             )}
+                            {currentlyEditing.type === 'section' && <SectionEdit />}
                         </div>
                         <div className="flex justify-between">
                             <button
@@ -171,6 +181,57 @@ const Modal = () => {
                         </div>
                     </>
                 )}
+            </div>
+        </div>
+    )
+}
+
+const SectionEdit = () => {
+    const currentlyEditing = useSelector((state) => state.currentlyEditing)
+    const [bgColor, setBgColor] = useState('')
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        console.log('extract class...')
+        const currentBgColor = extractClass(currentlyEditing.classList, 'bg-')
+        if (currentBgColor) {
+            setBgColor(currentBgColor)
+        }
+    }, [])
+
+    const extractClass = (classList, startValue) => {
+        /**
+         * Will return first class that matches startValue
+         */
+        const foundClassName = classList.find((item) => item.startsWith(startValue))
+        console.log(
+            foundClassName
+                ? `Found class ${foundClassName}`
+                : `No class starting with ${startValue}`
+        )
+        return foundClassName
+    }
+
+    const handleUpdate = () => {
+        dispatch({
+            type: UPDATE_EDITING,
+            payload: {
+                ...currentlyEditing,
+                classList: [...currentlyEditing.classList, 'bg-red-500'],
+            },
+        })
+    }
+
+    return (
+        <div>
+            <div>Background Color</div>
+            <div></div>
+            <div>
+                <input
+                    value={bgColor}
+                    onChange={(event) => handleUpdate()}
+                    className="border-2 px-4 py-2 rounded"
+                />
             </div>
         </div>
     )
