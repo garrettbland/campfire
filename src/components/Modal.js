@@ -1,29 +1,15 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { UPDATE_BLOCK, SET_EDITING } from '../redux/constants'
-import { ReactTrixRTEInput } from 'react-trix-rte'
 import SectionEdit from './SectionEdit'
 import TextEdit from './TextEdit'
 import ImageEdit from './ImageEdit'
 import LinkEdit from './LinkEdit'
-import { Link } from 'react-router-dom'
 
 const Modal = () => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)
     const dispatch = useDispatch()
     const modalNode = useRef()
-    const [textValue, setTextValue] = useState('')
-
-    useEffect(() => {
-        if (currentlyEditing !== null) {
-            if (currentlyEditing.type === 'image') {
-                setTextValue(currentlyEditing.data.src)
-            }
-            if (currentlyEditing.type === 'link') {
-                setTextValue(currentlyEditing.data.title)
-            }
-        }
-    }, [currentlyEditing])
 
     useEffect(() => {
         /**
@@ -56,54 +42,11 @@ const Modal = () => {
         })
     }
 
-    // const handleTextChange = (event, newValue) => {
-    //     if (currentlyEditing.type === 'text') {
-    //         setTextValue(newValue)
-    //     }
-    // }
-
     const handleSubmit = () => {
-        if (currentlyEditing.type === 'section') {
-            dispatch({
-                type: UPDATE_BLOCK,
-                payload: {
-                    ...currentlyEditing,
-                },
-            })
-        }
-
-        if (currentlyEditing.type === 'text') {
-            dispatch({
-                type: UPDATE_BLOCK,
-                payload: currentlyEditing,
-            })
-        }
-
-        if (currentlyEditing.type === 'image') {
-            dispatch({
-                type: UPDATE_BLOCK,
-                payload: {
-                    ...currentlyEditing,
-                    data: {
-                        ...currentlyEditing.data,
-                        src: textValue,
-                    },
-                },
-            })
-        }
-
-        if (currentlyEditing.type === 'link') {
-            dispatch({
-                type: UPDATE_BLOCK,
-                payload: {
-                    ...currentlyEditing,
-                    data: {
-                        ...currentlyEditing.data,
-                        title: textValue,
-                    },
-                },
-            })
-        }
+        dispatch({
+            type: UPDATE_BLOCK,
+            payload: currentlyEditing,
+        })
 
         dispatch({
             type: 'SET_EDITING',

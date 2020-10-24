@@ -4,7 +4,7 @@
     "description": "Campfire website builder",
     "scripts": {
         "clean": "rimraf dist",
-        "dev": "npm run clean && parcel serve src/index.html --dist-dir dist",
+        "dev": "npm run clean && parcel serve src/index.html --dist-dir dist --no-cache",
         "build": "npm run clean && parcel build src/index.html --dist-dir dist"
     },
     "repository": {
