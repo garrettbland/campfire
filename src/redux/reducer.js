@@ -18,6 +18,13 @@ let initialState = {
             type: 'section',
             tag: 'section',
             classList: ['py-12', 'relative'],
+            data: [],
+        },
+        {
+            id: uuidv4(),
+            type: 'section',
+            tag: 'section',
+            classList: ['py-12', 'relative'],
             data: [
                 {
                     id: uuidv4(),
