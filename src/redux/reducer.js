@@ -201,6 +201,7 @@ const rootReducer = (state = initialState, action) => {
             }
         }
         case UPDATE_EDITING: {
+            console.log(action.payload)
             return {
                 ...state,
                 currentlyEditing: action.payload,

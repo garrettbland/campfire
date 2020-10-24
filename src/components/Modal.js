@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { UPDATE_BLOCK, SET_EDITING } from '../redux/constants'
 import { ReactTrixRTEInput } from 'react-trix-rte'
 import SectionEdit from './SectionEdit'
+import TextEdit from './TextEdit'
 
 const Modal = () => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)
@@ -52,11 +53,11 @@ const Modal = () => {
         })
     }
 
-    const handleTextChange = (event, newValue) => {
-        if (currentlyEditing.type === 'text') {
-            setTextValue(newValue)
-        }
-    }
+    // const handleTextChange = (event, newValue) => {
+    //     if (currentlyEditing.type === 'text') {
+    //         setTextValue(newValue)
+    //     }
+    // }
 
     const handleSubmit = () => {
         if (currentlyEditing.type === 'section') {
@@ -71,10 +72,7 @@ const Modal = () => {
         if (currentlyEditing.type === 'text') {
             dispatch({
                 type: UPDATE_BLOCK,
-                payload: {
-                    ...currentlyEditing,
-                    data: textValue,
-                },
+                payload: currentlyEditing,
             })
         }
 
@@ -124,12 +122,7 @@ const Modal = () => {
                         Currently editing: {JSON.stringify(currentlyEditing.id)}
                         <div>
                             {currentlyEditing.type === 'text' && (
-                                <div>
-                                    <ReactTrixRTEInput
-                                        defaultValue={currentlyEditing.data}
-                                        onChange={handleTextChange}
-                                    />
-                                </div>
+                                <TextEdit/>
                             )}
                             {currentlyEditing.type === 'image' && (
                                 <div>
