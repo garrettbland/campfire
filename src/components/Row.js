@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { returnFound } from 'find-and'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { SET_EDITING } from '../redux/constants'
 
 const Row = ({ block, children }) => {
     const [showTool, setShowTool] = useState(false)
     const rowRef = useRef()
     const blocks = useSelector((state) => state.blocks)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const row = rowRef.current
@@ -25,7 +27,12 @@ const Row = ({ block, children }) => {
     return (
         <div data-type="row" ref={rowRef} className={[...block.classList, 'relative'].join(' ')}>
             <button
-                onClick={() => console.log(returnFound(blocks, { id: block.id }))}
+                onClick={() =>
+                    dispatch({
+                        type: SET_EDITING,
+                        payload: returnFound(blocks, { id: block.id }),
+                    })
+                }
                 className={`absolute top-0 left-0 h-6 bg-red-500 ${showTool ? 'block' : 'hidden'}`}
             >
                 Row Tools

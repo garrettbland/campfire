@@ -5,6 +5,7 @@ import SectionEdit from './SectionEdit'
 import TextEdit from './TextEdit'
 import ImageEdit from './ImageEdit'
 import LinkEdit from './LinkEdit'
+import RowEdit from './RowEdit'
 
 const Modal = () => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)
@@ -67,10 +68,11 @@ const Modal = () => {
                     <>
                         Currently editing: {JSON.stringify(currentlyEditing.id)}
                         <div>
+                            {currentlyEditing.type === 'section' && <SectionEdit />}
+                            {currentlyEditing.type === 'row' && <RowEdit />}
                             {currentlyEditing.type === 'text' && <TextEdit />}
                             {currentlyEditing.type === 'image' && <ImageEdit />}
                             {currentlyEditing.type === 'link' && <LinkEdit />}
-                            {currentlyEditing.type === 'section' && <SectionEdit />}
                         </div>
                         <div className="flex justify-between">
                             <button

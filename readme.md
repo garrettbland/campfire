@@ -1,6 +1,6 @@
 # Campfire
 
-> Visual website builder for people who build sites for others
+> ⛺️🔥 Visual website builder for people who build sites for others
 
 ## About
 
