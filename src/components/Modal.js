@@ -4,6 +4,9 @@ import { UPDATE_BLOCK, SET_EDITING } from '../redux/constants'
 import { ReactTrixRTEInput } from 'react-trix-rte'
 import SectionEdit from './SectionEdit'
 import TextEdit from './TextEdit'
+import ImageEdit from './ImageEdit'
+import LinkEdit from './LinkEdit'
+import { Link } from 'react-router-dom'
 
 const Modal = () => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)
@@ -121,42 +124,9 @@ const Modal = () => {
                     <>
                         Currently editing: {JSON.stringify(currentlyEditing.id)}
                         <div>
-                            {currentlyEditing.type === 'text' && (
-                                <TextEdit/>
-                            )}
-                            {currentlyEditing.type === 'image' && (
-                                <div>
-                                    <img className="w-64 h-auto" src={currentlyEditing.data.src} />
-                                    Alt Text:{' '}
-                                    <input
-                                        defaultValue={currentlyEditing.data.alt}
-                                        className="border-2 px-4 py-2 rounded"
-                                    />
-                                    <div>
-                                        <label>Photo URL</label>
-                                        <input
-                                            value={textValue}
-                                            onChange={(event) => setTextValue(event.target.value)}
-                                            className="border-2 px-4 py-2 rounded"
-                                        />
-                                    </div>
-                                </div>
-                            )}
-                            {currentlyEditing.type === 'link' && (
-                                <div className="flex flex-col">
-                                    <label>Title</label>
-                                    <input
-                                        value={textValue}
-                                        onChange={(event) => setTextValue(event.target.value)}
-                                        className="border-2 px-4 py-2 rounded"
-                                    />
-                                    <label>Link</label>
-                                    <input
-                                        defaultValue={currentlyEditing.data.href}
-                                        className="border-2 px-4 py-2 rounded"
-                                    />
-                                </div>
-                            )}
+                            {currentlyEditing.type === 'text' && <TextEdit />}
+                            {currentlyEditing.type === 'image' && <ImageEdit />}
+                            {currentlyEditing.type === 'link' && <LinkEdit />}
                             {currentlyEditing.type === 'section' && <SectionEdit />}
                         </div>
                         <div className="flex justify-between">
