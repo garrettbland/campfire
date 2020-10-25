@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { UPDATE_EDITING } from '../redux/constants'
+import { UPDATE_EDITING, REMOVE_SECTION } from '../redux/constants'
 import { backgroundColors, removeBackgroundClasses } from '../utils/colors'
 import { extractClass } from '../utils/tools'
 
@@ -33,6 +33,17 @@ const SectionEdit = () => {
         })
     }
 
+    const RemoveSection = () => {
+        dispatch({
+            type: REMOVE_SECTION,
+            payload: currentlyEditing,
+        })
+
+        dispatch({
+            type: UPDATE_EDITING,
+        })
+    }
+
     return (
         <div>
             <div>Background Color: {bgColor ? bgColor : 'N/A'}</div>
@@ -50,6 +61,9 @@ const SectionEdit = () => {
                         </div>
                     )
                 })}
+            </div>
+            <div>
+                <button onClick={() => RemoveSection()}>Remove Section</button>
             </div>
         </div>
     )

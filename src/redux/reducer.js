@@ -5,6 +5,7 @@ import {
     ADD_SECTION,
     ADD_ROW,
     APPEND_ROW,
+    REMOVE_SECTION,
 } from './constants'
 const findAnd = require('find-and')
 import { v4 as uuidv4 } from 'uuid'
@@ -277,6 +278,12 @@ const rootReducer = (state = initialState, action) => {
                     { id: action.payload.id },
                     empty_row
                 ),
+            }
+        }
+        case REMOVE_SECTION: {
+            return {
+                ...state,
+                blocks: findAnd.removeObject(state.blocks, { id: action.payload.id }),
             }
         }
         default:
