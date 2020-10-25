@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { ADD_ROW } from '../redux/constants'
 
-const EmptySection = ({ block }) => {
+const EmptySection = ({ data: block }) => {
     const blocks = useSelector((state) => state.blocks)
     const dispatch = useDispatch()
 
     const AddRow = () => {
-        // not working yet
-        console.log(block)
+        dispatch({
+            type: ADD_ROW,
+            payload: {
+                id: block.id,
+            },
+        })
     }
 
     return (

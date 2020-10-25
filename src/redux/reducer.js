@@ -1,4 +1,11 @@
-import { UPDATE_BLOCK, SET_EDITING, UPDATE_EDITING } from './constants'
+import {
+    UPDATE_BLOCK,
+    SET_EDITING,
+    UPDATE_EDITING,
+    ADD_SECTION,
+    ADD_ROW,
+    APPEND_ROW,
+} from './constants'
 const findAnd = require('find-and')
 import { v4 as uuidv4 } from 'uuid'
 
@@ -208,10 +215,68 @@ const rootReducer = (state = initialState, action) => {
             }
         }
         case UPDATE_EDITING: {
-            console.log(action.payload)
             return {
                 ...state,
                 currentlyEditing: action.payload,
+            }
+        }
+        case ADD_SECTION: {
+            return {
+                ...state,
+                blocks: findAnd.insertObjectAfter(
+                    state.blocks,
+                    { id: action.payload.id },
+                    {
+                        id: uuidv4(),
+                        type: 'section',
+                        tag: 'section',
+                        classList: ['py-12', 'relative'],
+                        data: [],
+                    }
+                ),
+            }
+        }
+        case ADD_ROW: {
+            /**
+             * Find the parent section
+             */
+            const currentSection = findAnd.returnFound(state.blocks, { id: action.payload.id })
+
+            const empty_row = {
+                id: uuidv4(),
+                type: 'row',
+                tag: 'div',
+                classList: ['max-w-4xl', 'mx-auto', 'flex', 'flex-wrap', 'py-6'],
+                data: [],
+            }
+
+            return {
+                ...state,
+                blocks: findAnd.changeProps(
+                    state.blocks,
+                    { id: action.payload.id },
+                    {
+                        data: [...currentSection.data, empty_row],
+                    }
+                ),
+            }
+        }
+        case APPEND_ROW: {
+            const empty_row = {
+                id: uuidv4(),
+                type: 'row',
+                tag: 'div',
+                classList: ['max-w-4xl', 'mx-auto', 'flex', 'flex-wrap', 'py-6'],
+                data: [],
+            }
+
+            return {
+                ...state,
+                blocks: findAnd.insertObjectAfter(
+                    state.blocks,
+                    { id: action.payload.id },
+                    empty_row
+                ),
             }
         }
         default:

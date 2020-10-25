@@ -1,3 +1,6 @@
 export const UPDATE_BLOCK = 'UPDATE_BLOCK'
 export const SET_EDITING = 'SET_EDITING'
 export const UPDATE_EDITING = 'UPDATE_EDITING'
+export const ADD_SECTION = 'ADD_SECTION'
+export const ADD_ROW = 'ADD_ROW'
+export const APPEND_ROW = 'APPEND_ROW'

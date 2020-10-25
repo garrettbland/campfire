@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { returnFound } from 'find-and'
 import { useDispatch, useSelector } from 'react-redux'
-import { SET_EDITING } from '../redux/constants'
+import { SET_EDITING, APPEND_ROW } from '../redux/constants'
 
 const Row = ({ block, children }) => {
     const [showTool, setShowTool] = useState(false)
@@ -24,6 +24,15 @@ const Row = ({ block, children }) => {
         }
     })
 
+    const AddRow = () => {
+        dispatch({
+            type: APPEND_ROW,
+            payload: {
+                id: block.id,
+            },
+        })
+    }
+
     return (
         <div data-type="row" ref={rowRef} className={[...block.classList, 'relative'].join(' ')}>
             <button
@@ -43,7 +52,10 @@ const Row = ({ block, children }) => {
                     showTool ? 'block' : 'hidden'
                 }`}
             >
-                <button className="w-10 h-10 bg-red-500 opacity-50 hover:opacity-100 rounded-full">
+                <button
+                    onClick={() => AddRow()}
+                    className="w-10 h-10 bg-red-500 opacity-50 hover:opacity-100 rounded-full"
+                >
                     +
                 </button>
             </div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { returnFound } from 'find-and'
 import { useSelector, useDispatch } from 'react-redux'
-import { SET_EDITING } from '../redux/constants'
+import { SET_EDITING, ADD_SECTION } from '../redux/constants'
 
 const Section = ({ block, children }) => {
     const [showTool, setShowTool] = useState(false)
@@ -24,6 +24,15 @@ const Section = ({ block, children }) => {
         }
     })
 
+    const AddSection = () => {
+        dispatch({
+            type: ADD_SECTION,
+            payload: {
+                id: block.id,
+            },
+        })
+    }
+
     return (
         <div data-type="section" ref={sectionRef} className={block.classList.join(' ')}>
             <button
@@ -43,7 +52,10 @@ const Section = ({ block, children }) => {
                     showTool ? 'block' : 'hidden'
                 }`}
             >
-                <button className="w-10 h-10 bg-red-500 opacity-50 hover:opacity-100 rounded-full">
+                <button
+                    onClick={() => AddSection()}
+                    className="w-10 h-10 bg-red-500 opacity-50 hover:opacity-100 rounded-full"
+                >
                     +
                 </button>
             </div>
