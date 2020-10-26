@@ -222,6 +222,22 @@ const rootReducer = (state = initialState, action) => {
             }
         }
         case ADD_SECTION: {
+            if (!action.payload) {
+                return {
+                    ...state,
+                    blocks: [
+                        ...state.blocks,
+                        {
+                            id: uuidv4(),
+                            type: 'section',
+                            tag: 'section',
+                            classList: ['py-12', 'relative'],
+                            data: [],
+                        },
+                    ],
+                }
+            }
+
             return {
                 ...state,
                 blocks: findAnd.insertObjectAfter(
