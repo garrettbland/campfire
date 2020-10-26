@@ -6,6 +6,7 @@ import {
     ADD_ROW,
     APPEND_ROW,
     REMOVE_SECTION,
+    SWAP_BLOCKS,
 } from './constants'
 const findAnd = require('find-and')
 import { v4 as uuidv4 } from 'uuid'
@@ -222,6 +223,9 @@ const rootReducer = (state = initialState, action) => {
             }
         }
         case ADD_SECTION: {
+            /**
+             * If not payload is supplied, add the new section to the parent blocks array
+             */
             if (!action.payload) {
                 return {
                     ...state,
@@ -332,6 +336,29 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 blocks: findAnd.removeObject(state.blocks, { id: action.payload.id }),
+            }
+        }
+        case SWAP_BLOCKS: {
+            const array_move = (arr, old_index, new_index) => {
+                if (new_index >= arr.length) {
+                    var k = new_index - arr.length + 1
+                    while (k--) {
+                        arr.push(undefined)
+                    }
+                }
+                arr.splice(new_index, 0, arr.splice(old_index, 1)[0])
+                return arr
+            }
+
+            const updated_blocks_order = array_move(
+                state.blocks,
+                action.payload.removedIndex,
+                action.payload.addedIndex
+            )
+
+            return {
+                ...state,
+                blocks: [...updated_blocks_order],
             }
         }
         default:
