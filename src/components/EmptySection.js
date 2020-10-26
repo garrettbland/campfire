@@ -1,18 +1,24 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
+import { useDispatch } from 'react-redux'
 import { ADD_ROW } from '../redux/constants'
 
 const EmptySection = ({ data: block }) => {
-    const blocks = useSelector((state) => state.blocks)
     const dispatch = useDispatch()
 
     const AddRow = () => {
-        dispatch({
-            type: ADD_ROW,
-            payload: {
-                id: block.id,
-            },
-        })
+        const columns = window.prompt('How many columns?')
+        const availableColumns = [1, 2, 3, 4, 5, 6]
+        if (availableColumns.includes(parseInt(columns))) {
+            dispatch({
+                type: ADD_ROW,
+                payload: {
+                    id: block.id,
+                    columns: parseInt(columns),
+                },
+            })
+        } else {
+            alert('Number not allowed')
+        }
     }
 
     return (

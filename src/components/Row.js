@@ -25,12 +25,19 @@ const Row = ({ block, children }) => {
     })
 
     const AddRow = () => {
-        dispatch({
-            type: APPEND_ROW,
-            payload: {
-                id: block.id,
-            },
-        })
+        const columns = window.prompt('How many columns?')
+        const availableColumns = [1, 2, 3, 4, 5, 6]
+        if (availableColumns.includes(parseInt(columns))) {
+            dispatch({
+                type: APPEND_ROW,
+                payload: {
+                    id: block.id,
+                    columns: parseInt(columns),
+                },
+            })
+        } else {
+            alert('Number not allowed')
+        }
     }
 
     return (

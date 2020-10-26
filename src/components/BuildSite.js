@@ -6,6 +6,7 @@ import Text from './Text'
 import Image from './Image'
 import Link from './Link'
 import EmptySection from './EmptySection'
+import EmptyColumn from './EmptyColumn'
 
 /**
  * Takes in an array and recursivley builds the site
@@ -33,7 +34,8 @@ const BuildSite = ({ data }) => {
             case 'column': {
                 return (
                     <Column block={block} key={block.id}>
-                        <BuildSite data={block.data} />
+                        {block.data.length === 0 && <EmptyColumn data={block} />}
+                        {block.data.length > 0 && <BuildSite data={block.data} />}
                     </Column>
                 )
             }

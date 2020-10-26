@@ -248,7 +248,23 @@ const rootReducer = (state = initialState, action) => {
                 type: 'row',
                 tag: 'div',
                 classList: ['max-w-4xl', 'mx-auto', 'flex', 'flex-wrap', 'py-6'],
-                data: [],
+                data: [...Array(action.payload.columns)].map((index) => {
+                    return {
+                        id: uuidv4(),
+                        type: `column`,
+                        tag: `div`,
+                        classList: [
+                            `w-full`,
+                            `${
+                                action.payload.columns === 1
+                                    ? 'md:w-full'
+                                    : `md:w-1/${action.payload.columns}`
+                            }`,
+                            `p-4`,
+                        ],
+                        data: [],
+                    }
+                }),
             }
 
             return {
@@ -268,7 +284,23 @@ const rootReducer = (state = initialState, action) => {
                 type: 'row',
                 tag: 'div',
                 classList: ['max-w-4xl', 'mx-auto', 'flex', 'flex-wrap', 'py-6'],
-                data: [],
+                data: [...Array(action.payload.columns)].map((index) => {
+                    return {
+                        id: uuidv4(),
+                        type: `column`,
+                        tag: `div`,
+                        classList: [
+                            `w-full`,
+                            `${
+                                action.payload.columns === 1
+                                    ? 'md:w-full'
+                                    : `md:w-1/${action.payload.columns}`
+                            }`,
+                            `p-4`,
+                        ],
+                        data: [],
+                    }
+                }),
             }
 
             return {
