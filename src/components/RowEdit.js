@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { UPDATE_EDITING } from '../redux/constants'
+import { UPDATE_EDITING, REMOVE_BLOCK } from '../redux/constants'
 import { backgroundColors, removeBackgroundClasses } from '../utils/colors'
 import { extractClass } from '../utils/tools'
 
@@ -33,6 +33,17 @@ const RowEdit = () => {
         })
     }
 
+    const RemoveRow = () => {
+        dispatch({
+            type: REMOVE_BLOCK,
+            payload: currentlyEditing,
+        })
+
+        dispatch({
+            type: UPDATE_EDITING,
+        })
+    }
+
     return (
         <div>
             <div>Background Color: {bgColor ? bgColor : 'N/A'}</div>
@@ -50,6 +61,9 @@ const RowEdit = () => {
                         </div>
                     )
                 })}
+            </div>
+            <div>
+                <button onClick={() => RemoveRow()}>Remove Row</button>
             </div>
         </div>
     )

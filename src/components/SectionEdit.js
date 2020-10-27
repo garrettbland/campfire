@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { UPDATE_EDITING, REMOVE_SECTION } from '../redux/constants'
+import { UPDATE_EDITING, REMOVE_BLOCK } from '../redux/constants'
 import { backgroundColors, removeBackgroundClasses } from '../utils/colors'
 import { extractClass } from '../utils/tools'
 
@@ -35,7 +35,7 @@ const SectionEdit = () => {
 
     const RemoveSection = () => {
         dispatch({
-            type: REMOVE_SECTION,
+            type: REMOVE_BLOCK,
             payload: currentlyEditing,
         })
 

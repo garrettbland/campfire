@@ -5,7 +5,7 @@ import {
     ADD_SECTION,
     ADD_ROW,
     APPEND_ROW,
-    REMOVE_SECTION,
+    REMOVE_BLOCK,
     SWAP_BLOCKS,
 } from './constants'
 const findAnd = require('find-and')
@@ -332,7 +332,7 @@ const rootReducer = (state = initialState, action) => {
                 ),
             }
         }
-        case REMOVE_SECTION: {
+        case REMOVE_BLOCK: {
             return {
                 ...state,
                 blocks: findAnd.removeObject(state.blocks, { id: action.payload.id }),
