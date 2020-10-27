@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
+/* * {
     transition: all 50ms ease-in-out;
-}
+} */
 
 [data-type='section']:hover {
     outline: 2px solid red;

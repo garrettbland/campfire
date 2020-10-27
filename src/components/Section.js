@@ -23,7 +23,7 @@ const Section = ({ block, children }) => {
             section.removeEventListener('mouseenter', () => {})
             section.removeEventListener('mouseleave', () => {})
         }
-    })
+    }, [])
 
     const AddSection = () => {
         dispatch({
@@ -59,7 +59,7 @@ const Section = ({ block, children }) => {
                 </div>
                 {children}
                 <div
-                    className={`absolute bottom-0 left-0 w-full h-0 bg-orange-500 flex items-center justify-center ${
+                    className={`absolute bottom-0 left-0 w-full h-0 flex items-center justify-center ${
                         showTool ? 'block' : 'hidden'
                     }`}
                 >
