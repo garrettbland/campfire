@@ -6,6 +6,10 @@
 
 Campfire is a React based application to visually build websites. It uses tailwindcss as the styling framework for the UI as well as output.
 
+## To Do
+
+-   Combine reducers for adding content, probably don't need as many
+
 ### Development
 
 This project uses parcel to bundle the javascript. To get started, clone this repo, `npm install`, and then `npm run dev`. For production builds, run `npm run build`

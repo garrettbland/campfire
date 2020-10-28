@@ -7,6 +7,8 @@ import {
     APPEND_ROW,
     REMOVE_BLOCK,
     SWAP_BLOCKS,
+    ADD_TEXT,
+    ADD_IMAGE,
 } from './constants'
 const findAnd = require('find-and')
 import { v4 as uuidv4 } from 'uuid'
@@ -359,6 +361,61 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 blocks: [...updated_blocks_order],
+            }
+        }
+        case ADD_TEXT: {
+            /**
+             * Find the parent section
+             */
+            const currentColumn = findAnd.returnFound(state.blocks, { id: action.payload.id })
+
+            const default_text = {
+                id: uuidv4(),
+                type: 'text',
+                tag: 'p',
+                classList: ['text-black', 'text-md', 'leading-6'],
+                data:
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat',
+            }
+
+            return {
+                ...state,
+                blocks: findAnd.changeProps(
+                    state.blocks,
+                    { id: action.payload.id },
+                    {
+                        data: [...currentColumn.data, default_text],
+                    }
+                ),
+            }
+        }
+        case ADD_IMAGE: {
+            /**
+             * Find the parent section
+             */
+            const currentColumn = findAnd.returnFound(state.blocks, { id: action.payload.id })
+
+            const default_image = {
+                id: uuidv4(),
+                type: 'image',
+                tag: 'img',
+                classList: ['w-full'],
+                data: {
+                    src:
+                        'https://images.unsplash.com/photo-1494783367193-149034c05e8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+                    alt: 'Highway Photo',
+                },
+            }
+
+            return {
+                ...state,
+                blocks: findAnd.changeProps(
+                    state.blocks,
+                    { id: action.payload.id },
+                    {
+                        data: [...currentColumn.data, default_image],
+                    }
+                ),
             }
         }
         default:
