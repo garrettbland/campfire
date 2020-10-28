@@ -4,8 +4,9 @@
     "description": "Campfire website builder",
     "scripts": {
         "clean": "rimraf dist",
+        "postbuild": "cp -r public/* dist/",
         "dev": "npm run clean && parcel serve src/index.html --dist-dir dist --no-cache",
-        "build": "npm run clean && parcel build src/index.html --dist-dir dist"
+        "build": "npm run clean && parcel build src/index.html --dist-dir dist && npm run postbuild"
     },
     "repository": {
         "type": "git",
@@ -38,6 +39,7 @@
         "eslint-plugin-prettier": "^3.1.4",
         "eslint-plugin-react": "^7.21.4",
         "parcel": "^2.0.0-beta.1",
+        "parcel-plugin-static-files-copy": "^2.5.0",
         "prettier": "^2.1.2",
         "rimraf": "^3.0.2"
     }
