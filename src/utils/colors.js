@@ -12,12 +12,5 @@ export const backgroundColors = () => {
 }
 
 export const removeBackgroundClasses = (classList) => {
-    const prefix = 'bg-'
-    return classList.filter((item) => {
-        if (item.startsWith(prefix)) {
-            // dont add class to new array
-        } else {
-            return item
-        }
-    })
+    return classList.filter((className) => !backgroundColors().includes(className))
 }

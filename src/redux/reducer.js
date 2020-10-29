@@ -41,7 +41,7 @@ let initialState = {
                     id: uuidv4(),
                     type: 'row',
                     tag: 'div',
-                    classList: ['max-w-4xl', 'mx-auto', 'bg-blue-500', 'flex', 'flex-wrap', 'py-6'],
+                    classList: ['container', 'mx-auto', 'bg-blue-500', 'flex', 'flex-wrap', 'py-6'],
                     data: [
                         {
                             id: uuidv4(),

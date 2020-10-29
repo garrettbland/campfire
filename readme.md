@@ -9,6 +9,7 @@ Campfire is a React based application to visually build websites. It uses tailwi
 ## To Do
 
 -   Combine reducers for adding content, probably don't need as many
+-   Break out RowEdit into its own components for styles (Width, Colors, ect)
 
 ### Development
 

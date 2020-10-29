@@ -2,17 +2,25 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { UPDATE_EDITING, REMOVE_BLOCK } from '../redux/constants'
 import { backgroundColors, removeBackgroundClasses } from '../utils/colors'
+import { maxWidths, removeMaxWidthClasses } from '../utils/width'
 import { extractClass } from '../utils/tools'
 
 const RowEdit = () => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)
     const [bgColor, setBgColor] = useState('')
+    const [maxWidth, setMaxWidth] = useState('')
     const dispatch = useDispatch()
 
     useEffect(() => {
         const currentBgColor = extractClass(currentlyEditing.classList, 'bg-')
+        const currentMaxWidth = extractClass(currentlyEditing.classList, ['max-w-', 'container'])
+
         if (currentBgColor) {
             setBgColor(currentBgColor)
+        }
+
+        if (currentMaxWidth) {
+            setMaxWidth(currentMaxWidth)
         }
     }, [])
 
@@ -29,6 +37,23 @@ const RowEdit = () => {
             payload: {
                 ...currentlyEditing,
                 classList: [...updatedClassList, value],
+            },
+        })
+    }
+
+    const handleMaxWidthUpdate = (index) => {
+        setMaxWidth(maxWidths()[index])
+
+        /**
+         * Filter out current max width classes
+         */
+        const updatedClassList = removeMaxWidthClasses(currentlyEditing.classList)
+
+        dispatch({
+            type: UPDATE_EDITING,
+            payload: {
+                ...currentlyEditing,
+                classList: [...updatedClassList, maxWidths()[index]],
             },
         })
     }
@@ -61,6 +86,16 @@ const RowEdit = () => {
                         </div>
                     )
                 })}
+            </div>
+            <div>
+                {maxWidth}
+                <input
+                    type="range"
+                    min="0"
+                    max={maxWidths().length - 1}
+                    value={maxWidths().findIndex((item) => item === maxWidth)}
+                    onChange={(event) => handleMaxWidthUpdate(event.target.value)}
+                />
             </div>
             <div>
                 <button onClick={() => RemoveRow()}>Remove Row</button>
