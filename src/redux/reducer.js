@@ -9,6 +9,7 @@ import {
     SWAP_BLOCKS,
     ADD_TEXT,
     ADD_IMAGE,
+    ADD_LINK,
 } from './constants'
 const findAnd = require('find-and')
 import { v4 as uuidv4 } from 'uuid'
@@ -414,6 +415,42 @@ const rootReducer = (state = initialState, action) => {
                     { id: action.payload.id },
                     {
                         data: [...currentColumn.data, default_image],
+                    }
+                ),
+            }
+        }
+        case ADD_LINK: {
+            /**
+             * Find the parent section
+             */
+            const currentColumn = findAnd.returnFound(state.blocks, { id: action.payload.id })
+
+            const default_link = {
+                id: uuidv4(),
+                type: 'link',
+                tag: 'a',
+                classList: [
+                    'px-4',
+                    'py-2',
+                    'bg-green-500',
+                    'text-white',
+                    'rounded',
+                    'inline-block',
+                ],
+                data: {
+                    target: '_self',
+                    href: '#',
+                    title: 'Try Today',
+                },
+            }
+
+            return {
+                ...state,
+                blocks: findAnd.changeProps(
+                    state.blocks,
+                    { id: action.payload.id },
+                    {
+                        data: [...currentColumn.data, default_link],
                     }
                 ),
             }

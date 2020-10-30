@@ -1,13 +1,13 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { ADD_TEXT, ADD_IMAGE } from '../redux/constants'
+import { ADD_TEXT, ADD_IMAGE, ADD_LINK } from '../redux/constants'
 
 const EmptyColumn = ({ data: block }) => {
     const dispatch = useDispatch()
 
     const AddContent = () => {
         const content_type = window.prompt('What type of content? Text or Image')
-        const availableTypes = ['img', 'text']
+        const availableTypes = ['img', 'text', 'link']
         if (availableTypes.includes(content_type)) {
             if (content_type === 'text') {
                 dispatch({
@@ -21,6 +21,15 @@ const EmptyColumn = ({ data: block }) => {
             if (content_type === 'img') {
                 dispatch({
                     type: ADD_IMAGE,
+                    payload: {
+                        id: block.id,
+                    },
+                })
+            }
+
+            if (content_type === 'link') {
+                dispatch({
+                    type: ADD_LINK,
                     payload: {
                         id: block.id,
                     },
