@@ -1,7 +1,33 @@
 import { v4 as uuidv4 } from 'uuid'
 
-export const defaultBlocks = (type) => {
+export const defaultBlocks = (type, columns) => {
     const defaultTypes = {
+        section: {
+            id: uuidv4(),
+            type: 'section',
+            tag: 'section',
+            classList: ['py-12', 'relative'],
+            data: [],
+        },
+        row: {
+            id: uuidv4(),
+            type: 'row',
+            tag: 'div',
+            classList: ['max-w-4xl', 'mx-auto', 'flex', 'flex-wrap', 'py-6'],
+            data: [...Array(columns)].map(() => {
+                return {
+                    id: uuidv4(),
+                    type: `column`,
+                    tag: `div`,
+                    classList: [
+                        `w-full`,
+                        `${columns === 1 ? 'md:w-full' : `md:w-1/${columns}`}`,
+                        `p-4`,
+                    ],
+                    data: [],
+                }
+            }),
+        },
         text: {
             id: uuidv4(),
             type: 'text',

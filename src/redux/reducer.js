@@ -7,9 +7,7 @@ import {
     APPEND_ROW,
     REMOVE_BLOCK,
     SWAP_BLOCKS,
-    ADD_TEXT,
-    ADD_IMAGE,
-    ADD_LINK,
+    ADD_CONTENT,
     APPEND_CONTENT,
 } from './constants'
 const findAnd = require('find-and')
@@ -234,16 +232,7 @@ const rootReducer = (state = initialState, action) => {
             if (!action.payload) {
                 return {
                     ...state,
-                    blocks: [
-                        ...state.blocks,
-                        {
-                            id: uuidv4(),
-                            type: 'section',
-                            tag: 'section',
-                            classList: ['py-12', 'relative'],
-                            data: [],
-                        },
-                    ],
+                    blocks: [...state.blocks, defaultBlocks('section')],
                 }
             }
 
@@ -252,13 +241,7 @@ const rootReducer = (state = initialState, action) => {
                 blocks: findAnd.insertObjectAfter(
                     state.blocks,
                     { id: action.payload.id },
-                    {
-                        id: uuidv4(),
-                        type: 'section',
-                        tag: 'section',
-                        classList: ['py-12', 'relative'],
-                        data: [],
-                    }
+                    defaultBlocks('section')
                 ),
             }
         }
@@ -268,72 +251,27 @@ const rootReducer = (state = initialState, action) => {
              */
             const currentSection = findAnd.returnFound(state.blocks, { id: action.payload.id })
 
-            const empty_row = {
-                id: uuidv4(),
-                type: 'row',
-                tag: 'div',
-                classList: ['max-w-4xl', 'mx-auto', 'flex', 'flex-wrap', 'py-6'],
-                data: [...Array(action.payload.columns)].map((index) => {
-                    return {
-                        id: uuidv4(),
-                        type: `column`,
-                        tag: `div`,
-                        classList: [
-                            `w-full`,
-                            `${
-                                action.payload.columns === 1
-                                    ? 'md:w-full'
-                                    : `md:w-1/${action.payload.columns}`
-                            }`,
-                            `p-4`,
-                        ],
-                        data: [],
-                    }
-                }),
-            }
-
             return {
                 ...state,
                 blocks: findAnd.changeProps(
                     state.blocks,
                     { id: action.payload.id },
                     {
-                        data: [...currentSection.data, empty_row],
+                        data: [
+                            ...currentSection.data,
+                            defaultBlocks('row', action.payload.columns),
+                        ],
                     }
                 ),
             }
         }
         case APPEND_ROW: {
-            const empty_row = {
-                id: uuidv4(),
-                type: 'row',
-                tag: 'div',
-                classList: ['max-w-4xl', 'mx-auto', 'flex', 'flex-wrap', 'py-6'],
-                data: [...Array(action.payload.columns)].map((index) => {
-                    return {
-                        id: uuidv4(),
-                        type: `column`,
-                        tag: `div`,
-                        classList: [
-                            `w-full`,
-                            `${
-                                action.payload.columns === 1
-                                    ? 'md:w-full'
-                                    : `md:w-1/${action.payload.columns}`
-                            }`,
-                            `p-4`,
-                        ],
-                        data: [],
-                    }
-                }),
-            }
-
             return {
                 ...state,
                 blocks: findAnd.insertObjectAfter(
                     state.blocks,
                     { id: action.payload.id },
-                    empty_row
+                    defaultBlocks('row', action.payload.columns)
                 ),
             }
         }
@@ -366,20 +304,11 @@ const rootReducer = (state = initialState, action) => {
                 blocks: [...updated_blocks_order],
             }
         }
-        case ADD_TEXT: {
+        case ADD_CONTENT: {
             /**
              * Find the parent section
              */
             const currentColumn = findAnd.returnFound(state.blocks, { id: action.payload.id })
-
-            const default_text = {
-                id: uuidv4(),
-                type: 'text',
-                tag: 'p',
-                classList: ['text-black', 'text-md', 'leading-6', 'mb-4'],
-                data:
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat',
-            }
 
             return {
                 ...state,
@@ -387,72 +316,7 @@ const rootReducer = (state = initialState, action) => {
                     state.blocks,
                     { id: action.payload.id },
                     {
-                        data: [...currentColumn.data, default_text],
-                    }
-                ),
-            }
-        }
-        case ADD_IMAGE: {
-            /**
-             * Find the parent section
-             */
-            const currentColumn = findAnd.returnFound(state.blocks, { id: action.payload.id })
-
-            const default_image = {
-                id: uuidv4(),
-                type: 'image',
-                tag: 'img',
-                classList: ['w-full'],
-                data: {
-                    src:
-                        'https://images.unsplash.com/photo-1494783367193-149034c05e8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-                    alt: 'Highway Photo',
-                },
-            }
-
-            return {
-                ...state,
-                blocks: findAnd.changeProps(
-                    state.blocks,
-                    { id: action.payload.id },
-                    {
-                        data: [...currentColumn.data, default_image],
-                    }
-                ),
-            }
-        }
-        case ADD_LINK: {
-            /**
-             * Find the parent section
-             */
-            const currentColumn = findAnd.returnFound(state.blocks, { id: action.payload.id })
-
-            const default_link = {
-                id: uuidv4(),
-                type: 'link',
-                tag: 'a',
-                classList: [
-                    'px-4',
-                    'py-2',
-                    'bg-green-500',
-                    'text-white',
-                    'rounded',
-                    'inline-block',
-                ],
-                data: {
-                    target: '_self',
-                    href: '#',
-                    title: 'Try Today',
-                },
-            }
-
-            return {
-                ...state,
-                blocks: findAnd.changeProps(
-                    state.blocks,
-                    { id: action.payload.id },
-                    {
-                        data: [...currentColumn.data, default_link],
+                        data: [...currentColumn.data, defaultBlocks(action.payload.type)],
                     }
                 ),
             }
