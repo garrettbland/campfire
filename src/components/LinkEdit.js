@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { UPDATE_EDITING } from '../redux/constants'
+import { UPDATE_EDITING, REMOVE_BLOCK } from '../redux/constants'
 
 const LinkEdit = () => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)
@@ -19,6 +19,17 @@ const LinkEdit = () => {
         })
     }
 
+    const RemoveBlock = () => {
+        dispatch({
+            type: REMOVE_BLOCK,
+            payload: currentlyEditing,
+        })
+
+        dispatch({
+            type: UPDATE_EDITING,
+        })
+    }
+
     return (
         <div className="flex flex-col">
             <label>Title</label>
@@ -32,6 +43,9 @@ const LinkEdit = () => {
                 defaultValue={currentlyEditing.data.href}
                 className="border-2 px-4 py-2 rounded"
             />
+            <div>
+                <button onClick={() => RemoveBlock()}>Remove Link</button>
+            </div>
         </div>
     )
 }

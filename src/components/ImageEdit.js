@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { UPDATE_EDITING } from '../redux/constants'
+import { UPDATE_EDITING, REMOVE_BLOCK } from '../redux/constants'
 
 const ImageEdit = () => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)
@@ -19,6 +19,17 @@ const ImageEdit = () => {
         })
     }
 
+    const RemoveBlock = () => {
+        dispatch({
+            type: REMOVE_BLOCK,
+            payload: currentlyEditing,
+        })
+
+        dispatch({
+            type: UPDATE_EDITING,
+        })
+    }
+
     return (
         <div>
             <img className="w-64 h-auto" src={currentlyEditing.data.src} />
@@ -34,6 +45,9 @@ const ImageEdit = () => {
                     onChange={(event) => handleTextChange(event.target.value)}
                     className="border-2 px-4 py-2 rounded"
                 />
+            </div>
+            <div>
+                <button onClick={() => RemoveBlock()}>Remove Image</button>
             </div>
         </div>
     )
