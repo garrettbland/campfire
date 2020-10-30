@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { returnFound } from 'find-and'
 import { useDispatch, useSelector } from 'react-redux'
 import { SET_EDITING } from '../redux/constants'
+import AddContentButton from '../components/AddContentButton'
 
 const Image = ({ block }) => {
     const [showTool, setShowTool] = useState(false)
@@ -18,15 +19,11 @@ const Image = ({ block }) => {
         image.addEventListener('mouseleave', (event) => {
             setShowTool(false)
         })
-        // return () => {
-        //   image.removeEventListener("mouseenter", () => {});
-        //   image.removeEventListener("mouseleave", () => {});
-        // };
     })
 
     return (
         <div ref={imageRef} className="relative z-10">
-            <button
+            <div
                 onClick={() =>
                     dispatch({
                         type: SET_EDITING,
@@ -37,8 +34,10 @@ const Image = ({ block }) => {
                     showTool ? 'block' : 'hidden'
                 }`}
             >
-                Edit | Add
-            </button>
+                <div className="flex items-center justify-center h-full w-full">
+                    Edit | <AddContentButton block={block} />
+                </div>
+            </div>
             <img
                 src={block.data.src}
                 alt={block.data.alt}

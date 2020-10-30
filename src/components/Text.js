@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { returnFound } from 'find-and'
 import { useDispatch, useSelector } from 'react-redux'
 import { SET_EDITING } from '../redux/constants'
+import AddContentButton from '../components/AddContentButton'
 
 const Text = ({ block }) => {
     const [showTool, setShowTool] = useState(false)
@@ -25,8 +26,8 @@ const Text = ({ block }) => {
     })
 
     return (
-        <p data-type="text" ref={textRef} className={[...block.classList, 'relative'].join(' ')}>
-            <button
+        <div data-type="text" ref={textRef} className={[...block.classList, 'relative'].join(' ')}>
+            <div
                 onClick={() =>
                     dispatch({
                         type: SET_EDITING,
@@ -37,10 +38,12 @@ const Text = ({ block }) => {
                     showTool ? 'block' : 'hidden'
                 }`}
             >
-                Edit | Add
-            </button>
-            <span dangerouslySetInnerHTML={{ __html: block.data }}></span>
-        </p>
+                <div className="flex items-center justify-center h-full w-full">
+                    Edit | <AddContentButton block={block} />
+                </div>
+            </div>
+            <p dangerouslySetInnerHTML={{ __html: block.data }}></p>
+        </div>
     )
 }
 

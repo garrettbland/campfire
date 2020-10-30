@@ -10,9 +10,11 @@ import {
     ADD_TEXT,
     ADD_IMAGE,
     ADD_LINK,
+    APPEND_CONTENT,
 } from './constants'
 const findAnd = require('find-and')
 import { v4 as uuidv4 } from 'uuid'
+import { defaultBlocks } from '../utils/blocks'
 
 /**
  * Define initial state for app
@@ -67,9 +69,9 @@ let initialState = {
                                     id: uuidv4(),
                                     type: 'text',
                                     tag: 'p',
-                                    classList: ['text-gray-800', 'text-md', 'leading-6', 'mb-4'],
+                                    classList: ['text-black', 'text-md', 'leading-6', 'mb-4'],
                                     data:
-                                        'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century',
+                                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat',
                                 },
                                 {
                                     id: uuidv4(),
@@ -374,7 +376,7 @@ const rootReducer = (state = initialState, action) => {
                 id: uuidv4(),
                 type: 'text',
                 tag: 'p',
-                classList: ['text-black', 'text-md', 'leading-6'],
+                classList: ['text-black', 'text-md', 'leading-6', 'mb-4'],
                 data:
                     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat',
             }
@@ -452,6 +454,16 @@ const rootReducer = (state = initialState, action) => {
                     {
                         data: [...currentColumn.data, default_link],
                     }
+                ),
+            }
+        }
+        case APPEND_CONTENT: {
+            return {
+                ...state,
+                blocks: findAnd.insertObjectAfter(
+                    state.blocks,
+                    { id: action.payload.id },
+                    defaultBlocks(action.payload.type)
                 ),
             }
         }
