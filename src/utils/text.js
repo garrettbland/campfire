@@ -13,6 +13,14 @@ export const fontSizes = () => {
     ]
 }
 
+export const textAlignments = () => {
+    return ['text-left', 'text-center', 'text-right', 'text-justify']
+}
+
 export const removeFontSizes = (classList) => {
     return classList.filter((className) => !fontSizes().includes(className))
+}
+
+export const removeTextAlignments = (classList) => {
+    return classList.filter((className) => !textAlignments().includes(className))
 }
