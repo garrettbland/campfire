@@ -69,6 +69,7 @@ let initialState = {
                                         'text-white',
                                         'rounded',
                                         'inline-block',
+                                        'text-center',
                                     ],
                                     data: {
                                         target: '_self',
