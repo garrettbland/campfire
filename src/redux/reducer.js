@@ -54,20 +54,14 @@ let initialState = {
                                     id: uuidv4(),
                                     type: 'text',
                                     tag: 'p',
-                                    classList: [
-                                        'text-black',
-                                        'text-4xl',
-                                        'font-semibold',
-                                        'leading-10',
-                                        'mb-2',
-                                    ],
+                                    classList: ['text-black', 'text-4xl', 'leading-10', 'mb-2'],
                                     data: 'This is a website editor made with react + tailwind',
                                 },
                                 {
                                     id: uuidv4(),
                                     type: 'text',
                                     tag: 'p',
-                                    classList: ['text-black', 'text-md', 'leading-6', 'mb-4'],
+                                    classList: ['text-black', 'text-base', 'leading-6', 'mb-4'],
                                     data:
                                         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat',
                                 },
