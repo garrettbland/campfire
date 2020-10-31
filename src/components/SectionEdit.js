@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { UPDATE_EDITING, REMOVE_BLOCK } from '../redux/constants'
-import { backgroundColors, removeBackgroundClasses } from '../utils/colors'
+import { generateColors, removeBackgroundClasses } from '../utils/colors'
 import { extractClass } from '../utils/tools'
 
 const SectionEdit = () => {
@@ -48,7 +48,7 @@ const SectionEdit = () => {
         <div>
             <div>Background Color: {bgColor ? bgColor : 'N/A'}</div>
             <div className="flex flex-wrap">
-                {[...backgroundColors(), ''].map((color) => {
+                {[...generateColors('bg'), ''].map((color) => {
                     return (
                         <div
                             key={color}

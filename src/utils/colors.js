@@ -1,16 +1,23 @@
-export const backgroundColors = () => {
+export const generateColors = (prefix) => {
+    if (!prefix) {
+        throw new Error('Prefix (string) must be defined')
+    }
     return [
-        'bg-red-500',
-        'bg-orange-500',
-        'bg-pink-500',
-        'bg-indigo-500',
-        'bg-green-500',
-        'bg-blue-500',
-        'bg-black',
-        'bg-white',
+        `${prefix}-red-500`,
+        `${prefix}-orange-500`,
+        `${prefix}-pink-500`,
+        `${prefix}-indigo-500`,
+        `${prefix}-green-500`,
+        `${prefix}-blue-500`,
+        `${prefix}-black`,
+        `${prefix}-white`,
     ]
 }
 
 export const removeBackgroundClasses = (classList) => {
-    return classList.filter((className) => !backgroundColors().includes(className))
+    return classList.filter((className) => !generateColors('bg').includes(className))
+}
+
+export const removeTextColorClasses = (classList) => {
+    return classList.filter((className) => !generateColors('text').includes(className))
 }
