@@ -5,8 +5,8 @@ import { extractClass } from '../utils/tools'
 import { lineHeights, removeLineHeights } from '../utils/text'
 
 const LineHeight = () => {
-    const [lineHeight, setLineHeight] = useState('')
     const currentlyEditing = useSelector((state) => state.currentlyEditing)
+    const [lineHeight, setLineHeight] = useState('')
     const dispatch = useDispatch()
 
     useEffect(() => {
