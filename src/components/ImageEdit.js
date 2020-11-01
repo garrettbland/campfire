@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { UPDATE_EDITING, REMOVE_BLOCK } from '../redux/constants'
+import RemoveBlockButton from './RemoveBlockButton'
 
 const ImageEdit = () => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)
@@ -46,9 +47,7 @@ const ImageEdit = () => {
                     className="border-2 px-4 py-2 rounded"
                 />
             </div>
-            <div>
-                <button onClick={() => RemoveBlock()}>Remove Image</button>
-            </div>
+            <RemoveBlockButton />
         </div>
     )
 }

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { UPDATE_EDITING, REMOVE_BLOCK } from '../redux/constants'
 import { generateColors, removeBackgroundClasses } from '../utils/colors'
 import { extractClass } from '../utils/tools'
+import RemoveBlockButton from './RemoveBlockButton'
 
 const SectionEdit = () => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)
@@ -62,9 +63,7 @@ const SectionEdit = () => {
                     )
                 })}
             </div>
-            <div>
-                <button onClick={() => RemoveSection()}>Remove Section</button>
-            </div>
+            <RemoveBlockButton />
         </div>
     )
 }

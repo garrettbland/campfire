@@ -4,6 +4,7 @@ import { UPDATE_EDITING, REMOVE_BLOCK } from '../redux/constants'
 import { generateColors, removeBackgroundClasses } from '../utils/colors'
 import { maxWidths, removeMaxWidthClasses } from '../utils/width'
 import { extractClass } from '../utils/tools'
+import RemoveBlockButton from './RemoveBlockButton'
 
 const RowEdit = () => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)
@@ -97,9 +98,7 @@ const RowEdit = () => {
                     onChange={(event) => handleMaxWidthUpdate(event.target.value)}
                 />
             </div>
-            <div>
-                <button onClick={() => RemoveRow()}>Remove Row</button>
-            </div>
+            <RemoveBlockButton />
         </div>
     )
 }

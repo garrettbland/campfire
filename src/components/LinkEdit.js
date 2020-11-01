@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { UPDATE_EDITING, REMOVE_BLOCK } from '../redux/constants'
+import RemoveBlockButton from './RemoveBlockButton'
 
 const LinkEdit = () => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)
@@ -43,9 +44,7 @@ const LinkEdit = () => {
                 defaultValue={currentlyEditing.data.href}
                 className="border-2 px-4 py-2 rounded"
             />
-            <div>
-                <button onClick={() => RemoveBlock()}>Remove Link</button>
-            </div>
+            <RemoveBlockButton />
         </div>
     )
 }
