@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { ADD_SECTION } from '../redux/constants'
+import { ADD_SECTION } from '../../../redux/constants'
 
 const NewSection = () => {
     const dispatch = useDispatch()

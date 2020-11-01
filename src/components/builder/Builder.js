@@ -1,33 +1,33 @@
 import React from 'react'
-import Section from './Section'
-import Row from './Row'
-import Column from './Column'
-import Text from './Text'
-import Image from './Image'
-import Link from './Link'
-import EmptySection from './EmptySection'
-import EmptyColumn from './EmptyColumn'
+import Section from './section/Section'
+import Row from './row/Row'
+import Column from './column/Column'
+import Text from './text/Text'
+import Image from './image/Image'
+import Link from './link/Link'
+import EmptySection from './section/EmptySection'
+import EmptyColumn from './column/EmptyColumn'
 
 /**
  * Takes in an array and recursivley builds the site
  * and adds in buttons
  * @param {Array} data
  */
-const BuildSite = ({ data }) => {
+const Builder = ({ data }) => {
     return data.map((block) => {
         switch (block.type) {
             case 'section': {
                 return (
                     <Section block={block} key={block.id}>
                         {block.data.length === 0 && <EmptySection data={block} />}
-                        {block.data.length > 0 && <BuildSite data={block.data} />}
+                        {block.data.length > 0 && <Builder data={block.data} />}
                     </Section>
                 )
             }
             case 'row': {
                 return (
                     <Row block={block} key={block.id}>
-                        <BuildSite data={block.data} />
+                        <Builder data={block.data} />
                     </Row>
                 )
             }
@@ -35,7 +35,7 @@ const BuildSite = ({ data }) => {
                 return (
                     <Column block={block} key={block.id}>
                         {block.data.length === 0 && <EmptyColumn data={block} />}
-                        {block.data.length > 0 && <BuildSite data={block.data} />}
+                        {block.data.length > 0 && <Builder data={block.data} />}
                     </Column>
                 )
             }
@@ -55,4 +55,4 @@ const BuildSite = ({ data }) => {
     })
 }
 
-export default BuildSite
+export default Builder

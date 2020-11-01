@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { UPDATE_EDITING } from '../redux/constants'
-import { extractClass } from '../utils/tools'
-import { fontSizes, removeFontSizes } from '../utils/text'
+import { UPDATE_EDITING } from '../../../redux/constants'
+import { extractClass } from '../../../utils/tools'
+import { fontSizes, removeFontSizes } from '../../../utils/text'
 
 const FontSize = () => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)

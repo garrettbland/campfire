@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { UPDATE_EDITING } from '../redux/constants'
-import { extractClass } from '../utils/tools'
-import { lineHeights, removeLineHeights } from '../utils/text'
+import { UPDATE_EDITING } from '../../../redux/constants'
+import { extractClass } from '../../../utils/tools'
+import { lineHeights, removeLineHeights } from '../../../utils/text'
 
 const LineHeight = () => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)

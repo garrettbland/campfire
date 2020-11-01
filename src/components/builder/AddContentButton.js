@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { APPEND_CONTENT } from '../redux/constants'
+import { APPEND_CONTENT } from '../../redux/constants'
 
 const AddContentButton = ({ block }) => {
     const dispatch = useDispatch()

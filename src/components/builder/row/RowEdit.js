@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { UPDATE_EDITING, REMOVE_BLOCK } from '../redux/constants'
-import { generateColors, removeBackgroundClasses } from '../utils/colors'
-import { maxWidths, removeMaxWidthClasses } from '../utils/width'
-import { extractClass } from '../utils/tools'
-import RemoveBlockButton from './RemoveBlockButton'
+import { UPDATE_EDITING } from '../../../redux/constants'
+import { generateColors, removeBackgroundClasses } from '../../../utils/colors'
+import { maxWidths, removeMaxWidthClasses } from '../../../utils/width'
+import { extractClass } from '../../../utils/tools'
+import RemoveBlockButton from '../RemoveBlockButton'
 
 const RowEdit = () => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)
@@ -56,17 +56,6 @@ const RowEdit = () => {
                 ...currentlyEditing,
                 classList: [...updatedClassList, maxWidths()[index]],
             },
-        })
-    }
-
-    const RemoveRow = () => {
-        dispatch({
-            type: REMOVE_BLOCK,
-            payload: currentlyEditing,
-        })
-
-        dispatch({
-            type: UPDATE_EDITING,
         })
     }
 

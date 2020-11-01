@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { UPDATE_EDITING, REMOVE_BLOCK } from '../redux/constants'
+import { UPDATE_EDITING, REMOVE_BLOCK } from '../../redux/constants'
 
 const RemoveBlockButton = ({ title = 'Remove Element' }) => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)

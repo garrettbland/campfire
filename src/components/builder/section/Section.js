@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { Draggable } from 'react-smooth-dnd'
 import { returnFound } from 'find-and'
 import { useSelector, useDispatch } from 'react-redux'
-import { SET_EDITING, ADD_SECTION } from '../redux/constants'
+import { SET_EDITING, ADD_SECTION } from '../../../redux/constants'
 
 const Section = ({ block, children }) => {
     const [showTool, setShowTool] = useState(false)

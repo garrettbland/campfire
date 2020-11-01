@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { ADD_CONTENT } from '../redux/constants'
+import { ADD_CONTENT } from '../../../redux/constants'
 
 const EmptyColumn = ({ data: block }) => {
     const dispatch = useDispatch()

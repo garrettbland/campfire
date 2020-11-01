@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { returnFound } from 'find-and'
 import { useDispatch, useSelector } from 'react-redux'
-import { SET_EDITING } from '../redux/constants'
-import AddContentButton from '../components/AddContentButton'
+import { SET_EDITING } from '../../../redux/constants'
+import AddContentButton from '../AddContentButton'
 
 const Link = ({ block }) => {
     const [showTool, setShowTool] = useState(false)

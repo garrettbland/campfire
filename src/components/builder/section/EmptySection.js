@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { ADD_ROW } from '../redux/constants'
+import { ADD_ROW } from '../../../redux/constants'
 
 const EmptySection = ({ data: block }) => {
     const dispatch = useDispatch()

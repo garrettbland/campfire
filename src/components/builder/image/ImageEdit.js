@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { UPDATE_EDITING, REMOVE_BLOCK } from '../redux/constants'
-import RemoveBlockButton from './RemoveBlockButton'
+import { UPDATE_EDITING } from '../../../redux/constants'
+import RemoveBlockButton from '../RemoveBlockButton'
 
 const ImageEdit = () => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)
@@ -17,17 +17,6 @@ const ImageEdit = () => {
                     src: newValue,
                 },
             },
-        })
-    }
-
-    const RemoveBlock = () => {
-        dispatch({
-            type: REMOVE_BLOCK,
-            payload: currentlyEditing,
-        })
-
-        dispatch({
-            type: UPDATE_EDITING,
         })
     }
 

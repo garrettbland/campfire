@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { UPDATE_BLOCK, SET_EDITING } from '../redux/constants'
-import SectionEdit from './SectionEdit'
-import TextEdit from './TextEdit'
-import ImageEdit from './ImageEdit'
-import LinkEdit from './LinkEdit'
-import RowEdit from './RowEdit'
+import { UPDATE_BLOCK, SET_EDITING } from '../../redux/constants'
+import SectionEdit from './section/SectionEdit'
+import TextEdit from './text/TextEdit'
+import ImageEdit from './image/ImageEdit'
+import LinkEdit from './link/LinkEdit'
+import RowEdit from './row/RowEdit'
 
 const Modal = () => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)

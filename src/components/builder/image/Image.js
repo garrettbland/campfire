@@ -1,32 +1,28 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { returnFound } from 'find-and'
 import { useDispatch, useSelector } from 'react-redux'
-import { SET_EDITING } from '../redux/constants'
-import AddContentButton from '../components/AddContentButton'
+import { SET_EDITING } from '../../../redux/constants'
+import AddContentButton from '../AddContentButton'
 
-const Text = ({ block }) => {
+const Image = ({ block }) => {
     const [showTool, setShowTool] = useState(false)
-    const textRef = useRef()
+    const imageRef = useRef()
     const blocks = useSelector((state) => state.blocks)
     const dispatch = useDispatch()
 
     useEffect(() => {
-        const text = textRef.current
+        const image = imageRef.current
 
-        text.addEventListener('mouseenter', (event) => {
+        image.addEventListener('mouseenter', (event) => {
             setShowTool(true)
         })
-        text.addEventListener('mouseleave', (event) => {
+        image.addEventListener('mouseleave', (event) => {
             setShowTool(false)
         })
-        return () => {
-            text.removeEventListener('mouseenter', () => {})
-            text.removeEventListener('mouseleave', () => {})
-        }
     })
 
     return (
-        <div data-type="text" ref={textRef} className={[...block.classList, 'relative'].join(' ')}>
+        <div ref={imageRef} className="relative z-10">
             <div
                 onClick={() =>
                     dispatch({
@@ -34,7 +30,7 @@ const Text = ({ block }) => {
                         payload: returnFound(blocks, { id: block.id }),
                     })
                 }
-                className={`absolute top-0 left-0 text-black bg-white p-1 h-full bg-opacity-25 text-lg w-full ${
+                className={`w-full h-full bg-blue-400 bg-opacity-50 absolute top-0 left-0 z-20 ${
                     showTool ? 'block' : 'hidden'
                 }`}
             >
@@ -42,9 +38,14 @@ const Text = ({ block }) => {
                     Edit | <AddContentButton block={block} />
                 </div>
             </div>
-            <p dangerouslySetInnerHTML={{ __html: block.data }}></p>
+            <img
+                src={block.data.src}
+                alt={block.data.alt}
+                data-type="image"
+                className={[...block.classList, 'relative'].join(' ')}
+            />
         </div>
     )
 }
 
-export default Text
+export default Image

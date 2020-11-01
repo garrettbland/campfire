@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { UPDATE_EDITING, REMOVE_BLOCK } from '../redux/constants'
-import { generateColors, removeBackgroundClasses } from '../utils/colors'
-import { extractClass } from '../utils/tools'
-import RemoveBlockButton from './RemoveBlockButton'
+import { UPDATE_EDITING } from '../../../redux/constants'
+import { generateColors, removeBackgroundClasses } from '../../../utils/colors'
+import { extractClass } from '../../../utils/tools'
+import RemoveBlockButton from '../RemoveBlockButton'
 
 const SectionEdit = () => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)
@@ -31,17 +31,6 @@ const SectionEdit = () => {
                 ...currentlyEditing,
                 classList: [...updatedClassList, value],
             },
-        })
-    }
-
-    const RemoveSection = () => {
-        dispatch({
-            type: REMOVE_BLOCK,
-            payload: currentlyEditing,
-        })
-
-        dispatch({
-            type: UPDATE_EDITING,
         })
     }
 
