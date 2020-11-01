@@ -3,7 +3,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { UPDATE_EDITING, REMOVE_BLOCK } from '../redux/constants'
 import { ReactTrixRTEInput } from 'react-trix-rte'
 import { extractClass } from '../utils/tools'
-import { fontSizes, textAlignments, removeFontSizes, removeTextAlignments } from '../utils/text'
+import {
+    fontSizes,
+    textAlignments,
+    removeFontSizes,
+    removeTextAlignments,
+    lineHeights,
+    removeLineHeights,
+} from '../utils/text'
 import { generateColors, removeTextColorClasses } from '../utils/colors'
 
 const TextEdit = () => {
@@ -11,12 +18,14 @@ const TextEdit = () => {
     const [fontSize, setFontSize] = useState('')
     const [textColor, setTextColor] = useState('')
     const [textAlignment, setTextAlignment] = useState('')
+    const [lineHeight, setLineHeight] = useState('')
     const dispatch = useDispatch()
 
     useEffect(() => {
         const currentFontSize = extractClass(currentlyEditing.classList, fontSizes())
         const currentTextColor = extractClass(currentlyEditing.classList, generateColors('text'))
         const currentTextAlignment = extractClass(currentlyEditing.classList, textAlignments())
+        const currentLineHeight = extractClass(currentlyEditing.classList, lineHeights())
 
         if (currentFontSize) {
             setFontSize(currentFontSize)
@@ -28,6 +37,10 @@ const TextEdit = () => {
 
         if (currentTextAlignment) {
             setTextAlignment(currentTextAlignment)
+        }
+
+        if (currentLineHeight) {
+            setLineHeight(currentLineHeight)
         }
     }, [])
 
@@ -98,6 +111,19 @@ const TextEdit = () => {
         })
     }
 
+    const handleLineHeightUpdate = (index) => {
+        const newLineHeight = lineHeights()[index]
+        setLineHeight(newLineHeight)
+        const updatedClassList = removeLineHeights(currentlyEditing.classList)
+        dispatch({
+            type: UPDATE_EDITING,
+            payload: {
+                ...currentlyEditing,
+                classList: [...updatedClassList, newLineHeight],
+            },
+        })
+    }
+
     return (
         <div>
             <ReactTrixRTEInput defaultValue={currentlyEditing.data} onChange={handleTextChange} />
@@ -157,6 +183,16 @@ const TextEdit = () => {
                     max={fontSizes().length - 1}
                     value={fontSizes().findIndex((item) => item === fontSize)}
                     onChange={(event) => handleFontSizeUpdate(event.target.value)}
+                />
+            </div>
+            <div>
+                {lineHeight ? lineHeight : 'Not set'}
+                <input
+                    type="range"
+                    min="0"
+                    max={lineHeights().length - 1}
+                    value={lineHeights().findIndex((item) => item === lineHeight)}
+                    onChange={(event) => handleLineHeightUpdate(event.target.value)}
                 />
             </div>
         </div>
