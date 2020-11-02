@@ -31,7 +31,7 @@ const BorderRadius = () => {
     return (
         <div>
             <div>
-                {borderRadius}
+                {borderRadius ? borderRadius : 'Default'}
                 <input
                     type="range"
                     min="0"

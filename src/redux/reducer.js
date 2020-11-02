@@ -68,7 +68,7 @@ let initialState = {
                                         'bg-green-500',
                                         'text-white',
                                         'rounded',
-                                        'inline-block',
+                                        'block',
                                         'text-center',
                                     ],
                                     data: {

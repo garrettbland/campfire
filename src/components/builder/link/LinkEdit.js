@@ -5,6 +5,7 @@ import BorderRadius from '../shared/BorderRadius'
 import BoxShadow from '../shared/BoxShadow'
 import BackgroundColor from '../shared/BackgroundColor'
 import RemoveBlockButton from '../RemoveBlockButton'
+import AutoMargin from '../shared/AutoMargin'
 
 const LinkEdit = () => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)
@@ -39,6 +40,7 @@ const LinkEdit = () => {
             <BackgroundColor />
             <BorderRadius />
             <BoxShadow />
+            <AutoMargin />
             <RemoveBlockButton />
         </div>
     )

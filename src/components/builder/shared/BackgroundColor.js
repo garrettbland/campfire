@@ -30,7 +30,7 @@ const BackgroundColor = () => {
 
     return (
         <div>
-            <div>Background Color: {bgColor ? bgColor : 'N/A'}</div>
+            <div>Background Color: {bgColor ? bgColor : 'Default'}</div>
             <div className="flex flex-wrap">
                 {[...generateColors('bg'), ''].map((color) => {
                     return (

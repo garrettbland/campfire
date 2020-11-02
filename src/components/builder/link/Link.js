@@ -22,7 +22,7 @@ const Link = ({ block }) => {
     })
 
     return (
-        <div ref={linkRef} className="relative z-10">
+        <div ref={linkRef} className="relative z-10 flex">
             <div
                 onClick={() =>
                     dispatch({

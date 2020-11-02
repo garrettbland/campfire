@@ -31,7 +31,7 @@ const BoxShadow = () => {
     return (
         <div>
             <div>
-                {boxShadow}
+                {boxShadow ? boxShadow : 'Default'}
                 <input
                     type="range"
                     min="0"
