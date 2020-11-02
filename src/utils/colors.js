@@ -14,7 +14,7 @@ export const generateColors = (prefix) => {
     ]
 }
 
-export const removeBackgroundClasses = (classList) => {
+export const removeBackgroundColors = (classList) => {
     return classList.filter((className) => !generateColors('bg').includes(className))
 }
 
