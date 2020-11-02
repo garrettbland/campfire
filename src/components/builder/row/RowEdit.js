@@ -4,6 +4,8 @@ import { UPDATE_EDITING } from '../../../redux/constants'
 import { generateColors, removeBackgroundClasses } from '../../../utils/colors'
 import { maxWidths, removeMaxWidthClasses } from '../../../utils/width'
 import { extractClass } from '../../../utils/tools'
+import BorderRadius from '../shared/BorderRadius'
+import BoxShadow from '../shared/BoxShadow'
 import RemoveBlockButton from '../RemoveBlockButton'
 
 const RowEdit = () => {
@@ -87,6 +89,8 @@ const RowEdit = () => {
                     onChange={(event) => handleMaxWidthUpdate(event.target.value)}
                 />
             </div>
+            <BorderRadius />
+            <BoxShadow />
             <RemoveBlockButton />
         </div>
     )

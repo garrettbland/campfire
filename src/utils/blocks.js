@@ -13,7 +13,7 @@ export const defaultBlocks = (type, columns) => {
             id: uuidv4(),
             type: 'row',
             tag: 'div',
-            classList: ['max-w-4xl', 'mx-auto', 'flex', 'flex-wrap', 'py-6'],
+            classList: ['max-w-4xl', 'mx-auto', 'flex', 'flex-wrap', 'p-4'],
             data: [...Array(columns)].map(() => {
                 return {
                     id: uuidv4(),

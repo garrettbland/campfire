@@ -1,9 +1,10 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import RemoveBlockButton from '../RemoveBlockButton'
-import BorderRadius from './BorderRadius'
 import ImageUrl from './ImageUrl'
 import ImageAlt from './ImageAlt'
+import BorderRadius from '../shared/BorderRadius'
+import BoxShadow from '../shared/BoxShadow'
 
 const ImageEdit = () => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)
@@ -13,6 +14,7 @@ const ImageEdit = () => {
             <ImageUrl />
             <ImageAlt />
             <BorderRadius />
+            <BoxShadow />
             <RemoveBlockButton />
         </div>
     )

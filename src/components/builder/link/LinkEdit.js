@@ -1,6 +1,8 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { UPDATE_EDITING } from '../../../redux/constants'
+import BorderRadius from '../shared/BorderRadius'
+import BoxShadow from '../shared/BoxShadow'
 import RemoveBlockButton from '../RemoveBlockButton'
 
 const LinkEdit = () => {
@@ -33,6 +35,8 @@ const LinkEdit = () => {
                 defaultValue={currentlyEditing.data.href}
                 className="border-2 px-4 py-2 rounded"
             />
+            <BorderRadius />
+            <BoxShadow />
             <RemoveBlockButton />
         </div>
     )

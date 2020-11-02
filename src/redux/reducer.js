@@ -35,7 +35,7 @@ let initialState = {
                     id: uuidv4(),
                     type: 'row',
                     tag: 'div',
-                    classList: ['container', 'mx-auto', 'bg-blue-500', 'flex', 'flex-wrap', 'py-6'],
+                    classList: ['container', 'mx-auto', 'bg-blue-500', 'flex', 'flex-wrap', 'p-4'],
                     data: [
                         {
                             id: uuidv4(),
@@ -47,7 +47,7 @@ let initialState = {
                                     id: uuidv4(),
                                     type: 'text',
                                     tag: 'p',
-                                    classList: ['text-black', 'text-4xl', 'mb-2', 'font-bold'],
+                                    classList: ['text-black', 'text-4xl', 'mb-2', 'font-black'],
                                     data: 'Campfire is a website editor made with react + tailwind',
                                 },
                                 {
@@ -117,7 +117,7 @@ let initialState = {
                     id: uuidv4(),
                     type: 'row',
                     tag: 'div',
-                    classList: ['max-w-4xl', 'mx-auto', 'bg-blue-500', 'flex', 'flex-wrap', 'py-6'],
+                    classList: ['max-w-4xl', 'mx-auto', 'bg-blue-500', 'flex', 'flex-wrap', 'p-4'],
                     data: [
                         {
                             id: uuidv4(),
