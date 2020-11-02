@@ -18,12 +18,7 @@ const FontSize = () => {
 
     const handleFontSizeUpdate = (index) => {
         setFontSize(fontSizes()[index])
-
-        /**
-         * Filter out current max width classes
-         */
         const updatedClassList = removeFontSizes(currentlyEditing.classList)
-
         dispatch({
             type: UPDATE_EDITING,
             payload: {

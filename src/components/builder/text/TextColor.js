@@ -18,12 +18,7 @@ const TextColor = () => {
 
     const handleTextColorUpdate = (value) => {
         setTextColor(value)
-
-        /**
-         * Filter out any text color classes
-         */
         const updatedClassList = removeTextColorClasses(currentlyEditing.classList)
-
         dispatch({
             type: UPDATE_EDITING,
             payload: {

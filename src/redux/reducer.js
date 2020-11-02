@@ -131,7 +131,6 @@ let initialState = {
                                     tag: 'img',
                                     classList: [],
                                     data: {
-                                        alt: 'image',
                                         src:
                                             'https://images.unsplash.com/photo-1503945839639-aea48daa250f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3150&q=80',
                                     },
