@@ -28,6 +28,20 @@ export const lineHeights = () => {
     ]
 }
 
+export const fontWeights = () => {
+    return [
+        'font-hairline',
+        'font-thin',
+        'font-light',
+        'font-normal',
+        'font-medium',
+        'font-semibold',
+        'font-bold',
+        'font-extrabold',
+        'font-black',
+    ]
+}
+
 export const removeFontSizes = (classList) => {
     return classList.filter((className) => !fontSizes().includes(className))
 }
@@ -38,4 +52,8 @@ export const removeTextAlignments = (classList) => {
 
 export const removeLineHeights = (classList) => {
     return classList.filter((className) => !lineHeights().includes(className))
+}
+
+export const removeFontWeights = (classList) => {
+    return classList.filter((className) => !fontWeights().includes(className))
 }
