@@ -3,7 +3,7 @@ import TextContent from './TextContent'
 import TextColor from './TextColor'
 import TextAlignment from './TextAlignment'
 import FontWeight from './FontWeight'
-import FontSize from './FontSize'
+import FontSize from '../shared/FontSize'
 import LineHeight from './LineHeight'
 import RemoveBlockButton from '../RemoveBlockButton'
 
