@@ -14,6 +14,19 @@ export const generateColors = (prefix) => {
     ]
 }
 
+export const colors = () => {
+    return [
+        'red-500',
+        'orange-500',
+        'pink-500',
+        'indigo-500',
+        'green-500',
+        'blue-500',
+        'black',
+        'white',
+    ]
+}
+
 export const removeBackgroundColors = (classList) => {
     return classList.filter((className) => !generateColors('bg').includes(className))
 }

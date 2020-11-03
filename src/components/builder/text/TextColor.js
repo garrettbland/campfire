@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { UPDATE_EDITING } from '../../../redux/constants'
 import { extractClass } from '../../../utils/tools'
 import { generateColors, removeTextColors } from '../../../utils/colors'
+import ColorPicker from '../shared/ColorPicker'
 
 const TextColor = () => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)
@@ -31,21 +32,10 @@ const TextColor = () => {
     return (
         <div>
             <div>Text Color: {textColor ? textColor : 'N/A'}</div>
-            <div className="flex flex-wrap">
-                {[...generateColors('text'), ''].map((color) => {
-                    return (
-                        <div
-                            key={color}
-                            onClick={() => handleTextColorUpdate(color)}
-                            className={`w-8 h-8 ${
-                                color ? color.replace('text-', 'bg-') : 'bg-teal-500'
-                            } border cursor-pointer`}
-                        >
-                            {color === textColor ? 'Selected' : null}
-                        </div>
-                    )
-                })}
-            </div>
+            <ColorPicker
+                currentColor={textColor.replace('text-', '')}
+                onClick={(color) => handleTextColorUpdate(`text-${color}`)}
+            />
         </div>
     )
 }
