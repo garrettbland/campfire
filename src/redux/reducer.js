@@ -29,7 +29,11 @@ let initialState = {
             id: uuidv4(),
             type: 'section',
             tag: 'section',
-            classList: ['py-12', 'relative'],
+            classList: ['py-12', 'relative', 'bg-cover', 'bg-center'],
+            styles: {
+                backgroundImage:
+                    'url("https://images.unsplash.com/photo-1508766917616-d22f3f1eea14?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80")',
+            },
             data: [
                 {
                     id: uuidv4(),
