@@ -24,6 +24,20 @@ const Builder = ({ data }) => {
                     </Section>
                 )
             }
+            case 'background-image': {
+                const bgStyle = {
+                    backgroundImage: `linear-gradient(${block.data.degree}deg, ${block.data.color_start}, ${block.data.color_end}),url('${block.data.src}')`,
+                }
+
+                return (
+                    <div
+                        key={block.id}
+                        data-type="background-image"
+                        className={[...block.classList].join(' ')}
+                        style={bgStyle}
+                    ></div>
+                )
+            }
             case 'row': {
                 return (
                     <Row block={block} key={block.id}>

@@ -39,11 +39,11 @@ const Section = ({ block, children }) => {
             <div
                 data-type="section"
                 ref={sectionRef}
-                className={block.classList.join(' ')}
+                className={[...block.classList, 'relative'].join(' ')}
                 style={block.styles ? block.styles : null}
             >
                 <div
-                    className={`absolute top-0 left-0 flex flex-row ${
+                    className={`absolute top-0 left-0 flex flex-row z-20 ${
                         showTool ? 'block' : 'hidden'
                     }`}
                 >

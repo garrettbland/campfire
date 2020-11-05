@@ -9,6 +9,27 @@ export const defaultBlocks = (type, columns) => {
             classList: ['py-12', 'relative'],
             data: [],
         },
+        background: {
+            id: uuidv4(),
+            type: 'background-image',
+            tag: 'div',
+            classList: [
+                'absolute',
+                'top-0',
+                'left-0',
+                'w-full ',
+                'h-full',
+                'bg-cover',
+                'bg-center',
+            ],
+            data: {
+                degree: 180,
+                color_start: `rgba(255, 255, 255, 0.5)`,
+                color_end: `rgba(255, 255, 255, 0.5)`,
+                src:
+                    'https://images.unsplash.com/photo-1508766917616-d22f3f1eea14?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80',
+            },
+        },
         row: {
             id: uuidv4(),
             type: 'row',
