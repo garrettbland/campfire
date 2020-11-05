@@ -11,6 +11,7 @@ export const generateColors = (prefix) => {
         `${prefix}-blue-500`,
         `${prefix}-black`,
         `${prefix}-white`,
+        `${prefix}-transparent`,
     ]
 }
 
@@ -24,6 +25,7 @@ export const colors = () => {
         'blue-500',
         'black',
         'white',
+        'transparent',
     ]
 }
 
