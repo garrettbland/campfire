@@ -22,7 +22,7 @@ const EmptySection = ({ data: block }) => {
     }
 
     return (
-        <div className="flex justify-center items-center">
+        <div className="relative z-40 flex justify-center items-center">
             <button
                 onClick={() => AddRow()}
                 className="w-24 h-10 bg-red-500 opacity-50 hover:opacity-100 rounded-full"
