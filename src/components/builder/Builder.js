@@ -20,7 +20,12 @@ const Builder = ({ data }) => {
                 return (
                     <Section block={block} key={block.id}>
                         {block.data.length === 0 && <EmptySection data={block} />}
-                        {block.data.length > 0 && <Builder data={block.data} />}
+                        {block.data.length > 0 && block.data.type !== 'background-image' && (
+                            <Builder data={block.data} />
+                        )}
+                        {block.data.length > 0 && block.data.type === 'background-image' && (
+                            <EmptySection data={block} />
+                        )}
                     </Section>
                 )
             }
