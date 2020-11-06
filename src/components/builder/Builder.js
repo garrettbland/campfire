@@ -1,5 +1,6 @@
 import React from 'react'
 import Section from './section/Section'
+import SectionBackground from './section/SectionBackground'
 import Row from './row/Row'
 import Column from './column/Column'
 import Text from './text/Text'
@@ -40,18 +41,7 @@ const Builder = ({ data }) => {
                 )
             }
             case 'section-background': {
-                const bgStyle = {
-                    backgroundImage: `linear-gradient(${block.data.degree}deg, ${block.data.color_start}, ${block.data.color_end}),url('${block.data.src}')`,
-                }
-
-                return (
-                    <div
-                        key={block.id}
-                        data-type="section-background"
-                        className={[...block.classList].join(' ')}
-                        style={bgStyle}
-                    ></div>
-                )
+                return <SectionBackground block={block} key={block.id} />
             }
             case 'row': {
                 return (

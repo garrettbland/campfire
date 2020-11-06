@@ -72,6 +72,16 @@ const BackgroundImage = () => {
                     />
                 </div>
                 <div>
+                    <div>Gradient Type (linear or radial)</div>
+                    <input
+                        value={currentlyEditingChild.data.gradient_type}
+                        onChange={(event) =>
+                            handleBackgroundUpdate('gradient_type', event.target.value)
+                        }
+                        className="border-2 px-4 py-2 rounded"
+                    />
+                </div>
+                <div>
                     <div>Background Photo URL</div>
                     <input
                         value={currentlyEditingChild.data.src}

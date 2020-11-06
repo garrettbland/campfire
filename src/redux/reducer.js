@@ -47,6 +47,7 @@ let initialState = {
                     ],
                     data: {
                         degree: 180,
+                        gradient_type: `linear`,
                         color_start: `rgba(255, 255, 255, 0.5)`,
                         color_end: `rgba(255, 255, 255, 0.5)`,
                         src:
