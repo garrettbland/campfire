@@ -9,6 +9,7 @@ import {
     SWAP_BLOCKS,
     ADD_CONTENT,
     APPEND_CONTENT,
+    ADD_SECTION_BACKGROUND,
 } from './constants'
 const findAnd = require('find-and')
 import { v4 as uuidv4 } from 'uuid'
@@ -344,6 +345,27 @@ const rootReducer = (state = initialState, action) => {
                     state.blocks,
                     { id: action.payload.id },
                     defaultBlocks(action.payload.type)
+                ),
+            }
+        }
+        case ADD_SECTION_BACKGROUND: {
+            /**
+             * Find the parent section
+             */
+            const currentSection = findAnd.returnFound(state.blocks, { id: action.payload.id })
+
+            /**
+             * Adds absolute positioned section-block to section. Adds to the beginning
+             * of the data array to work nicer with relative positioning
+             */
+            return {
+                ...state,
+                blocks: findAnd.changeProps(
+                    state.blocks,
+                    { id: action.payload.id },
+                    {
+                        data: [defaultBlocks('sectionBackground'), ...currentSection.data],
+                    }
                 ),
             }
         }

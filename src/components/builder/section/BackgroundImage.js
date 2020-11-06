@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { UPDATE_EDITING } from '../../../redux/constants'
+import { UPDATE_EDITING, ADD_SECTION_BACKGROUND, SET_EDITING } from '../../../redux/constants'
 const findAnd = require('find-and')
 
 const BackgroundImage = () => {
@@ -47,6 +47,19 @@ const BackgroundImage = () => {
         })
     }
 
+    const handleBackgroundImageAdd = () => {
+        dispatch({
+            type: ADD_SECTION_BACKGROUND,
+            payload: {
+                id: currentlyEditing.id,
+            },
+        })
+
+        dispatch({
+            type: SET_EDITING,
+        })
+    }
+
     if (currentlyEditingChild && currentlyEditingChild.data) {
         return (
             <div>
@@ -90,7 +103,12 @@ const BackgroundImage = () => {
         )
     }
 
-    return <div>No background image set...</div>
+    return (
+        <div>
+            No background image set...
+            <button onClick={() => handleBackgroundImageAdd()}>Click here to set</button>
+        </div>
+    )
 }
 
 export default BackgroundImage
