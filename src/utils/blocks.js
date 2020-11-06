@@ -9,9 +9,9 @@ export const defaultBlocks = (type, columns) => {
             classList: ['py-12', 'relative'],
             data: [],
         },
-        background: {
+        sectionBackground: {
             id: uuidv4(),
-            type: 'background-image',
+            type: 'section-background',
             tag: 'div',
             classList: [
                 'absolute',

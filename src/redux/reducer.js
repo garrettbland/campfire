@@ -33,7 +33,7 @@ let initialState = {
             data: [
                 {
                     id: uuidv4(),
-                    type: 'background-image',
+                    type: 'section-background',
                     tag: 'div',
                     classList: [
                         'absolute',

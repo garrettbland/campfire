@@ -10,7 +10,7 @@ const BackgroundImage = () => {
 
     useEffect(() => {
         const currentlyEditingChildIndex = currentlyEditing.data.findIndex(
-            (block) => block.type === 'background-image'
+            (block) => block.type === 'section-background'
         )
         if (currentlyEditingChildIndex !== -1) {
             setCurrentlyEditingChild(currentlyEditing.data[currentlyEditingChildIndex])
