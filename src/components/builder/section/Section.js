@@ -47,7 +47,6 @@ const Section = ({ block, children }) => {
                 data-type="section"
                 ref={sectionRef}
                 className={[...block.classList, 'relative'].join(' ')}
-                style={block.styles ? block.styles : null}
             >
                 <div
                     className={`absolute top-0 left-0 flex flex-row z-20 ${
@@ -77,7 +76,7 @@ const Section = ({ block, children }) => {
                 </div>
                 {children}
                 <div
-                    className={`absolute bottom-0 left-0 w-full h-0 flex items-center justify-center ${
+                    className={`absolute bottom-0 left-0 w-full h-0 flex items-center justify-center z-20 ${
                         showTool ? 'block' : 'hidden'
                     }`}
                 >
