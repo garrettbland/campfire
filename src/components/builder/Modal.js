@@ -56,13 +56,13 @@ const Modal = () => {
 
     return (
         <div
-            className={`w-full h-full bg-opacity-50 bg-black transform transition duration-150 ease-in-out ${
+            className={`w-full h-full bg-opacity-50 bg-black transform transition duration-150 ease-in-out overflow-y-scroll ${
                 currentlyEditing ? 'show z-40 fixed' : 'hide absolute top-0 left-0 z-10'
             }`}
         >
             <div
                 ref={modalNode}
-                className={`bg-white max-w-4xl mx-auto rounded mt-12 transition duration-150 ease-in-out`}
+                className={`bg-white max-w-4xl mx-auto rounded my-12 transition duration-150 ease-in-out`}
             >
                 {currentlyEditing && currentlyEditing.id && (
                     <>

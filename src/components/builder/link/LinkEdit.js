@@ -7,6 +7,8 @@ import BackgroundColor from '../shared/BackgroundColor'
 import RemoveBlockButton from '../RemoveBlockButton'
 import AutoMargin from '../shared/AutoMargin'
 import FontSize from '../shared/FontSize'
+import FontWeight from '../shared/FontWeight'
+import TextColor from '../shared/TextColor'
 
 const LinkEdit = () => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)
@@ -43,6 +45,8 @@ const LinkEdit = () => {
             <BoxShadow />
             <FontSize />
             <AutoMargin />
+            <FontWeight />
+            <TextColor />
             <RemoveBlockButton />
         </div>
     )

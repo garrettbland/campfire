@@ -14,7 +14,7 @@ const SectionBackground = ({ block }) => {
     }
 
     const generateBlurStyle = () => {
-        if (block.data.blur) {
+        if (block.data.blur && block.data.blur > 0) {
             return {
                 filter: `blur(${block.data.blur}px)`,
             }
