@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { returnFound } from 'find-and'
 import { useDispatch, useSelector } from 'react-redux'
-import { SET_EDITING } from '../../../redux/constants'
+import { SET_EDITING, DUPLICATE_BLOCK } from '../../../redux/constants'
 import AddContentButton from '../AddContentButton'
 
 const Text = ({ block }) => {
@@ -25,6 +25,17 @@ const Text = ({ block }) => {
         }
     })
 
+    const DuplicateBlock = (event) => {
+        // will stop any synthetic events from happening after this one
+        // example, will not fire edit block
+        event.stopPropagation()
+
+        dispatch({
+            type: DUPLICATE_BLOCK,
+            payload: block,
+        })
+    }
+
     return (
         <div data-type="text" ref={textRef} className={[...block.classList, 'relative'].join(' ')}>
             <div
@@ -39,7 +50,8 @@ const Text = ({ block }) => {
                 }`}
             >
                 <div className="flex items-center justify-center h-full w-full">
-                    Edit | <AddContentButton block={block} />
+                    Edit | <AddContentButton block={block} /> |{' '}
+                    <button onClick={(event) => DuplicateBlock(event)}>Duplicate</button>
                 </div>
             </div>
             <p dangerouslySetInnerHTML={{ __html: block.data }}></p>

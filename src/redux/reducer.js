@@ -9,6 +9,7 @@ import {
     SWAP_BLOCKS,
     ADD_CONTENT,
     APPEND_CONTENT,
+    DUPLICATE_BLOCK,
 } from './constants'
 const findAnd = require('find-and')
 import { v4 as uuidv4 } from 'uuid'
@@ -345,6 +346,19 @@ const rootReducer = (state = initialState, action) => {
                     state.blocks,
                     { id: action.payload.id },
                     defaultBlocks(action.payload.type)
+                ),
+            }
+        }
+        case DUPLICATE_BLOCK: {
+            return {
+                ...state,
+                blocks: findAnd.insertObjectAfter(
+                    state.blocks,
+                    { id: action.payload.id },
+                    {
+                        ...action.payload,
+                        id: uuidv4(),
+                    }
                 ),
             }
         }

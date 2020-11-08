@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { Draggable } from 'react-smooth-dnd'
 import { returnFound } from 'find-and'
 import { useSelector, useDispatch } from 'react-redux'
-import { SET_EDITING, ADD_SECTION } from '../../../redux/constants'
+import { SET_EDITING, ADD_SECTION, DUPLICATE_BLOCK } from '../../../redux/constants'
 
 const Section = ({ block, children }) => {
     const [showTool, setShowTool] = useState(false)
@@ -34,6 +34,13 @@ const Section = ({ block, children }) => {
         })
     }
 
+    const DuplicateBlock = () => {
+        dispatch({
+            type: DUPLICATE_BLOCK,
+            payload: block,
+        })
+    }
+
     return (
         <Draggable>
             <div
@@ -61,6 +68,12 @@ const Section = ({ block, children }) => {
                     <div className="bg-gray-600 text-white cursor-pointer" id="section-drag-handle">
                         Drag
                     </div>
+                    <button
+                        onClick={() => DuplicateBlock()}
+                        className="bg-pink-500 text-white cursor-pointer"
+                    >
+                        Duplicate
+                    </button>
                 </div>
                 {children}
                 <div
