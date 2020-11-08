@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { UPDATE_EDITING, ADD_SECTION_BACKGROUND, SET_EDITING } from '../../../redux/constants'
+import { UPDATE_EDITING } from '../../../redux/constants'
 const findAnd = require('find-and')
+import { defaultBlocks } from '../../../utils/blocks'
 
 const BackgroundImage = () => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)
@@ -15,9 +16,12 @@ const BackgroundImage = () => {
         if (currentlyEditingChildIndex !== -1) {
             setCurrentlyEditingChild(currentlyEditing.data[currentlyEditingChildIndex])
         } else {
-            console.log('no bg child')
+            /**
+             * No bg child
+             */
+            setCurrentlyEditingChild({})
         }
-    }, [currentlyEditing.id])
+    }, [currentlyEditing])
 
     const handleBackgroundUpdate = (key, value) => {
         setCurrentlyEditingChild({
@@ -49,14 +53,21 @@ const BackgroundImage = () => {
 
     const handleBackgroundImageAdd = () => {
         dispatch({
-            type: ADD_SECTION_BACKGROUND,
+            type: UPDATE_EDITING,
             payload: {
-                id: currentlyEditing.id,
+                ...currentlyEditing,
+                data: [defaultBlocks('sectionBackground'), ...currentlyEditing.data],
             },
         })
+    }
 
+    const handleBackgroundImageRemove = () => {
         dispatch({
-            type: SET_EDITING,
+            type: UPDATE_EDITING,
+            payload: {
+                ...currentlyEditing,
+                data: findAnd.removeObject(currentlyEditing.data, { id: currentlyEditingChild.id }),
+            },
         })
     }
 
@@ -109,6 +120,9 @@ const BackgroundImage = () => {
                         className="border-2 px-4 py-2 rounded"
                     />
                 </div>
+                <button onClick={() => handleBackgroundImageRemove()}>
+                    Remove Background Styling
+                </button>
             </div>
         )
     }
