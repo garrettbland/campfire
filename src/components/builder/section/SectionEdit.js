@@ -1,13 +1,13 @@
 import React from 'react'
 import RemoveBlockButton from '../RemoveBlockButton'
 import BackgroundColor from '../shared/BackgroundColor'
-import BackgroundImage from './BackgroundImage'
+import BackgroundStyle from './BackgroundStyle'
 
 const SectionEdit = () => {
     return (
         <div>
             <BackgroundColor />
-            <BackgroundImage />
+            <BackgroundStyle />
             <RemoveBlockButton />
         </div>
     )

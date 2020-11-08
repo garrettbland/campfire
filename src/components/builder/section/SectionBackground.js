@@ -13,12 +13,20 @@ const SectionBackground = ({ block }) => {
         }
     }
 
+    const generateBlurStyle = () => {
+        if (block.data.blur) {
+            return {
+                filter: `blur(${block.data.blur}px)`,
+            }
+        }
+    }
+
     return (
         <div
             key={block.id}
             data-type="section-background"
             className={[...block.classList].join(' ')}
-            style={generateGradientStyle()}
+            style={{ ...generateGradientStyle(), ...generateBlurStyle() }}
         ></div>
     )
 }

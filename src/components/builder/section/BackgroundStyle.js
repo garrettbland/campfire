@@ -4,7 +4,7 @@ import { UPDATE_EDITING } from '../../../redux/constants'
 const findAnd = require('find-and')
 import { defaultBlocks } from '../../../utils/blocks'
 
-const BackgroundImage = () => {
+const BackgroundStyle = () => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)
     const [currentlyEditingChild, setCurrentlyEditingChild] = useState({})
     const dispatch = useDispatch()
@@ -75,6 +75,14 @@ const BackgroundImage = () => {
         return (
             <div>
                 <div>
+                    <div>Blur</div>
+                    <input
+                        value={currentlyEditingChild.data.blur}
+                        onChange={(event) => handleBackgroundUpdate('blur', event.target.value)}
+                        className="border-2 px-4 py-2 rounded"
+                    />
+                </div>
+                <div>
                     <div>Degree</div>
                     <input
                         value={currentlyEditingChild.data.degree}
@@ -135,4 +143,4 @@ const BackgroundImage = () => {
     )
 }
 
-export default BackgroundImage
+export default BackgroundStyle
