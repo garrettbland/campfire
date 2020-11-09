@@ -85,7 +85,7 @@ const Section = ({ block, children }) => {
                         Duplicate
                     </button>
                 </div>
-                {block.data[0].type === 'section-background' && (
+                {block.data[0] && block.data[0].type === 'section-background' && (
                     <SectionBackground
                         block={block.data[0]}
                         key={block.data[0].id}
