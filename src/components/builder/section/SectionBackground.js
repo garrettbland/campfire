@@ -1,6 +1,33 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 const SectionBackground = ({ block }) => {
+    const [showTool, setShowTool] = useState(false)
+    const sectionBackgroundRef = useRef()
+
+    useEffect(() => {
+        const section = sectionBackgroundRef.current
+
+        section.addEventListener('mouseenter', (event) => {
+            setShowTool(true)
+        })
+        section.addEventListener('mouseleave', (event) => {
+            setShowTool(false)
+        })
+        return () => {
+            section.removeEventListener('mouseenter', () => {})
+            section.removeEventListener('mouseleave', () => {})
+        }
+    }, [])
+
+    const hoverStyle = () => {
+        if (showTool) {
+            return {
+                outline: '2px solid red',
+                outlineOffset: '-2px',
+            }
+        }
+    }
+
     const generateGradientStyle = () => {
         if (block.data.gradient_type === 'linear') {
             return {
@@ -24,9 +51,10 @@ const SectionBackground = ({ block }) => {
     return (
         <div
             key={block.id}
+            ref={sectionBackgroundRef}
             data-type="section-background"
             className={[...block.classList].join(' ')}
-            style={{ ...generateGradientStyle(), ...generateBlurStyle() }}
+            style={{ ...generateGradientStyle(), ...generateBlurStyle(), ...hoverStyle() }}
         ></div>
     )
 }

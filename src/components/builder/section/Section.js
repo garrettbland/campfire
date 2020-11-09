@@ -41,12 +41,22 @@ const Section = ({ block, children }) => {
         })
     }
 
+    const hoverStyle = () => {
+        if (showTool) {
+            return {
+                outline: '2px solid red',
+                outlineOffset: '-2px',
+            }
+        }
+    }
+
     return (
         <Draggable>
             <div
                 data-type="section"
                 ref={sectionRef}
                 className={[...block.classList, 'relative'].join(' ')}
+                style={{ ...hoverStyle() }}
             >
                 <div
                     className={`absolute top-0 left-0 flex flex-row z-20 ${
