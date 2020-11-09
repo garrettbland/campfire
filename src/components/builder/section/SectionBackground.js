@@ -1,23 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react'
 
-const SectionBackground = ({ block }) => {
-    const [showTool, setShowTool] = useState(false)
+const SectionBackground = ({ block, showTool }) => {
+    //const [showTool, setShowTool] = useState(false)
     const sectionBackgroundRef = useRef()
 
-    useEffect(() => {
-        const section = sectionBackgroundRef.current
+    // useEffect(() => {
+    //     const section = sectionBackgroundRef.current
 
-        section.addEventListener('mouseenter', (event) => {
-            setShowTool(true)
-        })
-        section.addEventListener('mouseleave', (event) => {
-            setShowTool(false)
-        })
-        return () => {
-            section.removeEventListener('mouseenter', () => {})
-            section.removeEventListener('mouseleave', () => {})
-        }
-    }, [])
+    //     section.addEventListener('mouseenter', (event) => {
+    //         setShowTool(true)
+    //     })
+    //     section.addEventListener('mouseleave', (event) => {
+    //         setShowTool(false)
+    //     })
+    //     return () => {
+    //         section.removeEventListener('mouseenter', () => {})
+    //         section.removeEventListener('mouseleave', () => {})
+    //     }
+    // }, [])
 
     const hoverStyle = () => {
         if (showTool) {

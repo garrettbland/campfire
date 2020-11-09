@@ -40,9 +40,9 @@ const Builder = ({ data }) => {
                     </Section>
                 )
             }
-            case 'section-background': {
-                return <SectionBackground block={block} key={block.id} />
-            }
+            // case 'section-background': {
+            //     return <SectionBackground block={block} key={block.id} />
+            // }
             case 'row': {
                 return (
                     <Row block={block} key={block.id}>

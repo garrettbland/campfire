@@ -3,6 +3,7 @@ import { Draggable } from 'react-smooth-dnd'
 import { returnFound } from 'find-and'
 import { useSelector, useDispatch } from 'react-redux'
 import { SET_EDITING, ADD_SECTION, DUPLICATE_BLOCK } from '../../../redux/constants'
+import SectionBackground from './SectionBackground'
 
 const Section = ({ block, children }) => {
     const [showTool, setShowTool] = useState(false)
@@ -84,6 +85,13 @@ const Section = ({ block, children }) => {
                         Duplicate
                     </button>
                 </div>
+                {block.data[0].type === 'section-background' && (
+                    <SectionBackground
+                        block={block.data[0]}
+                        key={block.data[0].id}
+                        showTool={showTool}
+                    />
+                )}
                 {children}
                 <div
                     className={`absolute bottom-0 left-0 w-full h-0 flex items-center justify-center z-20 ${
