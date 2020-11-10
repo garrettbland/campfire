@@ -44,7 +44,14 @@ const SectionBackground = ({ block, showTool }) => {
         if (block.data.blur && block.data.blur > 0) {
             return {
                 filter: `blur(${block.data.blur}px)`,
+                transform: 'scale(1.1)',
             }
+        }
+    }
+
+    const generateBackgroundAttachment = () => {
+        return {
+            backgroundAttachment: `${block.data.background_attachment}`,
         }
     }
 
@@ -54,7 +61,12 @@ const SectionBackground = ({ block, showTool }) => {
             ref={sectionBackgroundRef}
             data-type="section-background"
             className={[...block.classList].join(' ')}
-            style={{ ...generateGradientStyle(), ...generateBlurStyle(), ...hoverStyle() }}
+            style={{
+                ...generateGradientStyle(),
+                ...generateBlurStyle(),
+                ...generateBackgroundAttachment(),
+                ...hoverStyle(),
+            }}
         ></div>
     )
 }
