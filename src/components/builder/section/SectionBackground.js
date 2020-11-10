@@ -49,11 +49,22 @@ const SectionBackground = ({ block, showTool }) => {
         }
     }
 
-    const generateBackgroundAttachment = () => {
-        return {
-            backgroundAttachment: `${block.data.background_attachment}`,
-        }
-    }
+    // const generateBackgroundAttachment = () => {
+    //     /**
+    //      * aka - Background positioning (fixed or local)
+    //      * Will only display local if blur is enabled. Enabling blur and fixed
+    //      * jacks up the scaleing and fixed background and makes weird scrolling effects
+    //      */
+    //     if (block.data.blur > 0) {
+    //         return {
+    //             backgroundAttachment: 'local',
+    //         }
+    //     } else {
+    //         return {
+    //             backgroundAttachment: block.data.background_attachment,
+    //         }
+    //     }
+    // }
 
     return (
         <div
@@ -64,7 +75,6 @@ const SectionBackground = ({ block, showTool }) => {
             style={{
                 ...generateGradientStyle(),
                 ...generateBlurStyle(),
-                ...generateBackgroundAttachment(),
                 ...hoverStyle(),
             }}
         ></div>

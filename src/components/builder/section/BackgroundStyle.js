@@ -3,10 +3,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { UPDATE_EDITING } from '../../../redux/constants'
 const findAnd = require('find-and')
 import { defaultBlocks } from '../../../utils/blocks'
+import { backgroundAttachments, removeBackgroundAttachments } from '../../../utils/background'
+import { extractClass } from '../../../utils/tools'
 
 const BackgroundStyle = () => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)
+    const [backgroundAttachment, setBackgroundAttachment] = useState('')
     const [currentlyEditingChild, setCurrentlyEditingChild] = useState({})
+    const [blurDisabled, setBlurDisabled] = useState(false)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -15,6 +19,18 @@ const BackgroundStyle = () => {
         )
         if (currentlyEditingChildIndex !== -1) {
             setCurrentlyEditingChild(currentlyEditing.data[currentlyEditingChildIndex])
+            const currentBackgroundAttachment = extractClass(
+                currentlyEditing.data[currentlyEditingChildIndex].classList,
+                backgroundAttachments()
+            )
+            if (currentBackgroundAttachment) {
+                setBackgroundAttachment(currentBackgroundAttachment)
+                setCurrentlyEditingChild({
+                    ...currentlyEditing.data[currentlyEditingChildIndex],
+                    blur: 0,
+                })
+                setBlurDisabled(currentBackgroundAttachment === 'bg-fixed' ? true : false)
+            }
         } else {
             /**
              * No bg child
@@ -51,7 +67,7 @@ const BackgroundStyle = () => {
         })
     }
 
-    const handleBackgroundImageAdd = () => {
+    const handleBackgroundStyleAdd = () => {
         dispatch({
             type: UPDATE_EDITING,
             payload: {
@@ -61,12 +77,36 @@ const BackgroundStyle = () => {
         })
     }
 
-    const handleBackgroundImageRemove = () => {
+    const handleBackgroundStyleRemove = () => {
         dispatch({
             type: UPDATE_EDITING,
             payload: {
                 ...currentlyEditing,
                 data: findAnd.removeObject(currentlyEditing.data, { id: currentlyEditingChild.id }),
+            },
+        })
+    }
+
+    const handleBackgroundAttachmentUpdate = (value) => {
+        setBackgroundAttachment(value)
+        setBlurDisabled(value === 'bg-fixed' ? true : false)
+        const updatedClassList = removeBackgroundAttachments(currentlyEditingChild.classList)
+        dispatch({
+            type: UPDATE_EDITING,
+            payload: {
+                ...currentlyEditing,
+                data: findAnd.changeProps(
+                    currentlyEditing.data,
+                    { id: currentlyEditingChild.id },
+                    {
+                        ...currentlyEditingChild,
+                        data: {
+                            ...currentlyEditingChild.data,
+                            blur: value === 'bg-fixed' ? 0 : currentlyEditingChild.data.blur,
+                        },
+                        classList: [...updatedClassList, value],
+                    }
+                ),
             },
         })
     }
@@ -79,8 +119,27 @@ const BackgroundStyle = () => {
                     <input
                         value={currentlyEditingChild.data.blur}
                         onChange={(event) => handleBackgroundUpdate('blur', event.target.value)}
-                        className="border-2 px-4 py-2 rounded"
+                        className={`border-2 px-4 py-2 rounded ${blurDisabled ? 'opacity-25' : ''}`}
                     />
+                </div>
+                <div>
+                    <div>Background Positioning?</div>
+                    <div className="flex flex-row">
+                        Normal
+                        <input
+                            type="radio"
+                            value="n/a"
+                            onChange={() => handleBackgroundAttachmentUpdate('bg-local')}
+                            checked={backgroundAttachment === 'bg-fixed' ? false : true}
+                        />
+                        Fixed
+                        <input
+                            type="radio"
+                            value="fixed"
+                            onChange={() => handleBackgroundAttachmentUpdate('bg-fixed')}
+                            checked={backgroundAttachment === 'bg-fixed' ? true : false}
+                        />
+                    </div>
                 </div>
                 <div>
                     <div>Degree</div>
@@ -128,7 +187,7 @@ const BackgroundStyle = () => {
                         className="border-2 px-4 py-2 rounded"
                     />
                 </div>
-                <button onClick={() => handleBackgroundImageRemove()}>
+                <button onClick={() => handleBackgroundStyleRemove()}>
                     Remove Background Styling
                 </button>
             </div>
@@ -138,7 +197,7 @@ const BackgroundStyle = () => {
     return (
         <div>
             No background image set...
-            <button onClick={() => handleBackgroundImageAdd()}>Click here to set</button>
+            <button onClick={() => handleBackgroundStyleAdd()}>Click here to set</button>
         </div>
     )
 }

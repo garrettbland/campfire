@@ -13,15 +13,7 @@ export const defaultBlocks = (type, columns) => {
             id: uuidv4(),
             type: 'section-background',
             tag: 'div',
-            classList: [
-                'absolute',
-                'top-0',
-                'left-0',
-                'w-full ',
-                'h-full',
-                'bg-cover',
-                'bg-center',
-            ],
+            classList: ['absolute', 'top-0', 'left-0', 'w-full', 'h-full', 'bg-cover', 'bg-center'],
             data: {
                 degree: 180,
                 gradient_type: `linear`,
