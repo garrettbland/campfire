@@ -3,7 +3,6 @@ import { Draggable } from 'react-smooth-dnd'
 import { returnFound } from 'find-and'
 import { useSelector, useDispatch } from 'react-redux'
 import { SET_EDITING, ADD_SECTION, DUPLICATE_BLOCK } from '../../../redux/constants'
-import SectionBackground from './SectionBackground'
 
 const Section = ({ block, children }) => {
     const [showTool, setShowTool] = useState(false)
@@ -42,25 +41,15 @@ const Section = ({ block, children }) => {
         })
     }
 
-    const hoverStyle = () => {
-        if (showTool) {
-            return {
-                outline: '2px solid red',
-                outlineOffset: '-2px',
-            }
-        }
-    }
-
     return (
         <Draggable>
             <div
                 data-type="section"
                 ref={sectionRef}
                 className={[...block.classList, 'relative'].join(' ')}
-                style={{ ...hoverStyle() }}
             >
                 <div
-                    className={`absolute top-0 left-0 flex flex-row z-20 ${
+                    className={`absolute top-0 left-0 flex flex-row z-30 ${
                         showTool ? 'block' : 'hidden'
                     }`}
                 >
@@ -85,14 +74,14 @@ const Section = ({ block, children }) => {
                         Duplicate
                     </button>
                 </div>
-                {block.data[0] && block.data[0].type === 'section-background' && (
-                    <SectionBackground
-                        block={block.data[0]}
-                        key={block.data[0].id}
-                        showTool={showTool}
-                    />
+                {showTool && (
+                    <>
+                        <div className="absolute left-0 top-0 bg-orange-500 w-1 h-full z-20"></div>
+                        <div className="absolute right-0 top-0 bg-orange-500 w-1 h-full z-20"></div>
+                        <div className="absolute left-0 top-0 bg-orange-500 w-full h-1 z-20"></div>
+                        <div className="absolute left-0 bottom-0 bg-orange-500 w-full h-1 z-20"></div>
+                    </>
                 )}
-
                 {children}
                 <div
                     className={`absolute bottom-0 left-0 w-full h-0 flex items-center justify-center z-20 ${

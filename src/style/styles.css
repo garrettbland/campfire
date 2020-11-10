@@ -7,10 +7,10 @@
     outline-offset: -2px;
 } */
 
-[data-type='section-background']:hover {
+/* [data-type='section-background']:hover {
     outline: 2px solid red;
     outline-offset: -2px;
-}
+} */
 
 [data-type='row']:hover {
     outline: 2px solid pink;

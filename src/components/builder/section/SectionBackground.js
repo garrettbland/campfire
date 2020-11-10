@@ -1,33 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 
-const SectionBackground = ({ block, showTool }) => {
-    //const [showTool, setShowTool] = useState(false)
-    const sectionBackgroundRef = useRef()
-
-    // useEffect(() => {
-    //     const section = sectionBackgroundRef.current
-
-    //     section.addEventListener('mouseenter', (event) => {
-    //         setShowTool(true)
-    //     })
-    //     section.addEventListener('mouseleave', (event) => {
-    //         setShowTool(false)
-    //     })
-    //     return () => {
-    //         section.removeEventListener('mouseenter', () => {})
-    //         section.removeEventListener('mouseleave', () => {})
-    //     }
-    // }, [])
-
-    const hoverStyle = () => {
-        if (showTool) {
-            return {
-                outline: '2px solid red',
-                outlineOffset: '-2px',
-            }
-        }
-    }
-
+const SectionBackground = ({ block }) => {
     const generateGradientStyle = () => {
         if (block.data.gradient_type === 'linear') {
             return {
@@ -44,38 +17,19 @@ const SectionBackground = ({ block, showTool }) => {
         if (block.data.blur && block.data.blur > 0) {
             return {
                 filter: `blur(${block.data.blur}px)`,
-                transform: 'scale(1.1)',
+                transform: `scale(1.${block.data.blur})`,
             }
         }
     }
 
-    // const generateBackgroundAttachment = () => {
-    //     /**
-    //      * aka - Background positioning (fixed or local)
-    //      * Will only display local if blur is enabled. Enabling blur and fixed
-    //      * jacks up the scaleing and fixed background and makes weird scrolling effects
-    //      */
-    //     if (block.data.blur > 0) {
-    //         return {
-    //             backgroundAttachment: 'local',
-    //         }
-    //     } else {
-    //         return {
-    //             backgroundAttachment: block.data.background_attachment,
-    //         }
-    //     }
-    // }
-
     return (
         <div
             key={block.id}
-            ref={sectionBackgroundRef}
             data-type="section-background"
             className={[...block.classList].join(' ')}
             style={{
                 ...generateGradientStyle(),
                 ...generateBlurStyle(),
-                ...hoverStyle(),
             }}
         ></div>
     )
