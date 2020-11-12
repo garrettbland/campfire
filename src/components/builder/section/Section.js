@@ -49,7 +49,7 @@ const Section = ({ block, children }) => {
                 className={[...block.classList, 'relative'].join(' ')}
             >
                 <div
-                    className={`absolute top-0 left-0 flex flex-row z-30 ${
+                    className={`absolute top-0 left-0 flex flex-row z-50 ${
                         showTool ? 'block' : 'hidden'
                     }`}
                 >
@@ -76,15 +76,15 @@ const Section = ({ block, children }) => {
                 </div>
                 {showTool && (
                     <>
-                        <div className="absolute left-0 top-0 bg-orange-500 w-1 h-full z-20"></div>
-                        <div className="absolute right-0 top-0 bg-orange-500 w-1 h-full z-20"></div>
-                        <div className="absolute left-0 top-0 bg-orange-500 w-full h-1 z-20"></div>
-                        <div className="absolute left-0 bottom-0 bg-orange-500 w-full h-1 z-20"></div>
+                        <div className="absolute left-0 top-0 bg-orange-500 w-1 h-full z-50"></div>
+                        <div className="absolute right-0 top-0 bg-orange-500 w-1 h-full z-50"></div>
+                        <div className="absolute left-0 top-0 bg-orange-500 w-full h-1 z-50"></div>
+                        <div className="absolute left-0 bottom-0 bg-orange-500 w-full h-1 z-50"></div>
                     </>
                 )}
                 {children}
                 <div
-                    className={`absolute bottom-0 left-0 w-full h-0 flex items-center justify-center z-20 ${
+                    className={`absolute bottom-0 left-0 w-full h-0 flex items-center justify-center z-50 ${
                         showTool ? 'block' : 'hidden'
                     }`}
                 >
