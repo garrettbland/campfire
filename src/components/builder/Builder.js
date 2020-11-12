@@ -18,25 +18,12 @@ const Builder = ({ data }) => {
     return data.map((block) => {
         switch (block.type) {
             case 'section': {
-                /**
-                 * Depending on if there is a background-image child, thats why the
-                 * extra steps are done. If there is one child element of section and its
-                 * background-image block type, then we need to render it a little differently
-                 * so it still shows the empty section correctly
-                 */
                 return (
                     <Section block={block} key={block.id}>
-                        {block.data.length === 0 && <EmptySection data={block} />}
-                        {block.data.length === 1 && block.data[0].type === 'section-background' && (
-                            <>
-                                <Builder data={block.data} />
-                                <EmptySection data={block} />
-                            </>
+                        {block.data.length > 0 && <Builder data={block.data} />}
+                        {!block.data.find((block) => block.type === 'section') && (
+                            <EmptySection data={block} />
                         )}
-                        {block.data.length === 1 && block.data[0].type !== 'section-background' && (
-                            <Builder data={block.data} />
-                        )}
-                        {block.data.length > 1 && <Builder data={block.data} />}
                     </Section>
                 )
             }
