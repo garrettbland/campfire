@@ -30,7 +30,7 @@ let initialState = {
             id: uuidv4(),
             type: 'section',
             tag: 'section',
-            classList: ['py-12', 'relative'],
+            classList: ['py-64', 'relative'],
             data: [
                 {
                     id: uuidv4(),
