@@ -5,6 +5,8 @@ import ImageUrl from './ImageUrl'
 import ImageAlt from './ImageAlt'
 import BorderRadius from '../shared/BorderRadius'
 import BoxShadow from '../shared/BoxShadow'
+import PaddingTop from '../shared/PaddingTop'
+import PaddingBottom from '../shared/PaddingBottom'
 
 const ImageEdit = () => {
     const currentlyEditing = useSelector((state) => state.currentlyEditing)
@@ -15,6 +17,8 @@ const ImageEdit = () => {
             <ImageAlt />
             <BorderRadius />
             <BoxShadow />
+            <PaddingTop />
+            <PaddingBottom />
             <RemoveBlockButton />
         </div>
     )
