@@ -27,7 +27,7 @@ const BuilderWrapper = () => {
                 <Container
                     onDrop={(dropResult) => swapSections(dropResult)}
                     dragHandleSelector="#section-drag-handle"
-                    dragClass="shadow-2xl opacity-75"
+                    dragClass="shadow-2xl opacity-75 overflow-hidden"
                 >
                     <Builder data={blocks} />
                 </Container>

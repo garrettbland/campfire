@@ -5,6 +5,8 @@ import BackgroundColor from '../shared/BackgroundColor'
 import RemoveBlockButton from '../RemoveBlockButton'
 import MaxWidth from './MaxWidth'
 import BackgroundOpacity from './BackgroundOpacity'
+import MarginTop from '../shared/MarginTop'
+import MarginBottom from '../shared/MarginBottom'
 
 const RowEdit = () => {
     return (
@@ -14,6 +16,8 @@ const RowEdit = () => {
             <MaxWidth />
             <BorderRadius />
             <BoxShadow />
+            <MarginTop />
+            <MarginBottom />
             <RemoveBlockButton />
         </div>
     )

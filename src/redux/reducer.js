@@ -150,7 +150,15 @@ let initialState = {
                     id: uuidv4(),
                     type: 'row',
                     tag: 'div',
-                    classList: ['max-w-4xl', 'mx-auto', 'bg-blue-500', 'flex', 'flex-wrap', 'p-4'],
+                    classList: [
+                        'max-w-4xl',
+                        'mx-auto',
+                        'bg-blue-500',
+                        'flex',
+                        'flex-wrap',
+                        'p-4',
+                        'mt-24',
+                    ],
                     data: [
                         {
                             id: uuidv4(),
