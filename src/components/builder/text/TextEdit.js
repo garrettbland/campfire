@@ -5,8 +5,8 @@ import TextAlignment from './TextAlignment'
 import FontWeight from '../shared/FontWeight'
 import FontSize from '../shared/FontSize'
 import LineHeight from './LineHeight'
-import PaddingTop from '../shared/PaddingTop'
-import PaddingBottom from '../shared/PaddingBottom'
+import MarginTop from '../shared/MarginTop'
+import MarginBottom from '../shared/MarginBottom'
 import RemoveBlockButton from '../RemoveBlockButton'
 
 const TextEdit = () => {
@@ -18,8 +18,8 @@ const TextEdit = () => {
             <FontWeight />
             <FontSize />
             <LineHeight />
-            <PaddingTop />
-            <PaddingBottom />
+            <MarginTop />
+            <MarginBottom />
             <RemoveBlockButton title="Remove Text" />
         </div>
     )

@@ -59,6 +59,7 @@ const Modal = () => {
             className={`w-full h-full bg-opacity-50 bg-black transform transition duration-150 ease-in-out overflow-y-scroll ${
                 currentlyEditing ? 'show z-40 fixed' : 'hide absolute top-0 left-0 z-10'
             }`}
+            style={{ backdropFilter: `blur(10px)` }}
         >
             <div
                 ref={modalNode}
